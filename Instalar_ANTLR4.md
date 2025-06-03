@@ -22,8 +22,22 @@ Tambien necesitamos instalar Java
 sudo apt update
 sudo apt install default-jre -y
 ```
-
+Luego instalamos ANTL4 
 ```bash
-go mod init mi_compilador
-go mod tidy
+mkdir -p ~/antlr
+cd ~/antlr
+curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
 ```
+Configuramos el entorno de bash 
+```bash
+nano ~/.bashrc
+export CLASSPATH=".:$HOME/antlr/antlr-4.13.1-complete.jar:$CLASSPATH"
+alias antlr4='java -Xmx500M -cp "$HOME/antlr/antlr-4.13.1-complete.jar" org.antlr.v4.Tool'
+alias grun='java -Xmx500M -cp "$HOME/antlr/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig'
+```
+Luego ejecutamos el entorno de Bash 
+```bash
+source ~/.bashrc  # o ~/.zshrc
+```
+![image](https://github.com/user-attachments/assets/3a0ff98f-dc4e-41d4-96f2-0ce7aed4681a)
+
