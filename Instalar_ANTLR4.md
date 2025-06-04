@@ -83,6 +83,10 @@ Especificamente `github.com/antlr/antlr4/runtime/Go/antlr v1.4.10` es la version
 
 `go mod tidy` es un comando de Go que limpia y actualiza tu archivo go.mod y go.sum, haciendo que reflejen exactamente lo que tu proyecto realmente necesita.
 
+## Instalar ANTLR4 Tool 
+```bash 
+pip install antlr4-tools
+```
 ## Generacion de Archivos Facil
 Actualmente tengo esta division de archivos 
 ```bash
@@ -107,7 +111,10 @@ En `go generate` escribimos:
 
 `chmod +x generate.sh`
 
+## Notas importantes
+![image](https://github.com/user-attachments/assets/6adc625b-8a0c-4502-8573-d7ecd1f49540)
 
+EL REPOSITORIO QUE SE DEBE USAR ES ESTE: `github.com/antlr4-go/antlr`
 
 
 
