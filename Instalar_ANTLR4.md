@@ -41,3 +41,10 @@ source ~/.bashrc  # o ~/.zshrc
 ```
 ![image](https://github.com/user-attachments/assets/3a0ff98f-dc4e-41d4-96f2-0ce7aed4681a)
 
+```bash 
+go get github.com/antlr/antlr4/runtime/Go/antlr@latest
+```
+```bash 
+antlr4 -Dlanguage=Go -visitor -package parser -o parser V4LangGrammar.g4
+antlr4 -Dlanguage=Go -visitor -package parser -o parser V4LangGrammar.g4
+```
