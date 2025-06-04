@@ -1,43 +1,89 @@
-# Instalacion Completa de ANTLR4 y Primer Ejemplo
+# Instalacion Completa de ANTLR4 Tool y Runtime para GO
+## Errores comunes
+Si estás leyendo esto es muy probable que ya hayas instalado la versión 
+con un comando tipo `curl -O antlr4-complete.jar` y eso no te sirvio. 
+El motivo es porque en los ultimos años cambiaron la dirección del repo
+de antlr, lo movieron de carpeta (lol). Así que aquí te muestro como arreglar tu errorsito: 
+
+Primero debemos buscar todas las instancias de el repositorio antiguo y actualizarlas 
 ```bash
-curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
+find . -type f \
+    -name '*.go' \
+    -exec sed -i -e 's,github.com/antlr/antlr4/runtime/Go/antlr/v4,github.com/antlr4-go/antlr/v4,g' {} \;
 ```
+o bien en una linea como, lo debes correr en la carpeta de los archivos generados. 
 ```bash
-export CLASSPATH=".:antlr-4.13.1-complete.jar:$CLASSPATH"
-alias antlr4='java -jar antlr-4.13.1-complete.jar'
-alias grun='java org.antlr.v4.gui.TestRig'
+find . -type f -name '*.go' -exec sed -i -e 's,github.com/antlr/antlr4/runtime/Go/antlr/v4,github.com/antlr4-go/antlr/v4,g' {} \;
 ```
+
+## Instalacion de Go 1.21 
+NOTA: 
+Estás intentando usar una versión de ANTLR Go Runtime que requiere como mínimo Go 1.21. Aqui hay un tutorial de como instalar Go 1.21. 
 ```bash
-sudo apt install golang-go
+wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
 ```
-Instalamos Go
+Luego añadimos al CLASSPATH 
 ```bash
-go version
+export PATH=$PATH:/usr/local/go/bin
 ```
+![image](https://github.com/user-attachments/assets/f2f0d9fe-4881-4371-87b5-2816a14b513d)
+Actualizamos la consola
+```bash 
+source ~/.bashrc
+```
+
+## Instalacion de de ANTLR4 con Go 
 ```bash
-go install github.com/antlr/antlr4/runtime/Go/antlr@latest
+go get -u github.com/antlr4-go/antlr
 ```
-Tambien necesitamos instalar Java 
+![image](https://github.com/user-attachments/assets/a1610ac3-a16f-4789-94ff-b271029f2821)
+
+La estructura de nuestro proyecto debería ser: 
 ```bash
-sudo apt update
-sudo apt install default-jre -y
+	.
+	├── myproject
+	├── parser
+	│     ├── mygrammar.g4
+	│     ├── antlr-4.13.2-complete.jar
+	│     ├── generate.go
+	│     └── generate.sh
+	├── parsing  # Generated code goes here
+	│     └── error_listeners.go
+	├── go.mod
+	├── go.sum
+	├── main.go
+	└── main_test.go
 ```
-Luego instalamos ANTL4 
+
+Si aun no has hecho la instalacion, preferiblemente inicia con esto: 
 ```bash
-mkdir -p ~/antlr
-cd ~/antlr
-curl -O https://www.antlr.org/download/antlr-4.13.1-complete.jar
+go mod init
 ```
-Configuramos el entorno de bash 
-```bash
-nano ~/.bashrc
-export CLASSPATH=".:$HOME/antlr/antlr-4.13.1-complete.jar:$CLASSPATH"
-alias antlr4='java -Xmx500M -cp "$HOME/antlr/antlr-4.13.1-complete.jar" org.antlr.v4.Tool'
-alias grun='java -Xmx500M -cp "$HOME/antlr/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig'
+te va a generar un go.mod en donde se encuentran las dependencias del proyecto
+entra a el y si antes usaste go, veras algo asi: 
+```yaml
+module compiler
+
+go 1.18
+
+require (
+	github.com/antlr/antlr4/runtime/Go/antlr v1.4.10
+	github.com/antlr4-go/antlr/v4 v4.13.1
+)
+
+require (
+	github.com/antlr4-go/antlr v0.0.0-20230518091524-98b52378c522 // indirect
+	golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842 // indirect
+)
 ```
-Luego ejecutamos el entorno de Bash 
-```bash
-source ~/.bashrc  # o ~/.zshrc
-```
-![image](https://github.com/user-attachments/assets/3a0ff98f-dc4e-41d4-96f2-0ce7aed4681a)
+Especificamente `github.com/antlr/antlr4/runtime/Go/antlr v1.4.10` es la version antigua, asi que se deben asegurar que no sea el utilizado. La version actual es 
+`github.com/antlr4-go/antlr/v4`. Usar ambos puede dar conflictos. 
+
+`go mod tidy` es un comando de Go que limpia y actualiza tu archivo go.mod y go.sum, haciendo que reflejen exactamente lo que tu proyecto realmente necesita.
+
+
+
+
+
 
