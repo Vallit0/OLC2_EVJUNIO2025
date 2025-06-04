@@ -77,11 +77,35 @@ require (
 	golang.org/x/exp v0.0.0-20240506185415-9bf2ced13842 // indirect
 )
 ```
-Especificamente `github.com/antlr/antlr4/runtime/Go/antlr v1.4.10` es la version antigua, asi que se deben asegurar que no sea el utilizado. La version actual es 
+Especificamente `github.com/antlr/antlr4/runtime/Go/antlr v1.4.10` es la version antigua, asi que se deben asegurar que NO sea el utilizado. La version actual es 
 `github.com/antlr4-go/antlr/v4`. Usar ambos puede dar conflictos. 
+
 
 `go mod tidy` es un comando de Go que limpia y actualiza tu archivo go.mod y go.sum, haciendo que reflejen exactamente lo que tu proyecto realmente necesita.
 
+## Generacion de Archivos Facil
+Actualmente tengo esta division de archivos 
+```bash
+.
+├── Clase1
+│   └── compiler
+│       ├── evalVisitor.go
+│       ├── generate.go
+│       ├── generate.sh
+│       ├── go.mod
+│       ├── go.sum
+│       ├── main.go
+│       ├── V4LangGrammar.g4
+│       └── V4LangLexer.g4
+├── go1.21.5.linux-amd64.tar.gz
+├── Instalar_ANTLR4.md
+└── README.md
+
+```
+Si lo notan, tengo V4LangGrammar y V4LangLexer en esta seccion. Correr el comando de `antlr DLanguage=Go` se vuelve exhaustivo. Así que haremos un archivo `generate.go` y un `generate.sh` para que solo debamos correr `go generate` para generar nuestros archivos. 
+En `go generate` escribimos: 
+
+`chmod +x generate.sh`
 
 
 
