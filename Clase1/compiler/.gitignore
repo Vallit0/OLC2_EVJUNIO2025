@@ -1,0 +1,11 @@
+# Ignorar todo dentro de repl/
+repl/*
+value/*
+
+# ¡Excepto error_table.go!
+!repl/error_table.go
+!repl/console.go
+!repl/repl.go 
+!value/base_value.go
+!value/int_value.go
+!value/bool_value.go
