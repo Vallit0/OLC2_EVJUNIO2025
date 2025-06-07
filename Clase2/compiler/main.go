@@ -56,25 +56,17 @@ func main() {
 	parser.RemoveErrorListeners()
 	parser.SetErrorHandler(errors.NewCustomErrorStrategy())
 	parser.AddErrorListener(syntaxErrorListener)
-	fmt.Println("Se termino el analisis sintacticoz")
+	fmt.Println("Se termino el analisis sintactico")
 
 	// 4. Árbol sintáctico
 	// En tu gramatica tienes el axioma, o simbolo inicial
 	// Este es el que deberas agregar como parte del parser.
 	arbolito := parser.Programa()
-	/*
-		Ahora que acabo de sembrar mi arbol, puedo verlo crecer
-	*/
 
-	PrintVerticalTree(arbolito, parser.GetRuleNames())
-	// New Visitor
-	fmt.Println("Se termino el analisis sintactico")
+	// imprimimos los errores de sintaxis y léxicos
 	visitor := repl.NewReplVisitor()
 	visitor.Visit(arbolito)
-	fmt.Println("Se termino el analisis semantico")
-	// itor := repl.NewReplVisitor(syntaxErrorListener.ErrorTable)
-	// sitor.Visit(arbolito)
-	// fmt.Println(visitor.Console)
+
 }
 
 func readStdin() (string, error) {

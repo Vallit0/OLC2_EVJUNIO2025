@@ -26,6 +26,72 @@ func (s *BaseVlangListener) EnterPrograma(ctx *ProgramaContext) {}
 // ExitPrograma is called when production programa is exited.
 func (s *BaseVlangListener) ExitPrograma(ctx *ProgramaContext) {}
 
+// EnterDeclaraciones is called when production declaraciones is entered.
+func (s *BaseVlangListener) EnterDeclaraciones(ctx *DeclaracionesContext) {}
+
+// ExitDeclaraciones is called when production declaraciones is exited.
+func (s *BaseVlangListener) ExitDeclaraciones(ctx *DeclaracionesContext) {}
+
+// EnterVariableDeclaration is called when production variableDeclaration is entered.
+func (s *BaseVlangListener) EnterVariableDeclaration(ctx *VariableDeclarationContext) {}
+
+// ExitVariableDeclaration is called when production variableDeclaration is exited.
+func (s *BaseVlangListener) ExitVariableDeclaration(ctx *VariableDeclarationContext) {}
+
+// EnterExpresionStatement is called when production expresionStatement is entered.
+func (s *BaseVlangListener) EnterExpresionStatement(ctx *ExpresionStatementContext) {}
+
+// ExitExpresionStatement is called when production expresionStatement is exited.
+func (s *BaseVlangListener) ExitExpresionStatement(ctx *ExpresionStatementContext) {}
+
+// EnterPrintStatement is called when production printStatement is entered.
+func (s *BaseVlangListener) EnterPrintStatement(ctx *PrintStatementContext) {}
+
+// ExitPrintStatement is called when production printStatement is exited.
+func (s *BaseVlangListener) ExitPrintStatement(ctx *PrintStatementContext) {}
+
+// EnterControlStatement is called when production controlStatement is entered.
+func (s *BaseVlangListener) EnterControlStatement(ctx *ControlStatementContext) {}
+
+// ExitControlStatement is called when production controlStatement is exited.
+func (s *BaseVlangListener) ExitControlStatement(ctx *ControlStatementContext) {}
+
+// EnterIf_context is called when production if_context is entered.
+func (s *BaseVlangListener) EnterIf_context(ctx *If_contextContext) {}
+
+// ExitIf_context is called when production if_context is exited.
+func (s *BaseVlangListener) ExitIf_context(ctx *If_contextContext) {}
+
+// EnterFor_context is called when production for_context is entered.
+func (s *BaseVlangListener) EnterFor_context(ctx *For_contextContext) {}
+
+// ExitFor_context is called when production for_context is exited.
+func (s *BaseVlangListener) ExitFor_context(ctx *For_contextContext) {}
+
+// EnterWhile_context is called when production while_context is entered.
+func (s *BaseVlangListener) EnterWhile_context(ctx *While_contextContext) {}
+
+// ExitWhile_context is called when production while_context is exited.
+func (s *BaseVlangListener) ExitWhile_context(ctx *While_contextContext) {}
+
+// EnterIfDcl is called when production ifDcl is entered.
+func (s *BaseVlangListener) EnterIfDcl(ctx *IfDclContext) {}
+
+// ExitIfDcl is called when production ifDcl is exited.
+func (s *BaseVlangListener) ExitIfDcl(ctx *IfDclContext) {}
+
+// EnterForDcl is called when production forDcl is entered.
+func (s *BaseVlangListener) EnterForDcl(ctx *ForDclContext) {}
+
+// ExitForDcl is called when production forDcl is exited.
+func (s *BaseVlangListener) ExitForDcl(ctx *ForDclContext) {}
+
+// EnterWhileDcl is called when production whileDcl is entered.
+func (s *BaseVlangListener) EnterWhileDcl(ctx *WhileDclContext) {}
+
+// ExitWhileDcl is called when production whileDcl is exited.
+func (s *BaseVlangListener) ExitWhileDcl(ctx *WhileDclContext) {}
+
 // EnterMultdivmod is called when production multdivmod is entered.
 func (s *BaseVlangListener) EnterMultdivmod(ctx *MultdivmodContext) {}
 
@@ -97,12 +163,6 @@ func (s *BaseVlangListener) EnterSumres(ctx *SumresContext) {}
 
 // ExitSumres is called when production sumres is exited.
 func (s *BaseVlangListener) ExitSumres(ctx *SumresContext) {}
-
-// EnterAnd is called when production and is entered.
-func (s *BaseVlangListener) EnterAnd(ctx *AndContext) {}
-
-// ExitAnd is called when production and is exited.
-func (s *BaseVlangListener) ExitAnd(ctx *AndContext) {}
 
 // EnterId is called when production id is entered.
 func (s *BaseVlangListener) EnterId(ctx *IdContext) {}

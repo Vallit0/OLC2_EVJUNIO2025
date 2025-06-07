@@ -2,7 +2,39 @@ grammar Vlang;
 
 
 // === Axioma principal ===
-programa : expresion* EOF ;
+programa : declaraciones* EOF ;
+// /home/sebas/Desktop/Compiladores 2/OLC2_EVJUNIO2025/Clase2/compiler/errors/error_strategy.go
+declaraciones : varDcl   
+              | stmt    
+              ; 
+
+varDcl
+    : 'mut' ID (ASSIGN expresion)?  #variableDeclaration
+    ; 
+
+
+
+stmt : expresion          #expresionStatement
+     | 'print(' expresion ')' #printStatement
+     | sentencias_control    #controlStatement
+     ; 
+
+sentencias_control
+    : ifDcl             #if_context 
+    | forDcl            #for_context 
+    | whileDcl          #while_context
+    ;
+
+ifDcl
+    : 'if' LPAREN expresion RPAREN LBRACK declaraciones* RBRACK ( 'else' LBRACK declaraciones* RBRACK )? 
+    ;
+forDcl
+    : 'for' LPAREN ID ASSIGN expresion COMMA expresion RPAREN LBRACK declaraciones* RBRACK 
+    ;
+whileDcl
+    : 'while' LPAREN expresion RPAREN LBRACK declaraciones* RBRACK 
+    ;
+
 // === Reglas de expresiones ===
 expresion
     : valor                                                #valorexpr         
@@ -13,7 +45,6 @@ expresion
     | expresion op=(PLUS | MINUS) expresion                #sumres
     | expresion op=(LT | LE | GE | GT) expresion           #relacionales
     | expresion op=(EQ | NEQ) expresion                    #igualdad
-    | expresion AND expresion                              #and
     | expresion OR expresion                               #or
     | ID                                                   #id              
     | incredecre                                           #incredecr      
@@ -67,7 +98,6 @@ MUL     : '*' ;
 DIV     : '/' ;
 MOD     : '%' ;
 NOT     : '!' ;
-AND     : '&&' ;
 OR      : '||' ;
 EQ      : '==' ;
 NEQ     : '!=' ;
