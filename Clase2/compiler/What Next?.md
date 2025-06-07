@@ -96,3 +96,36 @@ classDiagram
     ReplVisitor --> ErrorTable : reporta a
     ReplVisitor --> Console : imprime en
 ```
+
+En Go, las interfaces son definidas de una manera distinta a la usual. 
+En este caso, solamente heredaremos de la clase que nos provee los métodos. 
+```Go 
+
+```
+Obviamente al definir nuestra clase de visitor tenemos que obedecer 
+orientacion a objetos. Así que necesitamos 
+- Un constructor
+```Go 
+func NewReplVisitor() *ReplVisitor {
+	return &ReplVisitor{}
+}
+```
+Recordemos que desde `main` llamamos `visitor.visit(arbolito)`
+por lo que debemos implementar ese metodo tambien. 
+```Go
+func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
+
+	switch val := tree.(type) { 
+	case *antlr.ErrorNodeImpl:
+		log.Fatal(val.GetText())
+		return nil
+	default:
+		return tree.Accept(v) <---- devolvemos el metodo recursivo que nos da el arbol
+	}
+
+}
+```
+Si buscamos `Accept` en el archivo `vlang_parser.go` notaremos que 
+todas nuestras reglas tienen el método para regresar de manera recursiva a
+este proceso. 
+![Documentacion](./images/accept.jpeg)
