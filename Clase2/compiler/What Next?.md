@@ -1,4 +1,5 @@
 # What Next? 
+Antes de empezar a leer esto, tienes que ver la clase de JUNIO 5 para entender el patrón Visitor. 
 Seguramente te estas preguntando que debes hacer. 
 En primera instancia tenemos que hacer nuestras expresiones, 
 definimos una gramatica simple. 
