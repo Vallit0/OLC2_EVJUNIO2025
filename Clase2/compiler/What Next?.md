@@ -65,15 +65,17 @@ de momento utilizaremos `visitor.go` para crear nuestro visitor.
 ```mermaid
 classDiagram
     class BaseVlangVisitor {
-        +Visit(tree ParseTree) : interface{}
-        +VisitChildren(node RuleNode) : interface{}
+        +Visit
+        +VisitChildren
     }
 
     class ReplVisitor {
-        +VisitPrograma(ctx ProgramaContext) : interface{}
-        +Visit<No-Terminal>(ctx <No-Terminal>) : interface{}
-        -errorTable : ErrorTable
-        -console : Console
+        +VisitPrograma
+        +VisitSumres
+        +VisitValorexpr
+        +VisitPrintStatement
+        -errorTable
+        -console
     }
 
     BaseVlangVisitor <|-- ReplVisitor
