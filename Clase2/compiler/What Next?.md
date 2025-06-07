@@ -128,4 +128,4 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 Si buscamos `Accept` en el archivo `vlang_parser.go` notaremos que 
 todas nuestras reglas tienen el método para regresar de manera recursiva a
 este proceso. 
-![Documentacion](./images/accept.jpeg)
+![Documentacion](./images/accept)
