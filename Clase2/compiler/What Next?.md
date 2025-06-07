@@ -133,12 +133,49 @@ recordemos que los metodos estan basados en cada una de las reglas
 
 Lo que debemos hacer es copiar el metodo que nos provee la `base_visitor.go` e implementarlo en nuestro `visitor.go`
 
-Si abrimos `[text](parser/vlang_base_visitor.go)`
-podemos encontrar 
-Lo unico que debemos cambiar es 
-la clase a la que se encuentra asociada
-
+Si abrimos `parser/vlang_base_visitor.go`
+podemos encontrar todas las reglas asociadas en la clase abstracta 
 ```Go
+type BaseVlangVisitor struct {
+	*antlr.BaseParseTreeVisitor
+}
+```
+Lo unico que debemos cambiar es 
+la clase a la que se encuentra asociada a lo que queremos hacer e implementarlo. ¿Cómo? copiamos la funcion visit que necesitemos, si necesitamos implementar la funcionalidad del nodo `Programa`
+en nuestra gramatica. 
+```Bash 
+// === Axioma principal ===
+programa : declaraciones* EOF ;
+declaraciones : varDcl   
+              | stmt    
+              ; 
+```
+Pues copiamos la funcion
+```Go 
+func (v *BaseVlangVisitor) VisitPrograma(ctx *ProgramaContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+```
+y la implementaremos en `visitor.go`
+copiamos pero, obviamente si ponemos la funcion en otra clase, debemos asociarlo al `struct` de `ReplVisitor`
+```Go
+func (v *BaseVlangVisitor) 
+                 ^
+                 |
+    Cambiamos esto por ReplVisitor
+
+VisitPrograma(ctx *ProgramaContext)
+                        ^
+                        | 
+        Cambiamos por parser.ProgramaContext
+
+interface{} {
+	return v.VisitChildren(ctx)
+}
+```
+Nota: Depende de que paquete le hayas dado a tus archivos en `/parser`
+```Go
+
 
 func (v *)
        ^ 
