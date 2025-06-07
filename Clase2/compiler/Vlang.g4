@@ -3,7 +3,6 @@ grammar Vlang;
 
 // === Axioma principal ===
 programa : declaraciones* | expresion EOF ;
-// /home/sebas/Desktop/Compiladores 2/OLC2_EVJUNIO2025/Clase2/compiler/errors/error_strategy.go
 declaraciones : varDcl
               // | funcDcl 
               // | structDcl 
