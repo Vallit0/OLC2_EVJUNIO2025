@@ -10,6 +10,39 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#programa.
 	VisitPrograma(ctx *ProgramaContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#declaraciones.
+	VisitDeclaraciones(ctx *DeclaracionesContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#variableDeclaration.
+	VisitVariableDeclaration(ctx *VariableDeclarationContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#expresionStatement.
+	VisitExpresionStatement(ctx *ExpresionStatementContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#printStatement.
+	VisitPrintStatement(ctx *PrintStatementContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#controlStatement.
+	VisitControlStatement(ctx *ControlStatementContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#if_context.
+	VisitIf_context(ctx *If_contextContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#for_context.
+	VisitFor_context(ctx *For_contextContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#while_context.
+	VisitWhile_context(ctx *While_contextContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ifDcl.
+	VisitIfDcl(ctx *IfDclContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#forDcl.
+	VisitForDcl(ctx *ForDclContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#whileDcl.
+	VisitWhileDcl(ctx *WhileDclContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#multdivmod.
 	VisitMultdivmod(ctx *MultdivmodContext) interface{}
 
@@ -45,9 +78,6 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#sumres.
 	VisitSumres(ctx *SumresContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#and.
-	VisitAnd(ctx *AndContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#id.
 	VisitId(ctx *IdContext) interface{}

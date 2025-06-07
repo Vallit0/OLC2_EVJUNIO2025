@@ -10,6 +10,39 @@ type VlangListener interface {
 	// EnterPrograma is called when entering the programa production.
 	EnterPrograma(c *ProgramaContext)
 
+	// EnterDeclaraciones is called when entering the declaraciones production.
+	EnterDeclaraciones(c *DeclaracionesContext)
+
+	// EnterVariableDeclaration is called when entering the variableDeclaration production.
+	EnterVariableDeclaration(c *VariableDeclarationContext)
+
+	// EnterExpresionStatement is called when entering the expresionStatement production.
+	EnterExpresionStatement(c *ExpresionStatementContext)
+
+	// EnterPrintStatement is called when entering the printStatement production.
+	EnterPrintStatement(c *PrintStatementContext)
+
+	// EnterControlStatement is called when entering the controlStatement production.
+	EnterControlStatement(c *ControlStatementContext)
+
+	// EnterIf_context is called when entering the if_context production.
+	EnterIf_context(c *If_contextContext)
+
+	// EnterFor_context is called when entering the for_context production.
+	EnterFor_context(c *For_contextContext)
+
+	// EnterWhile_context is called when entering the while_context production.
+	EnterWhile_context(c *While_contextContext)
+
+	// EnterIfDcl is called when entering the ifDcl production.
+	EnterIfDcl(c *IfDclContext)
+
+	// EnterForDcl is called when entering the forDcl production.
+	EnterForDcl(c *ForDclContext)
+
+	// EnterWhileDcl is called when entering the whileDcl production.
+	EnterWhileDcl(c *WhileDclContext)
+
 	// EnterMultdivmod is called when entering the multdivmod production.
 	EnterMultdivmod(c *MultdivmodContext)
 
@@ -45,9 +78,6 @@ type VlangListener interface {
 
 	// EnterSumres is called when entering the sumres production.
 	EnterSumres(c *SumresContext)
-
-	// EnterAnd is called when entering the and production.
-	EnterAnd(c *AndContext)
 
 	// EnterId is called when entering the id production.
 	EnterId(c *IdContext)
@@ -85,6 +115,39 @@ type VlangListener interface {
 	// ExitPrograma is called when exiting the programa production.
 	ExitPrograma(c *ProgramaContext)
 
+	// ExitDeclaraciones is called when exiting the declaraciones production.
+	ExitDeclaraciones(c *DeclaracionesContext)
+
+	// ExitVariableDeclaration is called when exiting the variableDeclaration production.
+	ExitVariableDeclaration(c *VariableDeclarationContext)
+
+	// ExitExpresionStatement is called when exiting the expresionStatement production.
+	ExitExpresionStatement(c *ExpresionStatementContext)
+
+	// ExitPrintStatement is called when exiting the printStatement production.
+	ExitPrintStatement(c *PrintStatementContext)
+
+	// ExitControlStatement is called when exiting the controlStatement production.
+	ExitControlStatement(c *ControlStatementContext)
+
+	// ExitIf_context is called when exiting the if_context production.
+	ExitIf_context(c *If_contextContext)
+
+	// ExitFor_context is called when exiting the for_context production.
+	ExitFor_context(c *For_contextContext)
+
+	// ExitWhile_context is called when exiting the while_context production.
+	ExitWhile_context(c *While_contextContext)
+
+	// ExitIfDcl is called when exiting the ifDcl production.
+	ExitIfDcl(c *IfDclContext)
+
+	// ExitForDcl is called when exiting the forDcl production.
+	ExitForDcl(c *ForDclContext)
+
+	// ExitWhileDcl is called when exiting the whileDcl production.
+	ExitWhileDcl(c *WhileDclContext)
+
 	// ExitMultdivmod is called when exiting the multdivmod production.
 	ExitMultdivmod(c *MultdivmodContext)
 
@@ -120,9 +183,6 @@ type VlangListener interface {
 
 	// ExitSumres is called when exiting the sumres production.
 	ExitSumres(c *SumresContext)
-
-	// ExitAnd is called when exiting the and production.
-	ExitAnd(c *AndContext)
 
 	// ExitId is called when exiting the id production.
 	ExitId(c *IdContext)

@@ -11,6 +11,50 @@ func (v *BaseVlangVisitor) VisitPrograma(ctx *ProgramaContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseVlangVisitor) VisitDeclaraciones(ctx *DeclaracionesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitVariableDeclaration(ctx *VariableDeclarationContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitExpresionStatement(ctx *ExpresionStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitPrintStatement(ctx *PrintStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitControlStatement(ctx *ControlStatementContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitIf_context(ctx *If_contextContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitFor_context(ctx *For_contextContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitWhile_context(ctx *While_contextContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitIfDcl(ctx *IfDclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitForDcl(ctx *ForDclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitWhileDcl(ctx *WhileDclContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseVlangVisitor) VisitMultdivmod(ctx *MultdivmodContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -56,10 +100,6 @@ func (v *BaseVlangVisitor) VisitParentesisexpre(ctx *ParentesisexpreContext) int
 }
 
 func (v *BaseVlangVisitor) VisitSumres(ctx *SumresContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitAnd(ctx *AndContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

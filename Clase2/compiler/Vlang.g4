@@ -3,7 +3,7 @@ grammar Vlang;
 
 // === Axioma principal ===
 programa : declaraciones* | expresion EOF ;
-
+// /home/sebas/Desktop/Compiladores 2/OLC2_EVJUNIO2025/Clase2/compiler/errors/error_strategy.go
 declaraciones : varDcl
               // | funcDcl 
               // | structDcl 
@@ -48,7 +48,6 @@ expresion
     | expresion op=(PLUS | MINUS) expresion                #sumres
     | expresion op=(LT | LE | GE | GT) expresion           #relacionales
     | expresion op=(EQ | NEQ) expresion                    #igualdad
-    | expresion AND expresion                              #and
     | expresion OR expresion                               #or
     | ID                                                   #id              
     | incredecre                                           #incredecr      
@@ -102,7 +101,6 @@ MUL     : '*' ;
 DIV     : '/' ;
 MOD     : '%' ;
 NOT     : '!' ;
-AND     : '&&' ;
 OR      : '||' ;
 EQ      : '==' ;
 NEQ     : '!=' ;
@@ -110,7 +108,7 @@ LT      : '<' ;
 LE      : '<=' ;
 GT      : '>' ;
 GE      : '>=' ;
-ASSIGN  : '=' ;
+ASSIGN  : ':=' ;
 INC     : '++' ;
 DEC     : '--' ;
 
