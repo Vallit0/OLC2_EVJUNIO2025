@@ -61,8 +61,7 @@ podemos encontrar estos archivos
 ├── variable.go
 └── visitor.go
 ```
-de momento utilizaremos `visitor.go` para crear nuestro visitor. 
-```mermaid 
+de momento utilizaremos `visitor.go` para crear nuestro visitor.  
 ```mermaid
 classDiagram
     class BaseVlangVisitor {
