@@ -32,6 +32,10 @@ Actualizamos la consola
 ```bash 
 source ~/.bashrc
 ```
+Luego le damos permiso al
+```bash
+chmod +x generate.sh
+```
 
 ## Instalacion de de ANTLR4 con Go 
 ```bash
