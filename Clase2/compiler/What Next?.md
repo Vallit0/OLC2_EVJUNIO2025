@@ -36,9 +36,6 @@ Se termino el analisis sintactico
     +-- "<EOF>"
 ```
 Agregue un metodo para generar este arbol cada vez que probamos la estructura.
-## Hagamos la declaraciones de las variables 
-Nota: Si no le ponemos las labels a los hermanos, no podemos generar nada en la gramatica. 
-
 
 
 ## Se que existe el Visitor pero...¿Ahora qué? 
@@ -129,3 +126,24 @@ Si buscamos `Accept` en el archivo `vlang_parser.go` notaremos que
 todas nuestras reglas tienen el método para regresar de manera recursiva a
 este proceso. 
 ![Documentacion](./images/accept)
+
+## Muy bien, ahora podemos empezar a hacer nuestros metodos
+recordemos que los metodos estan basados en cada una de las reglas
+![Documentacionnew](./images/comparacion)
+
+Lo que debemos hacer es copiar el metodo que nos provee la `base_visitor.go` e implementarlo en nuestro `visitor.go`
+
+Lo unico que debemos cambiar es 
+la clase a la que se encuentra asociada
+
+```Go
+
+func (v *)
+       ^ 
+       | 
+       | 
+Cambiar BaseVisitor 
+por el nombre de nuestra 
+clase ReplVisitor. 
+```
+
