@@ -133,6 +133,8 @@ recordemos que los metodos estan basados en cada una de las reglas
 
 Lo que debemos hacer es copiar el metodo que nos provee la `base_visitor.go` e implementarlo en nuestro `visitor.go`
 
+Si abrimos `[text](parser/vlang_base_visitor.go)`
+podemos encontrar 
 Lo unico que debemos cambiar es 
 la clase a la que se encuentra asociada
 
