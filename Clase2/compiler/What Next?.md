@@ -1,7 +1,6 @@
 # What Next? 
-Seguramente te estas preguntando que debes hacer. 
-En primera instancia tenemos que hacer nuestras expresiones, 
-definimos una gramatica simple. 
+Antes de empezar a leer esto, tienes que ver la clase de JUNIO 5 para entender el patrón Visitor. 
+En este documento se ven algunos conceptos basados en eso. 
 
 ```bash 
 Escribe el codigo de Vlang: (Ctrl+D) para terminar
@@ -40,8 +39,7 @@ Agregue un metodo para generar este arbol cada vez que probamos la estructura.
 
 ## Se que existe el Visitor pero...¿Ahora qué? 
 
-Lo primero es que debemos hacer un visitor por las operaciones que queremos hacer
-en este caso es interpretar. Por lo que, a partir de esta gramatica, si nos vamos a la carpeta `/parser` notaremos que en `vlang_visitor.go` y en  `base_visitor.go` 
+Lo primero es que debemos hacer un visitor por las operaciones que queremos hacer, en este caso,  interpretar. Por lo que, a partir de esta gramatica, si nos vamos a la carpeta `/parser` notaremos que en `vlang_visitor.go` y en  `base_visitor.go` 
 estaran los metodos que nos proponen la interfaz del Visitor y la clase abstracta.
 Debes copiar estos métodos a un archivo en el que quieras para declarar un visitor 
 que extienda de la interfaz de `visitor` que propones. 
