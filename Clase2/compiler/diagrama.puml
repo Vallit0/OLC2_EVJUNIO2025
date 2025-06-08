@@ -27,6 +27,14 @@ package repl {
         + AddError(message: string) : void
         + GetErrors() : []string
     }
+    
+    class CallStack {
+        - Stack : []string
+        + Push(functionName: string) : void
+        + Pop() : string
+        + Peek() : string
+        + IsEmpty() : bool
+    }
     class Variable {
         - Name : string
         - Value : IVOR
@@ -49,6 +57,7 @@ package repl {
 
   ReplVisitor --|> parser.BaseVlangVisitor
   ReplVisitor --> Console
+  ReplVisitor --> CallStack
   ReplVisitor --> ErrorTable
   ReplVisitor --> value.IVOR
   ReplVisitor --> Variable
@@ -101,6 +110,24 @@ package parser {
   class Expdotexp1Context
   class ExpdotexpContext
   class AsignacionforContext
+}
+
+package errors {
+  class SyntaxErrorListener  {
+	*antlr.DefaultErrorListener
+	ErrorTable *repl.ErrorTable
+}
+  class DefaultErrorListener {
+    + SyntaxError(recognizer: antlr.Recognizer, offendingSymbol: antlr.Token, line: int, charPositionInLine: int, msg: string, e: antlr.RecognitionException) : void
+  }
+  class RecognitionException {
+    + GetMessage() : string
+  }
+  class ErrorTable {
+    - Errors : []string
+    + AddError(message: string) : void
+    + GetErrors() : []string
+  }
 }
 
 package antlr {

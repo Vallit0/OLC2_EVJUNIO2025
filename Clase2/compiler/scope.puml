@@ -1,0 +1,60 @@
+@startuml
+package repl {
+
+class BaseScope {
+  - name: string
+  - parent: BaseScope
+  - children: List<BaseScope>
+  - variables: Map<string, Variable>
+  - functions: Map<string, value.IVOR>
+  - structs: Map<string, Struct>
+  - isStruct: bool
+  - IsMutating: bool
+
+  + Name(): string
+  + Parent(): BaseScope
+  + Children(): List<BaseScope>
+  + ValidType(_type: string): bool
+  + AddChild(child: BaseScope)
+  + variableExists(variable: Variable): bool
+  + AddVariable(name: string, varType: string, value: value.IVOR, isConst: bool, allowNil: bool, token: antlr.Token): (Variable, string)
+  + GetVariable(name: string): Variable
+  + AddFunction(name: string, function: value.IVOR): (bool, string)
+  + GetFunction(name: string): (value.IVOR, string)
+  + AddStruct(name: string, structValue: Struct): (bool, string)
+  + GetStruct(name: string): (Struct, string)
+  + Reset()
+  + IsMutatingScope(): bool
+}
+
+class Variable {
+  + Name: string
+  + Value: value.IVOR
+  + Type: string
+  + IsConst: bool
+  + AllowNil: bool
+  + Token: antlr.Token
+  + TypeValidation(): (bool, string)
+}
+
+class Struct
+
+class PointerValue {
+  + AssocVariable: Variable
+}
+
+interface IVOR
+
+BaseScope "1" --> "*" BaseScope : children
+BaseScope "1" --> "0..1" BaseScope : parent
+BaseScope "1" --> "*" Variable : variables
+BaseScope "1" --> "*" Struct : structs
+BaseScope "1" --> "*" IVOR : functions
+
+Variable "1" --> "1" IVOR : Value
+PointerValue "1" --> "1" Variable : AssocVariable
+
+IVOR <|.. PointerValue
+}
+
+@enduml

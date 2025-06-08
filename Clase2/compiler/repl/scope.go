@@ -7,49 +7,188 @@ import (
 )
 
 type BaseScope struct {
-	Name      string
-	Parent    *BaseScope
-	Variables map[string]*Variable
+	name       string
+	parent     *BaseScope
+	children   []*BaseScope
+	variables  map[string]*Variable
+	functions  map[string]value.IVOR
+	structs    map[string]*Struct
+	isStruct   bool
+	IsMutating bool
 }
 
-func NewBaseScope(name string, parent *BaseScope) *BaseScope {
-	return &BaseScope{
-		Name:      name,
-		Parent:    parent,
-		Variables: make(map[string]*Variable),
+func (s *BaseScope) Name() string {
+	return s.name
+}
+
+func (s *BaseScope) Parent() *BaseScope {
+	return s.parent
+}
+
+func (s *BaseScope) Children() []*BaseScope {
+	return s.children
+}
+
+func (s *BaseScope) ValidType(_type string) bool {
+
+	_, isStructType := s.structs[_type]
+
+	return value.IsPrimitiveType(_type) || isStructType
+}
+
+func (s *BaseScope) AddChild(child *BaseScope) {
+	s.children = append(s.children, child)
+	child.parent = s
+}
+
+func (s *BaseScope) variableExists(variable *Variable) bool {
+
+	if _, ok := s.variables[variable.Name]; ok {
+		return true
 	}
+
+	return false
+
 }
 
-func (s *BaseScope) variableExists(name string) bool {
-	_, exists := s.Variables[name]
-	return exists
-}
+func (s *BaseScope) AddVariable(name string, varType string, value value.IVOR, isConst bool, allowNil bool, token antlr.Token) (*Variable, string) {
 
-func (s *BaseScope) AddVariable(name string, varType string, val value.IVOR, isConst bool, allowNil bool, token antlr.Token) (*Variable, string) {
-	if s.variableExists(name) {
-		return nil, "La variable '" + name + "' ya existe en este scope"
-	}
-
-	v := &Variable{
+	variable := &Variable{
 		Name:     name,
+		Value:    value,
 		Type:     varType,
-		Value:    val,
 		IsConst:  isConst,
 		AllowNil: allowNil,
 		Token:    token,
 	}
 
-	s.Variables[name] = v
-	return v, ""
+	if s.variableExists(variable) {
+		return nil, "La variable " + name + " ya existe"
+	}
+
+	typesOk, msg := variable.TypeValidation()
+
+	// even if the variable is not valid, we add it to the scope, (internally it will be nil)
+	s.variables[name] = variable
+
+	if !typesOk {
+		// report error
+		return nil, msg
+	}
+
+	return variable, ""
 }
 
 func (s *BaseScope) GetVariable(name string) *Variable {
-	scope := s
-	for scope != nil {
-		if v, ok := scope.Variables[name]; ok {
-			return v
+	// verify if is refering to and object/struct function
+
+	initialScope := s
+
+	for {
+		if variable, ok := initialScope.variables[name]; ok {
+
+			// verify if is refering to a pointer
+			if variable.Type == value.IVOR_POINTER {
+				return variable.Value.(*PointerValue).AssocVariable // pointer of a pointer ?
+			}
+
+			return variable
 		}
-		scope = scope.Parent
+
+		if initialScope.parent == nil {
+			break
+		}
+
+		initialScope = initialScope.parent
 	}
+
 	return nil
+}
+
+// obj1.obj2.prop1
+
+func (s *BaseScope) AddFunction(name string, function value.IVOR) (bool, string) {
+	// check if function already exists
+
+	if _, ok := s.functions[name]; ok {
+		return false, "La funcion " + name + " ya existe"
+	}
+
+	s.functions[name] = function
+
+	return true, ""
+}
+
+func (s *BaseScope) GetFunction(name string) (value.IVOR, string) {
+
+	// verify if is refering to and object/struct function
+
+	initialScope := s
+
+	for {
+		if function, ok := initialScope.functions[name]; ok {
+			return function, ""
+		}
+
+		if initialScope.parent == nil {
+			break
+		}
+
+		initialScope = initialScope.parent
+	}
+
+	return nil, "La funcion " + name + " no existe"
+}
+
+func (s *BaseScope) AddStruct(name string, structValue *Struct) (bool, string) {
+
+	if _, ok := s.structs[name]; ok {
+		return false, "La estructura " + name + " ya existe"
+	}
+
+	s.structs[name] = structValue
+	return true, ""
+}
+
+func (s *BaseScope) GetStruct(name string) (*Struct, string) {
+
+	initialScope := s
+
+	for {
+		if structValue, ok := initialScope.structs[name]; ok {
+			return structValue, ""
+		}
+
+		if initialScope.parent == nil {
+			break
+		}
+
+		initialScope = initialScope.parent
+	}
+
+	return nil, "La estructura " + name + " no existe"
+}
+
+func (s *BaseScope) Reset() {
+	s.variables = make(map[string]*Variable)
+	s.children = make([]*BaseScope, 0)
+	s.functions = make(map[string]value.IVOR)
+}
+
+func (s *BaseScope) IsMutatingScope() bool {
+	aux := s
+
+	for {
+		if aux.IsMutating {
+			return true
+		}
+
+		if aux.parent == nil {
+			break
+		}
+
+		aux = aux.parent
+	}
+
+	return false
 }

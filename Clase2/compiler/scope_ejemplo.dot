@@ -1,0 +1,22 @@
+digraph ScopeTree {
+    node [shape=record, style=filled, fillcolor=lightgray];
+
+    // Root scope
+    scope0 [label="{Scope: global | variables: x, y | functions: f, g}"];
+
+    // First child
+    scope1 [label="{Scope: function foo | variables: a, b | functions: }"];
+    scope0 -> scope1;
+
+    // Second child
+    scope2 [label="{Scope: if block | variables: z | functions: }"];
+    scope1 -> scope2;
+
+    // Third child
+    scope3 [label="{Scope: inner block | variables: temp | functions: }"];
+    scope2 -> scope3;
+
+    // Struct scope
+    structScope [label="{Scope: struct Point | variables: x, y | functions: length}"];
+    scope0 -> structScope;
+}
