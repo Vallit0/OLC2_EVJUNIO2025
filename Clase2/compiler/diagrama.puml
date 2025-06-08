@@ -1,0 +1,110 @@
+@startuml
+package repl {
+
+  class ReplVisitor {
+    - Console : *Console
+    - ErrorTable : *ErrorTable
+    - StructNames : []string
+    + Visit(tree: antlr.ParseTree) : interface{}
+    + VisitPrograma(ctx: ProgramaContext) : interface{}
+    + VisitValorEntero(ctx: ValorEnteroContext) : interface{}
+    + VisitValorFloat(ctx: ValorFloatContext) : interface{}
+    + VisitValorDecimal(ctx: ValorDecimalContext) : interface{}
+    + VisitValorCadena(ctx: ValorCadenaContext) : interface{}
+    + VisitValorBooleano(ctx: ValorBooleanoContext) : interface{}
+    + VisitValorCaracter(ctx: ValorCaracterContext) : interface{}
+    + VisitBinaryExp(ctx: BinaryExpContext) : interface{}
+    + VisitId(ctx: IdContext) : interface{}
+    + VisitExpdotexp1(ctx: Expdotexp1Context) : interface{}
+    + VisitExpdotexp(ctx: ExpdotexpContext) : interface{}
+    + VisitAsignacionfor(ctx: AsignacionforContext) : interface{}
+  }
+    class Console {
+        + Println(value: string) : void
+        + Print(value: string) : void
+    }
+    class ErrorTable {
+        + AddError(message: string) : void
+        + GetErrors() : []string
+    }
+    class Variable {
+        - Name : string
+        - Value : IVOR
+        + GetName() : string
+        + GetValue() : IVOR
+        + SetValue(value: IVOR) : void
+    }
+    class BinaryValidation {
+        + ValidateBinaryOperation(left: IVOR, right: IVOR, operator: string) : IVOR
+    }
+    class BinaryStrategy {
+        + Execute(left: IVOR, right: IVOR, operator: string) : IVOR
+    }
+    class BinaryExp {
+        - Left : IVOR
+        - Right : IVOR
+        - Operator : string
+        + Evaluate() : IVOR
+    }
+
+  ReplVisitor --|> parser.BaseVlangVisitor
+  ReplVisitor --> Console
+  ReplVisitor --> ErrorTable
+  ReplVisitor --> value.IVOR
+  ReplVisitor --> Variable
+
+  Variable --> value.IVOR
+  Variable --> antlr.Token
+}
+
+package value {
+  interface IVOR {
+    + Type() : string
+    + Value() : interface{}
+    
+  }
+
+  class IntValue {
+    + InternalValue : int
+  }
+  class FloatValue {
+    + InternalValue : float64
+  }
+  class StringValue {
+    + InternalValue : string
+  }
+  class BoolValue {
+    + InternalValue : bool
+  }
+  class CharacterValue {
+    + InternalValue : string
+  }
+
+  IntValue ..|> IVOR
+  FloatValue ..|> IVOR
+  StringValue ..|> IVOR
+  BoolValue ..|> IVOR
+  CharacterValue ..|> IVOR
+}
+
+package parser {
+  class BaseVlangVisitor
+  class ProgramaContext
+  class ValorEnteroContext
+  class ValorFloatContext
+  class ValorDecimalContext
+  class ValorCadenaContext
+  class ValorBooleanoContext
+  class ValorCaracterContext
+  class BinaryExpContext
+  class IdContext
+  class Expdotexp1Context
+  class ExpdotexpContext
+  class AsignacionforContext
+}
+
+package antlr {
+  class Token
+}
+
+@enduml
