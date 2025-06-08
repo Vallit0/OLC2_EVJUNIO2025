@@ -5,8 +5,9 @@ import "github.com/antlr4-go/antlr/v4"
 const (
 	LexicalError  = "Error léxico"
 	SyntaxError   = "Error sintáctico"
-	SemanticError = "Error semántico"
-	RuntimeError  = "Error en tiempo de ejecución"
+	SemanticError = "Error semántico" // <-- Analisis Semantico
+	// Errores en tiempo de ejecucion
+	RuntimeError = "Error en tiempo de ejecución" // <-- Ejecucion
 )
 
 // Definimos una tabla de errores

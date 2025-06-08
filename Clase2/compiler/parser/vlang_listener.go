@@ -10,62 +10,26 @@ type VlangListener interface {
 	// EnterPrograma is called when entering the programa production.
 	EnterPrograma(c *ProgramaContext)
 
-	// EnterDeclaraciones is called when entering the declaraciones production.
-	EnterDeclaraciones(c *DeclaracionesContext)
-
 	// EnterVariableDeclaration is called when entering the variableDeclaration production.
 	EnterVariableDeclaration(c *VariableDeclarationContext)
 
-	// EnterExpresionStatement is called when entering the expresionStatement production.
-	EnterExpresionStatement(c *ExpresionStatementContext)
+	// EnterDeclarationStatement is called when entering the declarationStatement production.
+	EnterDeclarationStatement(c *DeclarationStatementContext)
+
+	// EnterAssignmentStatement is called when entering the assignmentStatement production.
+	EnterAssignmentStatement(c *AssignmentStatementContext)
 
 	// EnterPrintStatement is called when entering the printStatement production.
 	EnterPrintStatement(c *PrintStatementContext)
 
-	// EnterControlStatement is called when entering the controlStatement production.
-	EnterControlStatement(c *ControlStatementContext)
+	// EnterDirectAssign is called when entering the DirectAssign production.
+	EnterDirectAssign(c *DirectAssignContext)
 
-	// EnterIf_context is called when entering the if_context production.
-	EnterIf_context(c *If_contextContext)
+	// EnterDecl_stmt is called when entering the decl_stmt production.
+	EnterDecl_stmt(c *Decl_stmtContext)
 
-	// EnterFor_context is called when entering the for_context production.
-	EnterFor_context(c *For_contextContext)
-
-	// EnterWhile_context is called when entering the while_context production.
-	EnterWhile_context(c *While_contextContext)
-
-	// EnterIfDcl is called when entering the ifDcl production.
-	EnterIfDcl(c *IfDclContext)
-
-	// EnterForDcl is called when entering the forDcl production.
-	EnterForDcl(c *ForDclContext)
-
-	// EnterWhileDcl is called when entering the whileDcl production.
-	EnterWhileDcl(c *WhileDclContext)
-
-	// EnterMultdivmod is called when entering the multdivmod production.
-	EnterMultdivmod(c *MultdivmodContext)
-
-	// EnterIncredecr is called when entering the incredecr production.
-	EnterIncredecr(c *IncredecrContext)
-
-	// EnterOr is called when entering the or production.
-	EnterOr(c *OrContext)
-
-	// EnterValorexpr is called when entering the valorexpr production.
-	EnterValorexpr(c *ValorexprContext)
-
-	// EnterIgualdad is called when entering the igualdad production.
-	EnterIgualdad(c *IgualdadContext)
-
-	// EnterAsignacionfor is called when entering the asignacionfor production.
-	EnterAsignacionfor(c *AsignacionforContext)
-
-	// EnterExpdotexp is called when entering the expdotexp production.
-	EnterExpdotexp(c *ExpdotexpContext)
-
-	// EnterRelacionales is called when entering the relacionales production.
-	EnterRelacionales(c *RelacionalesContext)
+	// EnterMutType is called when entering the mutType production.
+	EnterMutType(c *MutTypeContext)
 
 	// EnterCorchetesexpre is called when entering the corchetesexpre production.
 	EnterCorchetesexpre(c *CorchetesexpreContext)
@@ -76,14 +40,26 @@ type VlangListener interface {
 	// EnterParentesisexpre is called when entering the parentesisexpre production.
 	EnterParentesisexpre(c *ParentesisexpreContext)
 
-	// EnterSumres is called when entering the sumres production.
-	EnterSumres(c *SumresContext)
+	// EnterIncredecr is called when entering the incredecr production.
+	EnterIncredecr(c *IncredecrContext)
+
+	// EnterValorexpresion is called when entering the valorexpresion production.
+	EnterValorexpresion(c *ValorexpresionContext)
+
+	// EnterAsignacionfor is called when entering the asignacionfor production.
+	EnterAsignacionfor(c *AsignacionforContext)
 
 	// EnterId is called when entering the id production.
 	EnterId(c *IdContext)
 
 	// EnterExpdotexp1 is called when entering the expdotexp1 production.
 	EnterExpdotexp1(c *Expdotexp1Context)
+
+	// EnterExpdotexp is called when entering the expdotexp production.
+	EnterExpdotexp(c *ExpdotexpContext)
+
+	// EnterBinaryExp is called when entering the BinaryExp production.
+	EnterBinaryExp(c *BinaryExpContext)
 
 	// EnterParametros is called when entering the parametros production.
 	EnterParametros(c *ParametrosContext)
@@ -106,6 +82,9 @@ type VlangListener interface {
 	// EnterValorCaracter is called when entering the valorCaracter production.
 	EnterValorCaracter(c *ValorCaracterContext)
 
+	// EnterValorFloat is called when entering the valorFloat production.
+	EnterValorFloat(c *ValorFloatContext)
+
 	// EnterIncremento is called when entering the incremento production.
 	EnterIncremento(c *IncrementoContext)
 
@@ -115,62 +94,26 @@ type VlangListener interface {
 	// ExitPrograma is called when exiting the programa production.
 	ExitPrograma(c *ProgramaContext)
 
-	// ExitDeclaraciones is called when exiting the declaraciones production.
-	ExitDeclaraciones(c *DeclaracionesContext)
-
 	// ExitVariableDeclaration is called when exiting the variableDeclaration production.
 	ExitVariableDeclaration(c *VariableDeclarationContext)
 
-	// ExitExpresionStatement is called when exiting the expresionStatement production.
-	ExitExpresionStatement(c *ExpresionStatementContext)
+	// ExitDeclarationStatement is called when exiting the declarationStatement production.
+	ExitDeclarationStatement(c *DeclarationStatementContext)
+
+	// ExitAssignmentStatement is called when exiting the assignmentStatement production.
+	ExitAssignmentStatement(c *AssignmentStatementContext)
 
 	// ExitPrintStatement is called when exiting the printStatement production.
 	ExitPrintStatement(c *PrintStatementContext)
 
-	// ExitControlStatement is called when exiting the controlStatement production.
-	ExitControlStatement(c *ControlStatementContext)
+	// ExitDirectAssign is called when exiting the DirectAssign production.
+	ExitDirectAssign(c *DirectAssignContext)
 
-	// ExitIf_context is called when exiting the if_context production.
-	ExitIf_context(c *If_contextContext)
+	// ExitDecl_stmt is called when exiting the decl_stmt production.
+	ExitDecl_stmt(c *Decl_stmtContext)
 
-	// ExitFor_context is called when exiting the for_context production.
-	ExitFor_context(c *For_contextContext)
-
-	// ExitWhile_context is called when exiting the while_context production.
-	ExitWhile_context(c *While_contextContext)
-
-	// ExitIfDcl is called when exiting the ifDcl production.
-	ExitIfDcl(c *IfDclContext)
-
-	// ExitForDcl is called when exiting the forDcl production.
-	ExitForDcl(c *ForDclContext)
-
-	// ExitWhileDcl is called when exiting the whileDcl production.
-	ExitWhileDcl(c *WhileDclContext)
-
-	// ExitMultdivmod is called when exiting the multdivmod production.
-	ExitMultdivmod(c *MultdivmodContext)
-
-	// ExitIncredecr is called when exiting the incredecr production.
-	ExitIncredecr(c *IncredecrContext)
-
-	// ExitOr is called when exiting the or production.
-	ExitOr(c *OrContext)
-
-	// ExitValorexpr is called when exiting the valorexpr production.
-	ExitValorexpr(c *ValorexprContext)
-
-	// ExitIgualdad is called when exiting the igualdad production.
-	ExitIgualdad(c *IgualdadContext)
-
-	// ExitAsignacionfor is called when exiting the asignacionfor production.
-	ExitAsignacionfor(c *AsignacionforContext)
-
-	// ExitExpdotexp is called when exiting the expdotexp production.
-	ExitExpdotexp(c *ExpdotexpContext)
-
-	// ExitRelacionales is called when exiting the relacionales production.
-	ExitRelacionales(c *RelacionalesContext)
+	// ExitMutType is called when exiting the mutType production.
+	ExitMutType(c *MutTypeContext)
 
 	// ExitCorchetesexpre is called when exiting the corchetesexpre production.
 	ExitCorchetesexpre(c *CorchetesexpreContext)
@@ -181,14 +124,26 @@ type VlangListener interface {
 	// ExitParentesisexpre is called when exiting the parentesisexpre production.
 	ExitParentesisexpre(c *ParentesisexpreContext)
 
-	// ExitSumres is called when exiting the sumres production.
-	ExitSumres(c *SumresContext)
+	// ExitIncredecr is called when exiting the incredecr production.
+	ExitIncredecr(c *IncredecrContext)
+
+	// ExitValorexpresion is called when exiting the valorexpresion production.
+	ExitValorexpresion(c *ValorexpresionContext)
+
+	// ExitAsignacionfor is called when exiting the asignacionfor production.
+	ExitAsignacionfor(c *AsignacionforContext)
 
 	// ExitId is called when exiting the id production.
 	ExitId(c *IdContext)
 
 	// ExitExpdotexp1 is called when exiting the expdotexp1 production.
 	ExitExpdotexp1(c *Expdotexp1Context)
+
+	// ExitExpdotexp is called when exiting the expdotexp production.
+	ExitExpdotexp(c *ExpdotexpContext)
+
+	// ExitBinaryExp is called when exiting the BinaryExp production.
+	ExitBinaryExp(c *BinaryExpContext)
 
 	// ExitParametros is called when exiting the parametros production.
 	ExitParametros(c *ParametrosContext)
@@ -210,6 +165,9 @@ type VlangListener interface {
 
 	// ExitValorCaracter is called when exiting the valorCaracter production.
 	ExitValorCaracter(c *ValorCaracterContext)
+
+	// ExitValorFloat is called when exiting the valorFloat production.
+	ExitValorFloat(c *ValorFloatContext)
 
 	// ExitIncremento is called when exiting the incremento production.
 	ExitIncremento(c *IncrementoContext)

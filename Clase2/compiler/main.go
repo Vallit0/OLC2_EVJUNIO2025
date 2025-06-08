@@ -28,12 +28,6 @@ func main() {
 	//startTime := time.Now()
 
 	// Canal para generar CST en paralelo (opcional)
-	/*
-		resultChannel := make(chan string)
-		go func() {
-			resultChannel <- cst.CstReport(inputCode)
-		}()
-	*/
 
 	// 1. Análisis Léxico
 	// Para verificar errores

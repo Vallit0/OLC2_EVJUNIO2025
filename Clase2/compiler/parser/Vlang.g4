@@ -2,11 +2,11 @@ grammar Vlang;
 
 
 // === Axioma principal ===
-programa : declaraciones* EOF ;
-// /home/sebas/Desktop/Compiladores 2/OLC2_EVJUNIO2025/Clase2/compiler/errors/error_strategy.go
-declaraciones : varDcl   
-              | stmt    
-              ; 
+
+programa: (stmt)+ EOF;
+
+
+
 
 varDcl
     : 'mut' ID (ASSIGN expresion)?  #variableDeclaration
@@ -14,38 +14,51 @@ varDcl
 
 
 
-stmt : expresion          #expresionStatement
+stmt:
+	 decl_stmt                #declarationStatement    
+	 | assign_stmt            #assignmentStatement
      | 'print(' expresion ')' #printStatement
-     | sentencias_control    #controlStatement
-     ; 
+     ;
 
-sentencias_control
-    : ifDcl             #if_context 
-    | forDcl            #for_context 
-    | whileDcl          #while_context
-    ;
+assign_stmt:
+	ID (DOT ID)* EQ expresion  	# DirectAssign
+    ; 
 
-ifDcl
-    : 'if' LPAREN expresion RPAREN LBRACK declaraciones* RBRACK ( 'else' LBRACK declaraciones* RBRACK )? 
-    ;
-forDcl
-    : 'for' LPAREN ID ASSIGN expresion COMMA expresion RPAREN LBRACK declaraciones* RBRACK 
-    ;
-whileDcl
-    : 'while' LPAREN expresion RPAREN LBRACK declaraciones* RBRACK 
-    ;
+decl_stmt: var_type ID EQ expresion  
+    ; 
+
+var_type: MUT #mutType
+;
+
+
+
+
 
 // === Reglas de expresiones ===
 expresion
-    : valor                                                #valorexpr         
+    : valor                                                #valorexpresion        
     | LPAREN expresion RPAREN                              #parentesisexpre
     | LBRACK expresion RBRACK                              #corchetesexpre
     | op=(NOT | MINUS) expresion                           #unario
-    | expresion op=(MUL | DIV | MOD) expresion             #multdivmod
-    | expresion op=(PLUS | MINUS) expresion                #sumres
-    | expresion op=(LT | LE | GE | GT) expresion           #relacionales
-    | expresion op=(EQ | NEQ) expresion                    #igualdad
-    | expresion OR expresion                               #or
+
+// ------------- >  Reglas de Expresiones Aritmeticas
+// por facilidad la llamaremos a nuestra regla #BinaryExpr
+/*¿Que puede tener una expresion binaria? |
+
+una expresion binaria puede tener dos operandos y un operador.
+el operando sera -> expresion 
+los operadores -> (*| + | )
+
+Entonces, nos ahorraremos trabajo en el BinaryExpr,
+porque lo definiremos en el visit de BinaryExpr
+ */
+	| left = expresion op = (MUL | DIV | MOD) right = expresion	# BinaryExp // a * b, a / b, a % b
+	| left = expresion op = (PLUS | MINUS) right = expresion    # BinaryExp // a + b, a - b
+	| left = expresion op = ( LT | LE | GT | GE) right = expresion	# BinaryExp // a < b, a <= b, a > b, a >= b
+	| left = expresion op = (EQ | NEQ ) right = expresion	# BinaryExp // a == b, a != b
+	| left = expresion op = AND right = expresion		    # BinaryExp // a && b
+	| left = expresion op = OR right = expresion 			# BinaryExp // a || b
+
     | ID                                                   #id              
     | incredecre                                           #incredecr      
     | ID DOT ID                                            #expdotexp1             
@@ -66,6 +79,7 @@ valor
     | CADENA    #valorCadena
     | BOOLEANO  #valorBooleano
     | CARACTER  #valorCaracter
+    | FLOAT     #valorFloat
     ;
 
 
@@ -80,10 +94,11 @@ incredecre
 LEN     : 'len' ;
 CAP     : 'cap' ;
 APPEND  : 'append' ;
-
+MUT     : 'mut' ;
 // === Literales ===
 BOOLEANO : 'true' | 'false' ;
 ENTERO   : [0-9]+ ;
+FLOAT    : [0-9]+ '.' [0-9]* | [0-9]* '.' [0-9]+ ;
 DECIMAL  : [0-9]+ '.' [0-9]+ ;
 CADENA   : '"' (~["\\] | '\\' .)* '"' ;
 CARACTER : '\'' . '\'' ;
@@ -99,6 +114,7 @@ DIV     : '/' ;
 MOD     : '%' ;
 NOT     : '!' ;
 OR      : '||' ;
+AND     : '&&' ;
 EQ      : '==' ;
 NEQ     : '!=' ;
 LT      : '<' ;

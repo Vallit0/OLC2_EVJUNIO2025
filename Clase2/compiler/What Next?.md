@@ -141,7 +141,7 @@ type BaseVlangVisitor struct {
 }
 ```
 Lo unico que debemos cambiar es 
-la clase a la que se encuentra asociada a lo que queremos hacer e implementarlo. ¿Cómo? copiamos la funcion visit que necesitemos, si necesitamos implementar la funcionalidad del nodo `Programa`
+la clase a la que se encuentra asociada. ¿Cómo? copiamos la funcion visit que necesitemos, si necesitamos implementar la funcionalidad del nodo `Programa`
 en nuestra gramatica. 
 ```Bash 
 // === Axioma principal ===
@@ -174,15 +174,40 @@ interface{} {
 }
 ```
 Nota: Depende de que paquete le hayas dado a tus archivos en `/parser`
-```Go
 
+### Ok, ¿Y ahora?
 
-func (v *)
-       ^ 
-       | 
-       | 
-Cambiar BaseVisitor 
-por el nombre de nuestra 
-clase ReplVisitor. 
+Ahora ya podemos implementar la ejecución en cada uno de los métodos que les mencione arriba. 
+
+## Expresiones 
+En el archivo de la gramatica podrán ver las expresiones que les añadí adaptadas a lo que les he solicitado. En las expresiones, tenemos: 
+```Bash 
+expresion
+    
+    : valor                       #valorexpr   -> Sube el valor    
+    
+    | LPAREN expresion RPAREN     #parentesisexpre
+    | LBRACK expresion RBRACK     #corchetesexpre
+    | op=(NOT | MINUS) expresion  #unario
+    | expresion op=(MUL | DIV | MOD) expresion #multdivmod
+    | expresion op=(PLUS | MINUS) expresion    #sumres
+    | expresion op=(LT | LE | GE | GT) expresion  #relacionales
+    | expresion op=(EQ | NEQ) expresion           #igualdad
+    | expresion OR expresion                      #or
+    | ID                                          #id              
+    | incredecre                                  #incredecr      
+    | ID DOT ID                                   #expdotexp1             
+    | ID DOT expresion                            #expdotexp      
+    | ID ASSIGN expresion                         #asignacionfor
+    ;
 ```
-
+Ahora lo que vamos a hacer es ir por cada una de estas variantes, 
+e implementar la logica en nuestro visitor. Recordemos que 
+```Bash 
+| ID ASSIGN expresion                         #asignacionfor
+                                                   ^
+                                                   |
+                               Nombre del SubContexto en el archivo parser.go
+```
+Cuando hacemos el `visitAsignacionFor` decimos que "Resolvemos" la expresion. 
+Vayamos a hacer cada uno de estos 

@@ -1,7 +1,7 @@
 package errors
 
 import (
-	"compiler/repl"
+	repl "compiler/repl"
 
 	"github.com/antlr4-go/antlr/v4"
 )
