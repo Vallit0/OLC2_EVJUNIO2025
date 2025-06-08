@@ -88,9 +88,9 @@ func (s *BaseScope) GetVariable(name string) *Variable {
 		if variable, ok := initialScope.variables[name]; ok {
 
 			// verify if is refering to a pointer
-			if variable.Type == value.IVOR_POINTER {
-				return variable.Value.(*PointerValue).AssocVariable // pointer of a pointer ?
-			}
+			// if variable.Type == value.IVOR_POINTER {
+			// 	return variable.Value.(*PointerValue).AssocVariable // pointer of a pointer ?
+			// }
 
 			return variable
 		}
