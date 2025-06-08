@@ -14,7 +14,7 @@ import (
 // Visitor personalizado para recorrer el árbol de sintaxis
 type ReplVisitor struct {
 	parser.BaseVlangVisitor
-	// ScopeTrace  *ScopeTrace
+	ScopeTrace *ScopeTrace
 	// CallStack   *CallStack
 	Console     *Console
 	ErrorTable  *ErrorTable
@@ -39,12 +39,107 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 func (v *ReplVisitor) VisitPrograma(ctx *parser.ProgramaContext) interface{} {
 
+	// Vamos a recorrer todos los statements y los visitamos
 	for _, stmt := range ctx.AllStmt() {
 		fmt.Println("🔍 Visitando declaración:", stmt.GetText())
 		v.Visit(stmt)
 	}
 
 	return nil
+}
+
+/*
+
+Ahora recorremos todos los stmts que tenemos en el programa
+
+*/
+
+func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
+	// vamos a recorrer todos los statements que tenemos
+	if ctx != nil && ctx.GetChildCount() != 0 {
+		// es distinto de nil y no tiene hijos
+		if ctx.Decl_stmt() != nil {
+			// Mandamos a visitar la declaracion
+			v.Visit(ctx.Decl_stmt())
+		} else if ctx.Assign_stmt() != nil {
+			// mandamos a asignar la variable que tenemos
+			v.Visit(ctx.Assign_stmt()) // -> me voy a ir a hacer el visitor
+		}
+		// despues vemos si es otro statement
+		// otro statement que sea de otro tipo
+	}
+
+	// Si es un error, lo lanzamos
+	//ctx.
+
+	// Vemos el caso de la Declaracion de Cualquier cosa
+
+	// v.Visit(ctx.declarationStatement())
+	// } else if ctx.Assign_stmt() != nil {
+	// 	v.Visit(ctx.Assign_stmt())
+	// }
+	//
+	// else if ctx.If_stmt() != nil {
+	// 	v.Visit(ctx.If_stmt())
+	// } else if ctx.Switch_stmt() != nil {
+	// 	v.Visit(ctx.Switch_stmt())
+	// } else if ctx.While_stmt() != nil {
+	// 	v.Visit(ctx.While_stmt())
+	// } else if ctx.For_stmt() != nil {
+	// 	v.Visit(ctx.For_stmt())
+	// } else if ctx.Guard_stmt() != nil {
+	// 	v.Visit(ctx.Guard_stmt())
+	// } else if ctx.Transfer_stmt() != nil {
+	// 	v.Visit(ctx.Transfer_stmt())
+	// } else if ctx.Func_call() != nil {
+	// 	v.Visit(ctx.Func_call())
+	// } else if ctx.Func_dcl() != nil {
+	// 	v.Visit(ctx.Func_dcl())
+	// } else if ctx.Strct_dcl() != nil {
+	// 	v.Visit(ctx.Strct_dcl())
+	// } else if ctx.Vector_func() != nil {
+	// 	v.Visit(ctx.Vector_func())
+	// } else {
+	// 	log.Fatal("Statement not found " + ctx.GetText())
+	// }
+
+	return nil
+}
+
+func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interface{} {
+	// Vamos a visitar la asignacion
+	// Primero vamos a ver si es una asignacion de variable
+	// lo que queremos hacer para una asignacion
+	// es ver si tenemos el ID
+	varName := v.Visit(ctx.Id_pattern()).(string)
+	varValue := v.Visit(ctx.Expresion()).(value.IVOR)
+	// le pedimos la variable al ScopeTrace
+	variable := v.ScopeTrace.GetVariable(varName)
+
+	if variable == nil {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Variable "+varName+" no encontrada")
+	} else {
+
+		// Se copia el objeto
+
+		// Aqui se deberia agregar la validacion del vector
+
+		canMutate := true
+
+		// // verificamos si es un struct
+		// if v.ScopeTrace.CurrentScope.isStruct {
+		// 	canMutate = v.ScopeTrace.IsMutatingEnvironment()
+		// }
+
+		ok, msg := variable.Assign(varValue, canMutate)
+
+		if !ok {
+			v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
+		}
+	}
+
+	return nil
+
 }
 
 /*

@@ -11,19 +11,7 @@ func (v *BaseVlangVisitor) VisitPrograma(ctx *ProgramaContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseVlangVisitor) VisitVariableDeclaration(ctx *VariableDeclarationContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitDeclarationStatement(ctx *DeclarationStatementContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitAssignmentStatement(ctx *AssignmentStatementContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitPrintStatement(ctx *PrintStatementContext) interface{} {
+func (v *BaseVlangVisitor) VisitStmt(ctx *StmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -36,6 +24,10 @@ func (v *BaseVlangVisitor) VisitDecl_stmt(ctx *Decl_stmtContext) interface{} {
 }
 
 func (v *BaseVlangVisitor) VisitMutType(ctx *MutTypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitIdPattern(ctx *IdPatternContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

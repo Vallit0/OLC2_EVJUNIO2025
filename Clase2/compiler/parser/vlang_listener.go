@@ -10,17 +10,8 @@ type VlangListener interface {
 	// EnterPrograma is called when entering the programa production.
 	EnterPrograma(c *ProgramaContext)
 
-	// EnterVariableDeclaration is called when entering the variableDeclaration production.
-	EnterVariableDeclaration(c *VariableDeclarationContext)
-
-	// EnterDeclarationStatement is called when entering the declarationStatement production.
-	EnterDeclarationStatement(c *DeclarationStatementContext)
-
-	// EnterAssignmentStatement is called when entering the assignmentStatement production.
-	EnterAssignmentStatement(c *AssignmentStatementContext)
-
-	// EnterPrintStatement is called when entering the printStatement production.
-	EnterPrintStatement(c *PrintStatementContext)
+	// EnterStmt is called when entering the stmt production.
+	EnterStmt(c *StmtContext)
 
 	// EnterDirectAssign is called when entering the DirectAssign production.
 	EnterDirectAssign(c *DirectAssignContext)
@@ -30,6 +21,9 @@ type VlangListener interface {
 
 	// EnterMutType is called when entering the mutType production.
 	EnterMutType(c *MutTypeContext)
+
+	// EnterIdPattern is called when entering the IdPattern production.
+	EnterIdPattern(c *IdPatternContext)
 
 	// EnterCorchetesexpre is called when entering the corchetesexpre production.
 	EnterCorchetesexpre(c *CorchetesexpreContext)
@@ -94,17 +88,8 @@ type VlangListener interface {
 	// ExitPrograma is called when exiting the programa production.
 	ExitPrograma(c *ProgramaContext)
 
-	// ExitVariableDeclaration is called when exiting the variableDeclaration production.
-	ExitVariableDeclaration(c *VariableDeclarationContext)
-
-	// ExitDeclarationStatement is called when exiting the declarationStatement production.
-	ExitDeclarationStatement(c *DeclarationStatementContext)
-
-	// ExitAssignmentStatement is called when exiting the assignmentStatement production.
-	ExitAssignmentStatement(c *AssignmentStatementContext)
-
-	// ExitPrintStatement is called when exiting the printStatement production.
-	ExitPrintStatement(c *PrintStatementContext)
+	// ExitStmt is called when exiting the stmt production.
+	ExitStmt(c *StmtContext)
 
 	// ExitDirectAssign is called when exiting the DirectAssign production.
 	ExitDirectAssign(c *DirectAssignContext)
@@ -114,6 +99,9 @@ type VlangListener interface {
 
 	// ExitMutType is called when exiting the mutType production.
 	ExitMutType(c *MutTypeContext)
+
+	// ExitIdPattern is called when exiting the IdPattern production.
+	ExitIdPattern(c *IdPatternContext)
 
 	// ExitCorchetesexpre is called when exiting the corchetesexpre production.
 	ExitCorchetesexpre(c *CorchetesexpreContext)

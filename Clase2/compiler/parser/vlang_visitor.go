@@ -10,17 +10,8 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#programa.
 	VisitPrograma(ctx *ProgramaContext) interface{}
 
-	// Visit a parse tree produced by VlangParser#variableDeclaration.
-	VisitVariableDeclaration(ctx *VariableDeclarationContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#declarationStatement.
-	VisitDeclarationStatement(ctx *DeclarationStatementContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#assignmentStatement.
-	VisitAssignmentStatement(ctx *AssignmentStatementContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#printStatement.
-	VisitPrintStatement(ctx *PrintStatementContext) interface{}
+	// Visit a parse tree produced by VlangParser#stmt.
+	VisitStmt(ctx *StmtContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#DirectAssign.
 	VisitDirectAssign(ctx *DirectAssignContext) interface{}
@@ -30,6 +21,9 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#mutType.
 	VisitMutType(ctx *MutTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#IdPattern.
+	VisitIdPattern(ctx *IdPatternContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#corchetesexpre.
 	VisitCorchetesexpre(ctx *CorchetesexpreContext) interface{}

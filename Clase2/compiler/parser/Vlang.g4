@@ -5,35 +5,30 @@ grammar Vlang;
 
 programa: (stmt)+ EOF;
 
-
-
-
-varDcl
-    : 'mut' ID (ASSIGN expresion)?  #variableDeclaration
-    ; 
-
-
+/*
+Desde el codigo vamos a recorrer Stmt y vamos 
+a ver de que tipo es cada uno entonces, no podemos 
+darle una etiqueta a cada uno 
+ */
 
 stmt:
-	 decl_stmt                #declarationStatement    
-	 | assign_stmt            #assignmentStatement
-     | 'print(' expresion ')' #printStatement
+	 decl_stmt                
+	 | assign_stmt            
+     | 'print(' expresion ')' 
      ;
 
 assign_stmt:
-	ID (DOT ID)* EQ expresion  	# DirectAssign
+	id_pattern EQ expresion  	# DirectAssign
     ; 
 
-decl_stmt: var_type ID EQ expresion  
+decl_stmt: 
+    var_type ID EQ expresion 
     ; 
 
 var_type: MUT #mutType
 ;
 
-
-
-
-
+id_pattern: ID (DOT ID)* # IdPattern;
 // === Reglas de expresiones ===
 expresion
     : valor                                                #valorexpresion        
@@ -72,7 +67,7 @@ parametros : expresion (COMMA expresion)* ;
 // === Tipos de valores simples ===
 valores : valor ;
 
-// === Subcontextos para valores ===
+// === Subcontextos para d ===
 valor
     : ENTERO    #valorEntero
     | DECIMAL   #valorDecimal

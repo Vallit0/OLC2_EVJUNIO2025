@@ -26,29 +26,11 @@ func (s *BaseVlangListener) EnterPrograma(ctx *ProgramaContext) {}
 // ExitPrograma is called when production programa is exited.
 func (s *BaseVlangListener) ExitPrograma(ctx *ProgramaContext) {}
 
-// EnterVariableDeclaration is called when production variableDeclaration is entered.
-func (s *BaseVlangListener) EnterVariableDeclaration(ctx *VariableDeclarationContext) {}
+// EnterStmt is called when production stmt is entered.
+func (s *BaseVlangListener) EnterStmt(ctx *StmtContext) {}
 
-// ExitVariableDeclaration is called when production variableDeclaration is exited.
-func (s *BaseVlangListener) ExitVariableDeclaration(ctx *VariableDeclarationContext) {}
-
-// EnterDeclarationStatement is called when production declarationStatement is entered.
-func (s *BaseVlangListener) EnterDeclarationStatement(ctx *DeclarationStatementContext) {}
-
-// ExitDeclarationStatement is called when production declarationStatement is exited.
-func (s *BaseVlangListener) ExitDeclarationStatement(ctx *DeclarationStatementContext) {}
-
-// EnterAssignmentStatement is called when production assignmentStatement is entered.
-func (s *BaseVlangListener) EnterAssignmentStatement(ctx *AssignmentStatementContext) {}
-
-// ExitAssignmentStatement is called when production assignmentStatement is exited.
-func (s *BaseVlangListener) ExitAssignmentStatement(ctx *AssignmentStatementContext) {}
-
-// EnterPrintStatement is called when production printStatement is entered.
-func (s *BaseVlangListener) EnterPrintStatement(ctx *PrintStatementContext) {}
-
-// ExitPrintStatement is called when production printStatement is exited.
-func (s *BaseVlangListener) ExitPrintStatement(ctx *PrintStatementContext) {}
+// ExitStmt is called when production stmt is exited.
+func (s *BaseVlangListener) ExitStmt(ctx *StmtContext) {}
 
 // EnterDirectAssign is called when production DirectAssign is entered.
 func (s *BaseVlangListener) EnterDirectAssign(ctx *DirectAssignContext) {}
@@ -67,6 +49,12 @@ func (s *BaseVlangListener) EnterMutType(ctx *MutTypeContext) {}
 
 // ExitMutType is called when production mutType is exited.
 func (s *BaseVlangListener) ExitMutType(ctx *MutTypeContext) {}
+
+// EnterIdPattern is called when production IdPattern is entered.
+func (s *BaseVlangListener) EnterIdPattern(ctx *IdPatternContext) {}
+
+// ExitIdPattern is called when production IdPattern is exited.
+func (s *BaseVlangListener) ExitIdPattern(ctx *IdPatternContext) {}
 
 // EnterCorchetesexpre is called when production corchetesexpre is entered.
 func (s *BaseVlangListener) EnterCorchetesexpre(ctx *CorchetesexpreContext) {}

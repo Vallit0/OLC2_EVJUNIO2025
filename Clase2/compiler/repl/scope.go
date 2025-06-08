@@ -17,6 +17,8 @@ type BaseScope struct {
 	IsMutating bool
 }
 
+// Anadir hijos en Clase
+
 func (s *BaseScope) Name() string {
 	return s.name
 }
@@ -41,11 +43,12 @@ func (s *BaseScope) AddChild(child *BaseScope) {
 	child.parent = s
 }
 
+/*
+Clase Aqui xd
+*/
 func (s *BaseScope) variableExists(variable *Variable) bool {
 
-	if _, ok := s.variables[variable.Name]; ok {
-		return true
-	}
+	// debo recorrer el scope y ver si existe
 
 	return false
 
