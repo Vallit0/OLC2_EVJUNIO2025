@@ -21,10 +21,6 @@ type ReplVisitor struct {
 	StructNames []string
 }
 
-func isDeclConst(lexval string) bool {
-	return lexval == "let"
-}
-
 // Constructor del visitor
 func NewReplVisitor() *ReplVisitor {
 	return &ReplVisitor{}

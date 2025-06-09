@@ -16,11 +16,11 @@ fn fibonacci(n int) int {
 
 fn hanoi(n int, origen string, auxiliar string, destino string) {
 	if n == 1 {
-		println('Mover disco 1 de $origen a $destino')
+		println("Mover disco 1 de $origen a $destino")
 		return
 	}
 	hanoi(n - 1, origen, destino, auxiliar)
-	println('Mover disco $n de $origen a $destino')
+	println("Mover disco $n de $origen a $destino")
 	hanoi(n - 1, auxiliar, origen, destino)
 }
 
@@ -97,7 +97,7 @@ fn main() {
 	mut puntos_atoi = 0
 	println("\n==== strconv.Atoi ====")
 	val = atoi("123") // llamado simulado
-	println('"123" convertido a int: $val')
+	println(""123" convertido a int: $val")
 	if val == 123 {
 		puntos_atoi += 1
 		println("OK strconv.Atoi: correcto")
@@ -110,8 +110,8 @@ fn main() {
 	println("\n==== strconv.ParseFloat ====")
 	val1 = parse_float("123.45")
 	val2 = parse_float("123")
-	println('"123.45" convertido a float64: $val1')
-	println('"123" convertido a float64: $val2')
+	println(""123.45" convertido a float64: $val1")
+	println(""123" convertido a float64: $val2")
 	if val1 == 123.45 && val2 == 123.0 {
 		puntos_parse += 1
 		println("OK strconv.ParseFloat: correcto")
@@ -129,7 +129,7 @@ fn main() {
 	t5 = reflect_typeof([1, 2, 3])
 	println("Tipo de 42: $t1")
 	println("Tipo de 3.14: $t2")
-	println("Tipo de 'Hola': $t3")
+	println("Tipo de "Hola": $t3")
 	println("Tipo de true: $t4")
 	println("Tipo de [1, 2, 3]: $t5")
 
