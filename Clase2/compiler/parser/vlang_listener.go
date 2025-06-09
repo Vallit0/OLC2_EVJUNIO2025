@@ -13,11 +13,44 @@ type VlangListener interface {
 	// EnterStmt is called when entering the stmt production.
 	EnterStmt(c *StmtContext)
 
+	// EnterIfStmt is called when entering the IfStmt production.
+	EnterIfStmt(c *IfStmtContext)
+
+	// EnterIfChain is called when entering the IfChain production.
+	EnterIfChain(c *IfChainContext)
+
+	// EnterElseStmt is called when entering the ElseStmt production.
+	EnterElseStmt(c *ElseStmtContext)
+
+	// EnterWhileStmt is called when entering the WhileStmt production.
+	EnterWhileStmt(c *WhileStmtContext)
+
+	// EnterForStmt is called when entering the ForStmt production.
+	EnterForStmt(c *ForStmtContext)
+
+	// EnterNumericRange is called when entering the NumericRange production.
+	EnterNumericRange(c *NumericRangeContext)
+
+	// EnterReturnStmt is called when entering the ReturnStmt production.
+	EnterReturnStmt(c *ReturnStmtContext)
+
+	// EnterBreakStmt is called when entering the BreakStmt production.
+	EnterBreakStmt(c *BreakStmtContext)
+
+	// EnterContinueStmt is called when entering the ContinueStmt production.
+	EnterContinueStmt(c *ContinueStmtContext)
+
 	// EnterDirectAssign is called when entering the DirectAssign production.
 	EnterDirectAssign(c *DirectAssignContext)
 
 	// EnterDeclAssign is called when entering the DeclAssign production.
 	EnterDeclAssign(c *DeclAssignContext)
+
+	// EnterDeclAssignPattern is called when entering the DeclAssignPattern production.
+	EnterDeclAssignPattern(c *DeclAssignPatternContext)
+
+	// EnterDeclPattern is called when entering the DeclPattern production.
+	EnterDeclPattern(c *DeclPatternContext)
 
 	// EnterMutType is called when entering the mutType production.
 	EnterMutType(c *MutTypeContext)
@@ -91,11 +124,44 @@ type VlangListener interface {
 	// ExitStmt is called when exiting the stmt production.
 	ExitStmt(c *StmtContext)
 
+	// ExitIfStmt is called when exiting the IfStmt production.
+	ExitIfStmt(c *IfStmtContext)
+
+	// ExitIfChain is called when exiting the IfChain production.
+	ExitIfChain(c *IfChainContext)
+
+	// ExitElseStmt is called when exiting the ElseStmt production.
+	ExitElseStmt(c *ElseStmtContext)
+
+	// ExitWhileStmt is called when exiting the WhileStmt production.
+	ExitWhileStmt(c *WhileStmtContext)
+
+	// ExitForStmt is called when exiting the ForStmt production.
+	ExitForStmt(c *ForStmtContext)
+
+	// ExitNumericRange is called when exiting the NumericRange production.
+	ExitNumericRange(c *NumericRangeContext)
+
+	// ExitReturnStmt is called when exiting the ReturnStmt production.
+	ExitReturnStmt(c *ReturnStmtContext)
+
+	// ExitBreakStmt is called when exiting the BreakStmt production.
+	ExitBreakStmt(c *BreakStmtContext)
+
+	// ExitContinueStmt is called when exiting the ContinueStmt production.
+	ExitContinueStmt(c *ContinueStmtContext)
+
 	// ExitDirectAssign is called when exiting the DirectAssign production.
 	ExitDirectAssign(c *DirectAssignContext)
 
 	// ExitDeclAssign is called when exiting the DeclAssign production.
 	ExitDeclAssign(c *DeclAssignContext)
+
+	// ExitDeclAssignPattern is called when exiting the DeclAssignPattern production.
+	ExitDeclAssignPattern(c *DeclAssignPatternContext)
+
+	// ExitDeclPattern is called when exiting the DeclPattern production.
+	ExitDeclPattern(c *DeclPatternContext)
 
 	// ExitMutType is called when exiting the mutType production.
 	ExitMutType(c *MutTypeContext)

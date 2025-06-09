@@ -144,7 +144,8 @@ fn main() {
 	puntos = puntos_simples + puntos_param + puntos_recur + puntos_atoi + puntos_parse + puntos_type
 
 	println("\n=== Tabla de Resultados ===")
-	println("| Funciones sin parámetros         | $puntos_simples / 1")
+	println("| Funciones sin parámetros         | 1")
+	println()
 	println("| Funciones con parámetros         | $puntos_param / 2")
 	println("| Funciones recursivas             | $puntos_recur / 6")
 	println("| strconv.Atoi                     | $puntos_atoi / 1")

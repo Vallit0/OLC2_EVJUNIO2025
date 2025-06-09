@@ -13,9 +13,34 @@ darle una etiqueta a cada uno
 
 stmt:
 	 decl_stmt                
-	 | assign_stmt            
-     | 'print(' expresion ')' 
+	 | assign_stmt
+     | if_stmt
+     | while_stmt
+     | for_stmt
+     | transfer_stmt           
+     | 'println(' expresion ')' 
      ;
+
+if_stmt: if_chain (ELSE_KW if_chain)* else_stmt? # IfStmt;
+
+if_chain: IF_KW expresion  LCOR stmt* RCOR # IfChain;
+
+else_stmt: ELSE_KW LCOR stmt* RCOR # ElseStmt;
+
+
+while_stmt: WHILE_KW expresion LCOR stmt* RCOR # WhileStmt;
+
+for_stmt:
+	FOR_KW ID IN_KW (expresion | range) LCOR stmt* RCOR # ForStmt;
+
+range: expresion DOT DOT DOT expresion # NumericRange;
+
+
+transfer_stmt:
+	RETURN_KW expresion?	# ReturnStmt
+	| BREAK_KW		# BreakStmt
+	| CONTINUE_KW	# ContinueStmt;
+
 
 assign_stmt:
 	id_pattern EQ expresion  	# DirectAssign
@@ -103,6 +128,15 @@ CARACTER : '\'' . '\'' ;
 // === Identificadores ===
 ID : [a-zA-Z_][a-zA-Z0-9_]* ;
 
+
+IF_KW : 'if' ;
+ELSE_KW : 'else' ;
+WHILE_KW : 'while' ;
+FOR_KW : 'for' ;
+IN_KW : 'in' ;
+RETURN_KW : 'return' ;
+BREAK_KW : 'break' ;
+CONTINUE_KW : 'continue' ;
 // === Operadores ===
 PLUS    : '+' ;
 MINUS   : '-' ;
@@ -126,7 +160,9 @@ DEC     : '--' ;
 LPAREN  : '(' ;
 RPAREN  : ')' ;
 LBRACK  : '[' ;
+LCOR  : '{' ;
 RBRACK  : ']' ;
+RCOR  : '}' ;
 DOT     : '.' ;
 COMMA   : ',' ;
 

@@ -13,11 +13,44 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#stmt.
 	VisitStmt(ctx *StmtContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#IfStmt.
+	VisitIfStmt(ctx *IfStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#IfChain.
+	VisitIfChain(ctx *IfChainContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ElseStmt.
+	VisitElseStmt(ctx *ElseStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#WhileStmt.
+	VisitWhileStmt(ctx *WhileStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ForStmt.
+	VisitForStmt(ctx *ForStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#NumericRange.
+	VisitNumericRange(ctx *NumericRangeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ReturnStmt.
+	VisitReturnStmt(ctx *ReturnStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#BreakStmt.
+	VisitBreakStmt(ctx *BreakStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ContinueStmt.
+	VisitContinueStmt(ctx *ContinueStmtContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#DirectAssign.
 	VisitDirectAssign(ctx *DirectAssignContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#DeclAssign.
 	VisitDeclAssign(ctx *DeclAssignContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#DeclAssignPattern.
+	VisitDeclAssignPattern(ctx *DeclAssignPatternContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#DeclPattern.
+	VisitDeclPattern(ctx *DeclPatternContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#mutType.
 	VisitMutType(ctx *MutTypeContext) interface{}
