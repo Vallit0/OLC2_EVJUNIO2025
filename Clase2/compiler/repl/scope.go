@@ -2,6 +2,8 @@ package repl
 
 import (
 	"compiler/value"
+	"fmt"
+	"strings"
 
 	"github.com/antlr4-go/antlr/v4"
 )
@@ -194,4 +196,53 @@ func (s *BaseScope) IsMutatingScope() bool {
 	}
 
 	return false
+}
+
+func NewGlobalScope() *BaseScope {
+
+	// register built-in functions
+
+	funcs := make(map[string]value.IVOR)
+
+	// for k, v := range DefaultBuiltInFunctions {
+	// 	funcs[k] = v
+	// }
+
+	return &BaseScope{
+		name:      "global",
+		variables: make(map[string]*Variable),
+		children:  make([]*BaseScope, 0),
+		structs:   make(map[string]*Struct),
+		parent:    nil,
+		functions: funcs,
+	}
+}
+
+func NewLocalScope(name string) *BaseScope {
+	return &BaseScope{
+		name:      name,
+		variables: make(map[string]*Variable),
+		functions: make(map[string]value.IVOR),
+		children:  make([]*BaseScope, 0),
+		parent:    nil,
+	}
+}
+
+func (s *BaseScope) PrintScopeVariables(indent int) {
+	fmt.Printf("-----------------------")
+	prefix := strings.Repeat("  ", indent)
+	fmt.Printf("%sScope: %s\n", prefix, s.Name())
+
+	if len(s.variables) == 0 {
+		fmt.Printf("%s  (no variables)\n", prefix)
+	} else {
+		for name, variable := range s.variables {
+			fmt.Printf("%s  - Variable: %s (Type: %s)\n", prefix, name, variable.Type)
+		}
+	}
+
+	for _, child := range s.children {
+		child.PrintScopeVariables(indent + 1)
+	}
+	fmt.Printf("%s-----------------------\n", prefix)
 }

@@ -152,7 +152,7 @@ func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interf
 		Cuando declaramos una variable tenemos que
 		1. Saber si es constante o variable (let o var)
 		2. Saber el nombre de la variable
-		3. Saber el valor de la variable
+		3. Saber el valor de la variable (Depende, si solo la declaramos)
 		mut
 
 	*/

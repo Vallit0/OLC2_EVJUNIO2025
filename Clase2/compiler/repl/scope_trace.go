@@ -6,39 +6,14 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
-func NewGlobalScope() *BaseScope {
-
-	// register built-in functions
-
-	// funcs := make(map[string]value.IVOR)
-
-	// for k, v := range DefaultBuiltInFunctions {
-	// 	funcs[k] = v
-	// }
-
-	return &BaseScope{
-		name:      "global",
-		variables: make(map[string]*Variable),
-		children:  make([]*BaseScope, 0),
-		structs:   make(map[string]*Struct),
-		parent:    nil,
-		//functions: funcs,
-	}
-}
-
-func NewLocalScope(name string) *BaseScope {
-	return &BaseScope{
-		name:      name,
-		variables: make(map[string]*Variable),
-		functions: make(map[string]value.IVOR),
-		children:  make([]*BaseScope, 0),
-		parent:    nil,
-	}
-}
-
 type ScopeTrace struct {
 	GlobalScope  *BaseScope
 	CurrentScope *BaseScope
+	/*
+		Lo vamos a ir trasladando con punteros
+		en un arbol de scopes hacia arriba.
+
+	*/
 }
 
 func (s *ScopeTrace) PushScope(name string) *BaseScope {
