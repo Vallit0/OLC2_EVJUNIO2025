@@ -23,6 +23,8 @@ assign_stmt:
 
 decl_stmt: 
     var_type ID EQ expresion # DeclAssign
+    | var_type id_pattern EQ expresion # DeclAssignPattern
+    | var_type id_pattern # DeclPattern
     ; 
 
 var_type: MUT #mutType

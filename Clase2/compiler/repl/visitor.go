@@ -21,6 +21,10 @@ type ReplVisitor struct {
 	StructNames []string
 }
 
+func isDeclConst(lexval string) bool {
+	return lexval == "let"
+}
+
 // Constructor del visitor
 func NewReplVisitor() *ReplVisitor {
 	return &ReplVisitor{}
@@ -144,9 +148,19 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 
 func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interface{} {
 
-	isConst := isDeclConst(ctx.Var_type().GetText())
+	/*
+		Cuando declaramos una variable tenemos que
+		1. Saber si es constante o variable (let o var)
+		2. Saber el nombre de la variable
+		3. Saber el valor de la variable
+		mut
+
+	*/
+	// verificamos si es una constante
+
+	// isConst := isDeclConst(ctx.Var_type().GetText())
 	varName := ctx.ID().GetText()
-	varValue := v.Visit(ctx.Expr()).(value.IVOR)
+	varValue := v.Visit(ctx.Expresion()).(value.IVOR)
 	varType := varValue.Type()
 
 	if varType == "[]" {
@@ -163,7 +177,7 @@ func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interf
 	// 	varValue = varValue.Copy()
 	// }
 
-	variable, msg := v.ScopeTrace.AddVariable(varName, varType, varValue, isConst, false, ctx.GetStart())
+	variable, msg := v.ScopeTrace.AddVariable(varName, varType, varValue, false, false, ctx.GetStart())
 
 	// Variable already exists
 	if variable == nil {
