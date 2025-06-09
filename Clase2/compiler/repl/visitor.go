@@ -142,6 +142,36 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 
 }
 
+func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interface{} {
+
+	isConst := isDeclConst(ctx.Var_type().GetText())
+	varName := ctx.ID().GetText()
+	varValue := v.Visit(ctx.Expr()).(value.IVOR)
+	varType := varValue.Type()
+
+	if varType == "[]" {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "No se puede inferir el tipo de un vector vacio '"+varName+"'")
+		return nil
+	}
+
+	// copy object
+	// if obj, ok := varValue.(*ObjectValue); ok {
+	// 	varValue = obj.Copy()
+	// }
+
+	// if IsVectorType(varValue.Type()) {
+	// 	varValue = varValue.Copy()
+	// }
+
+	variable, msg := v.ScopeTrace.AddVariable(varName, varType, varValue, isConst, false, ctx.GetStart())
+
+	// Variable already exists
+	if variable == nil {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
+	}
+	return nil
+}
+
 /*
 
 

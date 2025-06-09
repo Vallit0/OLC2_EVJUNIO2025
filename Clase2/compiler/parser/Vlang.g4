@@ -22,7 +22,7 @@ assign_stmt:
     ; 
 
 decl_stmt: 
-    var_type ID EQ expresion 
+    var_type ID EQ expresion # DeclAssign
     ; 
 
 var_type: MUT #mutType

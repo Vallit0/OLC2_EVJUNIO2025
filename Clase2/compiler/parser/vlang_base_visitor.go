@@ -19,7 +19,7 @@ func (v *BaseVlangVisitor) VisitDirectAssign(ctx *DirectAssignContext) interface
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseVlangVisitor) VisitDecl_stmt(ctx *Decl_stmtContext) interface{} {
+func (v *BaseVlangVisitor) VisitDeclAssign(ctx *DeclAssignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

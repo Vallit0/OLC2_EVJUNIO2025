@@ -737,13 +737,6 @@ type IDecl_stmtContext interface {
 
 	// GetParser returns the parser.
 	GetParser() antlr.Parser
-
-	// Getter signatures
-	Var_type() IVar_typeContext
-	ID() antlr.TerminalNode
-	EQ() antlr.TerminalNode
-	Expresion() IExpresionContext
-
 	// IsDecl_stmtContext differentiates from other interfaces.
 	IsDecl_stmtContext()
 }
@@ -780,7 +773,37 @@ func NewDecl_stmtContext(parser antlr.Parser, parent antlr.ParserRuleContext, in
 
 func (s *Decl_stmtContext) GetParser() antlr.Parser { return s.parser }
 
-func (s *Decl_stmtContext) Var_type() IVar_typeContext {
+func (s *Decl_stmtContext) CopyAll(ctx *Decl_stmtContext) {
+	s.CopyFrom(&ctx.BaseParserRuleContext)
+}
+
+func (s *Decl_stmtContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Decl_stmtContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+type DeclAssignContext struct {
+	Decl_stmtContext
+}
+
+func NewDeclAssignContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DeclAssignContext {
+	var p = new(DeclAssignContext)
+
+	InitEmptyDecl_stmtContext(&p.Decl_stmtContext)
+	p.parser = parser
+	p.CopyAll(ctx.(*Decl_stmtContext))
+
+	return p
+}
+
+func (s *DeclAssignContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *DeclAssignContext) Var_type() IVar_typeContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IVar_typeContext); ok {
@@ -796,15 +819,15 @@ func (s *Decl_stmtContext) Var_type() IVar_typeContext {
 	return t.(IVar_typeContext)
 }
 
-func (s *Decl_stmtContext) ID() antlr.TerminalNode {
+func (s *DeclAssignContext) ID() antlr.TerminalNode {
 	return s.GetToken(VlangParserID, 0)
 }
 
-func (s *Decl_stmtContext) EQ() antlr.TerminalNode {
+func (s *DeclAssignContext) EQ() antlr.TerminalNode {
 	return s.GetToken(VlangParserEQ, 0)
 }
 
-func (s *Decl_stmtContext) Expresion() IExpresionContext {
+func (s *DeclAssignContext) Expresion() IExpresionContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IExpresionContext); ok {
@@ -820,30 +843,22 @@ func (s *Decl_stmtContext) Expresion() IExpresionContext {
 	return t.(IExpresionContext)
 }
 
-func (s *Decl_stmtContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *Decl_stmtContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
-	return antlr.TreesStringTree(s, ruleNames, recog)
-}
-
-func (s *Decl_stmtContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *DeclAssignContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.EnterDecl_stmt(s)
+		listenerT.EnterDeclAssign(s)
 	}
 }
 
-func (s *Decl_stmtContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *DeclAssignContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.ExitDecl_stmt(s)
+		listenerT.ExitDeclAssign(s)
 	}
 }
 
-func (s *Decl_stmtContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *DeclAssignContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case VlangVisitor:
-		return t.VisitDecl_stmt(s)
+		return t.VisitDeclAssign(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -853,6 +868,7 @@ func (s *Decl_stmtContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 	localctx = NewDecl_stmtContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 6, VlangParserRULE_decl_stmt)
+	localctx = NewDeclAssignContext(p, localctx)
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(41)

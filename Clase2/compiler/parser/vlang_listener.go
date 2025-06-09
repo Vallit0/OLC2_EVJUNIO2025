@@ -16,8 +16,8 @@ type VlangListener interface {
 	// EnterDirectAssign is called when entering the DirectAssign production.
 	EnterDirectAssign(c *DirectAssignContext)
 
-	// EnterDecl_stmt is called when entering the decl_stmt production.
-	EnterDecl_stmt(c *Decl_stmtContext)
+	// EnterDeclAssign is called when entering the DeclAssign production.
+	EnterDeclAssign(c *DeclAssignContext)
 
 	// EnterMutType is called when entering the mutType production.
 	EnterMutType(c *MutTypeContext)
@@ -94,8 +94,8 @@ type VlangListener interface {
 	// ExitDirectAssign is called when exiting the DirectAssign production.
 	ExitDirectAssign(c *DirectAssignContext)
 
-	// ExitDecl_stmt is called when exiting the decl_stmt production.
-	ExitDecl_stmt(c *Decl_stmtContext)
+	// ExitDeclAssign is called when exiting the DeclAssign production.
+	ExitDeclAssign(c *DeclAssignContext)
 
 	// ExitMutType is called when exiting the mutType production.
 	ExitMutType(c *MutTypeContext)

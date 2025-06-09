@@ -270,6 +270,18 @@ public class VlangParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class Decl_stmtContext extends ParserRuleContext {
+		public Decl_stmtContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_decl_stmt; }
+	 
+		public Decl_stmtContext() { }
+		public void copyFrom(Decl_stmtContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class DeclAssignContext extends Decl_stmtContext {
 		public Var_typeContext var_type() {
 			return getRuleContext(Var_typeContext.class,0);
 		}
@@ -278,16 +290,14 @@ public class VlangParser extends Parser {
 		public ExpresionContext expresion() {
 			return getRuleContext(ExpresionContext.class,0);
 		}
-		public Decl_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_decl_stmt; }
+		public DeclAssignContext(Decl_stmtContext ctx) { copyFrom(ctx); }
 	}
 
 	public final Decl_stmtContext decl_stmt() throws RecognitionException {
 		Decl_stmtContext _localctx = new Decl_stmtContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_decl_stmt);
 		try {
+			_localctx = new DeclAssignContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(41);

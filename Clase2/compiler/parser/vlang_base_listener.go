@@ -38,11 +38,11 @@ func (s *BaseVlangListener) EnterDirectAssign(ctx *DirectAssignContext) {}
 // ExitDirectAssign is called when production DirectAssign is exited.
 func (s *BaseVlangListener) ExitDirectAssign(ctx *DirectAssignContext) {}
 
-// EnterDecl_stmt is called when production decl_stmt is entered.
-func (s *BaseVlangListener) EnterDecl_stmt(ctx *Decl_stmtContext) {}
+// EnterDeclAssign is called when production DeclAssign is entered.
+func (s *BaseVlangListener) EnterDeclAssign(ctx *DeclAssignContext) {}
 
-// ExitDecl_stmt is called when production decl_stmt is exited.
-func (s *BaseVlangListener) ExitDecl_stmt(ctx *Decl_stmtContext) {}
+// ExitDeclAssign is called when production DeclAssign is exited.
+func (s *BaseVlangListener) ExitDeclAssign(ctx *DeclAssignContext) {}
 
 // EnterMutType is called when production mutType is entered.
 func (s *BaseVlangListener) EnterMutType(ctx *MutTypeContext) {}

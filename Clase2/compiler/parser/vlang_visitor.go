@@ -16,8 +16,8 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#DirectAssign.
 	VisitDirectAssign(ctx *DirectAssignContext) interface{}
 
-	// Visit a parse tree produced by VlangParser#decl_stmt.
-	VisitDecl_stmt(ctx *Decl_stmtContext) interface{}
+	// Visit a parse tree produced by VlangParser#DeclAssign.
+	VisitDeclAssign(ctx *DeclAssignContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#mutType.
 	VisitMutType(ctx *MutTypeContext) interface{}
