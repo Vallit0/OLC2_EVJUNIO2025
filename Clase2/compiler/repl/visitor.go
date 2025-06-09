@@ -57,6 +57,7 @@ Ahora recorremos todos los stmts que tenemos en el programa
 func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	// vamos a recorrer todos los statements que tenemos
 	if ctx != nil && ctx.GetChildCount() != 0 {
+
 		// es distinto de nil y no tiene hijos
 		if ctx.Decl_stmt() != nil {
 			// Mandamos a visitar la declaracion
@@ -64,7 +65,11 @@ func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 		} else if ctx.Assign_stmt() != nil {
 			// mandamos a asignar la variable que tenemos
 			v.Visit(ctx.Assign_stmt()) // -> me voy a ir a hacer el visitor
+		} else if ctx.If_stmt() != nil {
+
+			v.Visit(ctx.If_stmt()) // -> me voy a ir a hacer el visitor
 		}
+
 		// despues vemos si es otro statement
 		// otro statement que sea de otro tipo
 	}
@@ -124,14 +129,12 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 
 		// Aqui se deberia agregar la validacion del vector
 
-		canMutate := true
-
 		// // verificamos si es un struct
 		// if v.ScopeTrace.CurrentScope.isStruct {
 		// 	canMutate = v.ScopeTrace.IsMutatingEnvironment()
 		// }
 
-		ok, msg := variable.Assign(varValue, canMutate)
+		ok, msg := variable.Assign(varValue, true)
 
 		if !ok {
 			v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
@@ -141,12 +144,74 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 	return nil
 
 }
+func (v *ReplVisitor) VisitIfStmt(ctx *parser.IfStmtContext) interface{} {
+
+	runChain := true
+
+	for _, ifStmt := range ctx.AllIf_chain() {
+
+		runChain = !v.Visit(ifStmt).(bool)
+		// Si la condicion del if es verdadera, ejecutamos el bloque
+		if !runChain {
+			break
+		}
+	}
+
+	if runChain && ctx.Else_stmt() != nil {
+		v.Visit(ctx.Else_stmt())
+	}
+
+	return nil
+}
+
+func (v *ReplVisitor) VisitIfChain(ctx *parser.IfChainContext) interface{} {
+
+	condition := v.Visit(ctx.Expresion()).(value.IVOR)
+
+	if condition.Type() != value.IVOR_BOOL {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "La condicion del if debe ser un booleano")
+		return false
+
+	}
+
+	if condition.(*value.BoolValue).InternalValue {
+
+		// Push scope
+		v.ScopeTrace.PushScope("if")
+
+		for _, stmt := range ctx.AllStmt() {
+			v.Visit(stmt)
+		}
+
+		// Pop scope
+		v.ScopeTrace.PopScope()
+
+		return true
+	}
+
+	return false
+}
+
+func (v *ReplVisitor) VisitElseStmt(ctx *parser.ElseStmtContext) interface{} {
+
+	// Push scope {   }
+	v.ScopeTrace.PushScope("else")
+
+	for _, stmt := range ctx.AllStmt() {
+		v.Visit(stmt)
+	}
+
+	// Pop scope
+	v.ScopeTrace.PopScope()
+
+	return nil
+}
 
 func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interface{} {
 
 	/*
 		Cuando declaramos una variable tenemos que
-		1. Saber si es constante o variable (let o var)
+
 		2. Saber el nombre de la variable
 		3. Saber el valor de la variable (Depende, si solo la declaramos)
 		mut
@@ -174,7 +239,21 @@ func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interf
 	// }
 
 	variable, msg := v.ScopeTrace.AddVariable(varName, varType, varValue, false, false, ctx.GetStart())
+	/*
 
+	   fn main() {
+	   // entorno padre
+
+	   x = 6
+	   while (true){
+	    x = 5
+	   }
+	   while (true){
+	   x = 6
+	   }
+	   }
+
+	*/
 	// Variable already exists
 	if variable == nil {
 		v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
@@ -365,4 +444,11 @@ func (v *ReplVisitor) VisitBinaryExp(ctx *parser.BinaryExpContext) interface{} {
 	}
 
 	return result
+}
+
+func (v *ReplVisitor) VisitCommunityExp(ctx *parser.CommunityExpContext) interface{} {
+	ctx.GetLeft()
+	ctx.GetRight()
+
+	return v.VisitChildren(ctx)
 }

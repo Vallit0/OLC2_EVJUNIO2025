@@ -76,6 +76,9 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#asignacionfor.
 	VisitAsignacionfor(ctx *AsignacionforContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#CommunityExp.
+	VisitCommunityExp(ctx *CommunityExpContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#id.
 	VisitId(ctx *IdContext) interface{}
 

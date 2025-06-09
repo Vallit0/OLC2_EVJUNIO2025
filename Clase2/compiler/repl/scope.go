@@ -10,8 +10,8 @@ import (
 
 type BaseScope struct {
 	name       string
-	parent     *BaseScope
-	children   []*BaseScope
+	parent     *BaseScope   /// variable aqui ->
+	children   []*BaseScope // hijos deben conocer esa variable
 	variables  map[string]*Variable
 	functions  map[string]value.IVOR
 	structs    map[string]*Struct
@@ -105,6 +105,7 @@ func (s *BaseScope) GetVariable(name string) *Variable {
 			break
 		}
 
+		// -> Hacia el padre
 		initialScope = initialScope.parent
 	}
 

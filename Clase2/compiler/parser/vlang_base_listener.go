@@ -158,6 +158,12 @@ func (s *BaseVlangListener) EnterAsignacionfor(ctx *AsignacionforContext) {}
 // ExitAsignacionfor is called when production asignacionfor is exited.
 func (s *BaseVlangListener) ExitAsignacionfor(ctx *AsignacionforContext) {}
 
+// EnterCommunityExp is called when production CommunityExp is entered.
+func (s *BaseVlangListener) EnterCommunityExp(ctx *CommunityExpContext) {}
+
+// ExitCommunityExp is called when production CommunityExp is exited.
+func (s *BaseVlangListener) ExitCommunityExp(ctx *CommunityExpContext) {}
+
 // EnterId is called when production id is entered.
 func (s *BaseVlangListener) EnterId(ctx *IdContext) {}
 

@@ -16,7 +16,8 @@ fn fibonacci(n int) int {
 
 fn hanoi(n int, origen string, auxiliar string, destino string) {
 	if n == 1 {
-		println("Mover disco 1 de $origen a $destino")
+		println("Mover disco 1 de ")
+		println(origen, destino)
 		return
 	}
 	hanoi(n - 1, origen, destino, auxiliar)
@@ -36,6 +37,13 @@ fn parse_float(s string) f64 {
 	return 0.0
 }
 
+/*
+Que las funciones no sean nativas 
+
+
+*/
+
+
 
 fn main() {
 	mut puntos = 0
@@ -45,8 +53,9 @@ fn main() {
 	// 1. Funciones sin parámetros
 	mut puntos_simples = 0
 	println("\n==== Funciones no recursivas sin parámetros ====")
-	saludar()
-	numero = obtener_numero()
+	// saludar() ERROR 
+	
+	// numero = obtener_numero() ERROR 
 	println("El número obtenido es: $numero")
 	if numero == 42 {
 		puntos_simples += 1
@@ -60,7 +69,8 @@ fn main() {
 	println("\n==== Funciones no recursivas con parámetros ====")
 	saludar_persona("Juan")
 	resultado = sumar(10, 20)
-	println("La suma de 10 y 20 es: $resultado")
+	println("La suma de 10 y 20 es:")
+	println(resultado)
 	if resultado == 30 {
 		puntos_param += 2
 		println("OK Función con parámetros: correcto")
@@ -93,11 +103,12 @@ fn main() {
 	hanoi(3, "A", "B", "C")
 	puntos_recur += 2
 
-	// 4. strconv.Atoi (simulado)
+	// Funcion Nativa
 	mut puntos_atoi = 0
 	println("\n==== strconv.Atoi ====")
 	val = atoi("123") // llamado simulado
-	println(""123" convertido a int: $val")
+	println("123 convertido a int: ")
+	println(val)
 	if val == 123 {
 		puntos_atoi += 1
 		println("OK strconv.Atoi: correcto")
@@ -119,25 +130,45 @@ fn main() {
 		println("X strconv.ParseFloat: incorrecto")
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// 6. reflect.TypeOf
 	mut puntos_type = 0
+
+	// Nativa no es de esta forma 
 	println("\n==== reflect.TypeOf ====")
 	t1 = reflect_typeof(42)
 	t2 = reflect_typeof(3.14)
 	t3 = reflect_typeof("Hola")
 	t4 = reflect_typeof(true)
 	t5 = reflect_typeof([1, 2, 3])
-	println("Tipo de 42: $t1")
-	println("Tipo de 3.14: $t2")
-	println("Tipo de "Hola": $t3")
-	println("Tipo de true: $t4")
-	println("Tipo de [1, 2, 3]: $t5")
+	println("Tipo de 42:")
+	println(t2)
+	println("Tipo de 3.14:")
+	println(t2)
+	println("Tipo de "Hola":")
+	println(t3)
+	println("Tipo de true:")
+	println(t4)
+	println("Tipo de [1, 2, 3]:")
+	println(t5)
 
 	if t1 == "int" && t2 == "f64" && t3 == "string" && t4 == "bool" && t5 == "[]int" {
 		puntos_type += 1
-		println("OK reflect.TypeOf: correcto")
+		println("OK TypeOf: correcto")
 	} else {
-		println("X reflect.TypeOf: incorrecto")
+		println("X TypeOf: incorrecto")
 	}
 
 	// TOTAL
@@ -148,8 +179,8 @@ fn main() {
 	println()
 	println("| Funciones con parámetros         | $puntos_param / 2")
 	println("| Funciones recursivas             | $puntos_recur / 6")
-	println("| strconv.Atoi                     | $puntos_atoi / 1")
-	println("| strconv.ParseFloat               | $puntos_parse / 1")
-	println("| reflect.TypeOf                   | $puntos_type / 1")
+	println("| Atoi                     | $puntos_atoi / 1")
+	println("| ParseFloat               | $puntos_parse / 1")
+	println("| TypeOf                   | $puntos_type / 1")
 	println("| TOTAL                            | $puntos / 12")
 }

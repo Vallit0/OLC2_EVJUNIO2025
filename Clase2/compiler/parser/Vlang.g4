@@ -74,7 +74,7 @@ los operadores -> (*| + | )
 Entonces, nos ahorraremos trabajo en el BinaryExpr,
 porque lo definiremos en el visit de BinaryExpr
  */
-	| left = expresion op = (MUL | DIV | MOD) right = expresion	# BinaryExp // a * b, a / b, a % b
+	| left = expresion op = (MUL | DIV | MOD) right = expresion	# BinaryExp// a * b, a / b, a % b
 	| left = expresion op = (PLUS | MINUS) right = expresion    # BinaryExp // a + b, a - b
 	| left = expresion op = ( LT | LE | GT | GE) right = expresion	# BinaryExp // a < b, a <= b, a > b, a >= b
 	| left = expresion op = (EQ | NEQ ) right = expresion	# BinaryExp // a == b, a != b

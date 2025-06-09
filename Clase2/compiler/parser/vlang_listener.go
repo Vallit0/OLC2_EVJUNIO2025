@@ -76,6 +76,9 @@ type VlangListener interface {
 	// EnterAsignacionfor is called when entering the asignacionfor production.
 	EnterAsignacionfor(c *AsignacionforContext)
 
+	// EnterCommunityExp is called when entering the CommunityExp production.
+	EnterCommunityExp(c *CommunityExpContext)
+
 	// EnterId is called when entering the id production.
 	EnterId(c *IdContext)
 
@@ -186,6 +189,9 @@ type VlangListener interface {
 
 	// ExitAsignacionfor is called when exiting the asignacionfor production.
 	ExitAsignacionfor(c *AsignacionforContext)
+
+	// ExitCommunityExp is called when exiting the CommunityExp production.
+	ExitCommunityExp(c *CommunityExpContext)
 
 	// ExitId is called when exiting the id production.
 	ExitId(c *IdContext)
