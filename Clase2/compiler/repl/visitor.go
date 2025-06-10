@@ -39,6 +39,7 @@ que ya tienen inicializadas las listas con lo que se agrego.
 
 */
 
+// Recibe DclVisitor e inicializa el ReplVisitor
 func NewVisitor(dclVisitor *DclVisitor) *ReplVisitor {
 	return &ReplVisitor{
 		ScopeTrace:  dclVisitor.ScopeTrace,
@@ -49,6 +50,20 @@ func NewVisitor(dclVisitor *DclVisitor) *ReplVisitor {
 	}
 }
 
+// tambien podemos crear un ReplVisitor sin DclVisitor
+// Esto es util para hacer tests de una vez
+func NewReplVisitor(errorTable *ErrorTable) *ReplVisitor {
+	return &ReplVisitor{
+		ScopeTrace:  NewScopeTrace(),
+		ErrorTable:  errorTable,
+		StructNames: []string{},
+		CallStack:   NewCallStack(),
+		Console:     NewConsole(),
+	}
+}
+
+// GetReplContext devuelve el contexto del REPL
+// que contiene la consola, el ScopeTrace, el CallStack y la ErrorTable
 func (v *ReplVisitor) GetReplContext() *ReplContext {
 	return &ReplContext{
 		Console:    v.Console,
@@ -58,10 +73,15 @@ func (v *ReplVisitor) GetReplContext() *ReplContext {
 	}
 }
 
+// ValidType verifica si el tipo es valido en el ScopeTrace
+// Esto se usa para validar tipos de variables, funciones, etc.
 func (v *ReplVisitor) ValidType(_type string) bool {
 	return v.ScopeTrace.GlobalScope.ValidType(_type)
 }
 
+// Visit es el metodo que se llama para visitar un nodo del arbol de sintaxis
+// Dependiendo del tipo de nodo, se llama al metodo correspondiente
+// Si es un ErrorNodeImpl, se lanza un error
 func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 	switch val := tree.(type) {
@@ -74,6 +94,9 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 }
 
+// VisitPrograma es el metodo que se llama para visitar el nodo Programa
+// Este nodo es el nodo raiz del arbol de sintaxis
+// En este metodo recorremos todos los statements del programa
 func (v *ReplVisitor) VisitPrograma(ctx *parser.ProgramaContext) interface{} {
 
 	fmt.Println("🔍 Visitando el programa...")
