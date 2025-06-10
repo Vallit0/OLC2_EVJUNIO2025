@@ -6,6 +6,20 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
+/*
+Variable_global = 0
+
+	fn fibonacci(n int) int {
+		if n <= 1 {
+			return n
+		}
+		return fibonacci(n-1) + fibonacci(n-2)
+	}
+
+fn main() {
+
+}
+*/
 type ScopeTrace struct {
 	GlobalScope  *BaseScope
 	CurrentScope *BaseScope

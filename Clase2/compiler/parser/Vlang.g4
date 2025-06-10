@@ -47,13 +47,11 @@ assign_stmt:
     ; 
 
 decl_stmt: 
-    var_type ID ASSIGN expresion # DeclAssign
-    | var_type id_pattern ASSIGN expresion # DeclAssignPattern
-    | var_type id_pattern # DeclPattern
+    MUT ID ASSIGN expresion # DeclAssign
+    | MUT id_pattern ASSIGN expresion # DeclAssignPattern
+    | MUT id_pattern # DeclPattern
     ; 
 
-var_type: MUT #mutType
-;
 
 id_pattern: ID (DOT ID)* # IdPattern;
 // === Reglas de expresiones ===
