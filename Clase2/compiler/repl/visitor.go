@@ -83,15 +83,22 @@ func (v *ReplVisitor) ValidType(_type string) bool {
 // Dependiendo del tipo de nodo, se llama al metodo correspondiente
 // Si es un ErrorNodeImpl, se lanza un error
 func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
-
-	switch val := tree.(type) {
-	case *antlr.ErrorNodeImpl:
-		log.Fatal(val.GetText())
+	if tree == nil {
+		fmt.Println("⚠️ Árbol nulo recibido.")
 		return nil
-	default:
-		return tree.Accept(v)
 	}
 
+	switch t := tree.(type) {
+	case *antlr.ErrorNodeImpl:
+		log.Fatal(t.GetText())
+	case *parser.ProgramaContext:
+		return v.VisitPrograma(t)
+	default:
+		fmt.Printf("⚠️ Tipo inesperado en Visit(): %T\n", tree)
+		return tree.Accept(v) // fallback por si acaso
+	}
+
+	return nil
 }
 
 // VisitPrograma es el metodo que se llama para visitar el nodo Programa

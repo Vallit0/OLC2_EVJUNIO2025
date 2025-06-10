@@ -7,7 +7,6 @@ import (
 	compiler "compiler/parser"
 	repl "compiler/repl"
 
-	//"main/cst"
 	"compiler/errors"
 	// "main/repl"
 
@@ -57,9 +56,31 @@ func main() {
 	// Este es el que deberas agregar como parte del parser.
 	arbolito := parser.Programa()
 
+	// verificamos que el arbol si funcione
+	fmt.Printf("🌳 Árbol raíz: %T\n", arbolito)
+
 	// imprimimos los errores de sintaxis y léxicos
+	/*
+		NOTA: Para mejorar el rendimiento y facilidad de las estructuras
+		lo primero que debemos hacer es un visitor que declare funciones,
+		structs, y algunos vectores.
+
+	*/
+	// dclVisitor := repl.NewDclVisitor(syntaxErrorListener.ErrorTable)
+	// dclVisitor.Visit(tree)
+	/*
+		En visitor.go tenemos un metodo en el que INICIALIZAMOS
+		ReplVisitor PERO le enviamos dclVisitor como parametro
+		para que este pueda visitar los nodos de declaración
+
+		En visitor.go tambien tenemos un metodo para inicializar
+		ReplVisitor y enviarle el errorTable, este nos sirve
+		para testear
+	*/
 	fmt.Println("Visitamos los nodos del árbol sintáctico")
-	visitor := repl.NewReplVisitor()
+
+	visitor := repl.NewReplVisitor(syntaxErrorListener.ErrorTable)
+
 	visitor.Visit(arbolito)
 	//
 }

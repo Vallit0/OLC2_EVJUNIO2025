@@ -18,7 +18,8 @@ stmt:
      | while_stmt
      | for_stmt
      | transfer_stmt           
-     | 'println(' expresion ')' 
+     | 'println(' expresion ')'
+     | 'print(' expresion ')'
      ;
 
 if_stmt: if_chain (ELSE_KW if_chain)* else_stmt? # IfStmt;
