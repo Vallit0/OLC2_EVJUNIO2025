@@ -47,6 +47,7 @@ func (cs *CallStack) Pop() *CallStackItem {
 	return item
 }
 
+// Aqui haria la verificacion de que el stack no esta vacio
 func (cs *CallStack) Peek() *CallStackItem {
 	return cs.Items[len(cs.Items)-1]
 }
