@@ -5,7 +5,7 @@ import (
 )
 
 type Console struct {
-	output string
+	output string // Va a ser la salida de la consola
 }
 
 // tiene el "\n"

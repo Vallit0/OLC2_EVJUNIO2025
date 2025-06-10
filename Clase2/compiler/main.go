@@ -65,7 +65,12 @@ func main() {
 		lo primero que debemos hacer es un visitor que declare funciones,
 		structs, y algunos vectores.
 
+		// -> Crear los entornos de la funciones
+		// -> Anadir los vectores a esos entornos
+		// Se define el main()
+
 	*/
+	// ----> Este visitor -> Crear entornos
 	// dclVisitor := repl.NewDclVisitor(syntaxErrorListener.ErrorTable)
 	// dclVisitor.Visit(tree)
 	/*
@@ -82,6 +87,13 @@ func main() {
 	visitor := repl.NewReplVisitor(syntaxErrorListener.ErrorTable)
 
 	visitor.Visit(arbolito)
+	visitor.Console.Show()
+	/*
+
+		En console.GetOutput() tenemos la salida de la consola
+	*/
+	nuevaVariable := visitor.Console.GetOutput()
+	fmt.Println("Salida de la consola:", nuevaVariable)
 	//
 }
 

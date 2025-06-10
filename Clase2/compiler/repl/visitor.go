@@ -104,6 +104,31 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 	case *parser.PrintStmtContext:
 		return v.VisitPrintStmt(node)
 
+	// tiramos todos los case de los nodos literales
+	case *parser.ValorEnteroContext:
+		fmt.Println("🔍 Visitando ValorEntero:", node.GetText())
+		return v.VisitValorEntero(node)
+	case *parser.ValorFloatContext:
+		return v.VisitValorFloat(node)
+	case *parser.ValorDecimalContext:
+		return v.VisitValorDecimal(node)
+	case *parser.ValorCadenaContext:
+		return v.VisitValorCadena(node)
+	case *parser.ValorBooleanoContext:
+		return v.VisitValorBooleano(node)
+	case *parser.ValorCaracterContext:
+		return v.VisitValorCaracter(node)
+	case *parser.IdContext:
+		return v.VisitId(node)
+	// Expresiones binarias
+	case *parser.BinaryExpContext:
+		return v.VisitBinaryExp(node)
+	/// Agregamos las declaraciones
+	case *parser.DeclAssignContext:
+		return v.VisitValueDeclAssign(node)
+	case *parser.DirectAssignContext:
+		return v.VisitDirectAssign(node)
+
 	default:
 		fmt.Printf("⚠️ Tipo inesperado en Visit(): %T\n", tree)
 		return tree.Accept(v) // fallback por si acaso
@@ -146,7 +171,8 @@ func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	// Aquí van todos los ifs como los que hicimos antes:
 	if printlnStmt, ok := node.(*parser.PrintlnStmtContext); ok {
 		fmt.Println("🔔 Visitando nodo println")
-		v.Visit(printlnStmt)
+
+		v.VisitPrintlnStmt(printlnStmt)
 	} else {
 		fmt.Printf("⚠️ Tipo no reconocido dentro de stmt: %T\n", node)
 	}
@@ -190,7 +216,14 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 
 func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface{} {
 	fmt.Println("🔍 Visitando PrintlnStmt:", ctx.GetText())
+
 	val := v.Visit(ctx.Expresion()).(value.IVOR)
+	fmt.Println("🔔 Imprimiendo valor:", val)
+	if val == nil {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Expresión vacía dentro de Println")
+		return nil
+	}
+
 	fmt.Println(val)
 	return nil
 }
@@ -321,7 +354,16 @@ y lo convertiremos a un entero
 
 */
 
+// Funcion para subir el valorExpresion
+func (v *ReplVisitor) VisitValorexpresion(ctx *parser.ValorexpresionContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+// el hijo de valorexpresioncontext -> valorEnter | valorBooleano |
+
 func (v *ReplVisitor) VisitValorEntero(ctx *parser.ValorEnteroContext) interface{} {
+
+	fmt.Println("🔍 Visitando ValorEntero:", ctx.GetText())
 
 	intVal, _ := strconv.Atoi(ctx.GetText())
 

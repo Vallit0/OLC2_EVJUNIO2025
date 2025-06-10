@@ -15,9 +15,13 @@ stmt:
 	 decl_stmt                
 	 | assign_stmt
      | if_stmt
-     | while_stmt
+     | while_stmt  
      | for_stmt
-     | transfer_stmt           
+     | func_call 
+	 | func_dcl
+     | struct_dcl
+     | strct_instancia
+     | transfer_stmt       
      | println 
      | print
      ;
@@ -37,6 +41,33 @@ for_stmt:
 	FOR_KW ID IN_KW (expresion | range) LCOR stmt* RCOR # ForStmt;
 
 range: expresion DOT DOT DOT expresion # NumericRange;
+
+
+/// Llamadas a funciones catch
+func_call: ID LPAREN (parametros)? RPAREN # FuncCall;
+
+
+func_dcl: 
+    // id(parametros | vacio )  { } 
+    ID LPAREN (parametros)? RPAREN LCOR stmt* RCOR # FuncDecl
+    ;
+
+
+/*struct 
+<NombreStruct> {
+<Tipo> <NombreAtributo>;
+...
+} */
+struct_dcl:
+    // struct ID { }
+    /**
+    TODO: 
+    Agregar la posilidad de inicializar
+    los atributos sin asignacion
+    
+     */
+    'struct' ID LCOR (assign_stmt)* RCOR # StructDecl
+    ;
 
 
 transfer_stmt:
@@ -60,6 +91,7 @@ id_pattern: ID (DOT ID)* # IdPattern;
 // === Reglas de expresiones ===
 expresion
     : valor                                                #valorexpresion        
+    | func_call                                            #funcionexpre
     | LPAREN expresion RPAREN                              #parentesisexpre
     | LBRACK expresion RBRACK                              #corchetesexpre
     | op=(NOT | MINUS) expresion                           #unario
@@ -105,7 +137,41 @@ valor
     | FLOAT     #valorFloat
     ;
 
+// ===== STRUCTS ==== catch
+// * Structs
 
+/*  struct id { 
+    tipo id : variosTipos;
+    ...
+} 
+*/
+
+// Instancia de Struct
+strct_instancia: 'struct' ID LCOR struct_prop* RCOR # StructDecl;
+
+/*
+miInstancia = Persona{
+ Nombre: "Alice",
+ Edad: 25,
+ EsEstudiante: false,
+}
+ */
+
+struct_prop:
+
+	var_type ID ASSIGN ID LCOR (ID COLON expresion COMMA) RCOR 	# StructAttr
+;
+// tipos de primitivos que puede ser un struct catch
+var_type
+    : 'int'     # IntType
+    | 'float'   # FloatType
+    | 'string'  # StringType
+    | 'bool'    # BoolType
+    | 'char'    # CharType
+    | 'void'    # VoidType
+    ;
+
+struct_vector: LBRACK ID RBRACK LPAREN RPAREN # StructVector;
 
 // === Incremento / Decremento ===
 incredecre
@@ -156,6 +222,7 @@ GE      : '>=' ;
 ASSIGN  : '=' ;
 INC     : '++' ;
 DEC     : '--' ;
+COLON  : ':' ;
 
 // === Símbolos ===
 LPAREN  : '(' ;

@@ -123,6 +123,7 @@ fn main() {
 	// 6. reflect.TypeOf
 	mut puntos_type = 0
 	println("\n==== reflect.TypeOf ====")
+	// => Correccion del TypeOf 
 	t1 = reflect_typeof(42)
 	t2 = reflect_typeof(3.14)
 	t3 = reflect_typeof("Hola")
@@ -145,11 +146,18 @@ fn main() {
 	puntos = puntos_simples + puntos_param + puntos_recur + puntos_atoi + puntos_parse + puntos_type
 
 	println("\n=== Tabla de Resultados ===")
-	println("| Funciones sin parámetros         | $puntos_simples / 1")
-	println("| Funciones con parámetros         | $puntos_param / 2")
-	println("| Funciones recursivas             | $puntos_recur / 6")
-	println("| strconv.Atoi                     | $puntos_atoi / 1")
-	println("| strconv.ParseFloat               | $puntos_parse / 1")
-	println("| reflect.TypeOf                   | $puntos_type / 1")
-	println("| TOTAL                            | $puntos / 12")
+	println("| Funciones sin parámetros         |  / 1")
+	println(puntos_simples)
+	println("| Funciones con parámetros         |  / 2")
+	println(puntos_param)
+	println("| Funciones recursivas             |  / 6")
+	println(puntos_recur)
+	println("| Atoi                             |  / 1")
+	println(puntos_atoi)
+	println("| ParseFloat                       |  / 1")
+	println(puntos_parse)
+	println("| TypeOf                           |  / 1")
+	println(puntos_type)
+	println("| TOTAL                            |  / 12")
+	println(puntos)
 }
