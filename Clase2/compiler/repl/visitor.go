@@ -23,6 +23,22 @@ type ReplVisitor struct {
 	StructNames []string
 }
 
+/*
+NOTA: para testear estoy usando un constructor
+para ReplVisitor que solo recibe la tabla de errores
+y luego inicializar el ScopeTrace y el CallStack
+y la Consola
+
+PERO: el metodo NewVisitor(dclVisitor *DclVisitor)
+lo que hace es que recibe un DclVisitor que hace una pasada
+antes para ver que cosas estan declaradas.
+
+ENTONCES: NewVisitor es el que inicializa el ReplVisitor
+y le pasa el ScopeTrace, ErrorTable y StructNames, estructuras
+que ya tienen inicializadas las listas con lo que se agrego.
+
+*/
+
 func NewVisitor(dclVisitor *DclVisitor) *ReplVisitor {
 	return &ReplVisitor{
 		ScopeTrace:  dclVisitor.ScopeTrace,
