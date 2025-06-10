@@ -50,6 +50,18 @@ func (s *BaseVlangListener) EnterElseStmt(ctx *ElseStmtContext) {}
 // ExitElseStmt is called when production ElseStmt is exited.
 func (s *BaseVlangListener) ExitElseStmt(ctx *ElseStmtContext) {}
 
+// EnterPrintlnStmt is called when production PrintlnStmt is entered.
+func (s *BaseVlangListener) EnterPrintlnStmt(ctx *PrintlnStmtContext) {}
+
+// ExitPrintlnStmt is called when production PrintlnStmt is exited.
+func (s *BaseVlangListener) ExitPrintlnStmt(ctx *PrintlnStmtContext) {}
+
+// EnterPrintStmt is called when production PrintStmt is entered.
+func (s *BaseVlangListener) EnterPrintStmt(ctx *PrintStmtContext) {}
+
+// ExitPrintStmt is called when production PrintStmt is exited.
+func (s *BaseVlangListener) ExitPrintStmt(ctx *PrintStmtContext) {}
+
 // EnterWhileStmt is called when production WhileStmt is entered.
 func (s *BaseVlangListener) EnterWhileStmt(ctx *WhileStmtContext) {}
 

@@ -22,6 +22,12 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#ElseStmt.
 	VisitElseStmt(ctx *ElseStmtContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#PrintlnStmt.
+	VisitPrintlnStmt(ctx *PrintlnStmtContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#PrintStmt.
+	VisitPrintStmt(ctx *PrintStmtContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#WhileStmt.
 	VisitWhileStmt(ctx *WhileStmtContext) interface{}
 

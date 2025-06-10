@@ -27,6 +27,14 @@ func (v *BaseVlangVisitor) VisitElseStmt(ctx *ElseStmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseVlangVisitor) VisitPrintlnStmt(ctx *PrintlnStmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitPrintStmt(ctx *PrintStmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseVlangVisitor) VisitWhileStmt(ctx *WhileStmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

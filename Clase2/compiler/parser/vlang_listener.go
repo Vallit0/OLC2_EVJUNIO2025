@@ -22,6 +22,12 @@ type VlangListener interface {
 	// EnterElseStmt is called when entering the ElseStmt production.
 	EnterElseStmt(c *ElseStmtContext)
 
+	// EnterPrintlnStmt is called when entering the PrintlnStmt production.
+	EnterPrintlnStmt(c *PrintlnStmtContext)
+
+	// EnterPrintStmt is called when entering the PrintStmt production.
+	EnterPrintStmt(c *PrintStmtContext)
+
 	// EnterWhileStmt is called when entering the WhileStmt production.
 	EnterWhileStmt(c *WhileStmtContext)
 
@@ -129,6 +135,12 @@ type VlangListener interface {
 
 	// ExitElseStmt is called when exiting the ElseStmt production.
 	ExitElseStmt(c *ElseStmtContext)
+
+	// ExitPrintlnStmt is called when exiting the PrintlnStmt production.
+	ExitPrintlnStmt(c *PrintlnStmtContext)
+
+	// ExitPrintStmt is called when exiting the PrintStmt production.
+	ExitPrintStmt(c *PrintStmtContext)
 
 	// ExitWhileStmt is called when exiting the WhileStmt production.
 	ExitWhileStmt(c *WhileStmtContext)

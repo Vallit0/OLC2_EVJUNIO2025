@@ -18,8 +18,8 @@ stmt:
      | while_stmt
      | for_stmt
      | transfer_stmt           
-     | 'println(' expresion ')'
-     | 'print(' expresion ')'
+     | println 
+     | print
      ;
 
 if_stmt: if_chain (ELSE_KW if_chain)* else_stmt? # IfStmt;
@@ -28,6 +28,8 @@ if_chain: IF_KW expresion  LCOR stmt* RCOR # IfChain;
 
 else_stmt: ELSE_KW LCOR stmt* RCOR # ElseStmt;
 
+println: 'println'  LPAREN expresion RPAREN # PrintlnStmt;
+print: 'print'  LPAREN expresion (COMMA expresion)* RPAREN # PrintStmt;
 
 while_stmt: WHILE_KW expresion LCOR stmt* RCOR # WhileStmt;
 

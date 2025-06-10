@@ -88,11 +88,22 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 		return nil
 	}
 
-	switch t := tree.(type) {
+	switch node := tree.(type) {
 	case *antlr.ErrorNodeImpl:
-		log.Fatal(t.GetText())
+		log.Fatal(node.GetText())
+
 	case *parser.ProgramaContext:
-		return v.VisitPrograma(t)
+		return v.VisitPrograma(node)
+
+	case *parser.StmtContext:
+		return v.VisitStmt(node)
+
+	case *parser.PrintlnStmtContext:
+		return v.VisitPrintlnStmt(node)
+
+	case *parser.PrintStmtContext:
+		return v.VisitPrintStmt(node)
+
 	default:
 		fmt.Printf("⚠️ Tipo inesperado en Visit(): %T\n", tree)
 		return tree.Accept(v) // fallback por si acaso
@@ -109,7 +120,7 @@ func (v *ReplVisitor) VisitPrograma(ctx *parser.ProgramaContext) interface{} {
 	fmt.Println("🔍 Visitando el programa...")
 	// Vamos a recorrer todos los statements y los visitamos
 	for _, stmt := range ctx.AllStmt() {
-		fmt.Println("🔍 Visitando declaración:", stmt.GetText())
+		fmt.Println("🔍 Visitando statement*:", stmt.GetText())
 		v.Visit(stmt)
 	}
 
@@ -123,58 +134,22 @@ Ahora recorremos todos los stmts que tenemos en el programa
 */
 
 func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
-	// vamos a recorrer todos los statements que tenemos
-	if ctx != nil && ctx.GetChildCount() != 0 {
+	fmt.Println("🔍 Visitando statement*:", ctx.GetText())
 
-		// es distinto de nil y no tiene hijos
-		if ctx.Decl_stmt() != nil {
-			// Mandamos a visitar la declaracion
-			v.Visit(ctx.Decl_stmt())
-		} else if ctx.Assign_stmt() != nil {
-			// mandamos a asignar la variable que tenemos
-			v.Visit(ctx.Assign_stmt()) // -> me voy a ir a hacer el visitor
-		} else if ctx.If_stmt() != nil {
-
-			v.Visit(ctx.If_stmt()) // -> me voy a ir a hacer el visitor
-		}
-
-		// despues vemos si es otro statement
-		// otro statement que sea de otro tipo
+	if ctx == nil || ctx.GetChildCount() == 0 {
+		fmt.Println("⚠️ Stmt vacío o nulo.")
+		return nil
 	}
 
-	// Si es un error, lo lanzamos
-	//ctx.
+	node := ctx.GetChild(0)
 
-	// Vemos el caso de la Declaracion de Cualquier cosa
-
-	// v.Visit(ctx.declarationStatement())
-	// } else if ctx.Assign_stmt() != nil {
-	// 	v.Visit(ctx.Assign_stmt())
-	// }
-	//
-	// else if ctx.If_stmt() != nil {
-	// 	v.Visit(ctx.If_stmt())
-	// } else if ctx.Switch_stmt() != nil {
-	// 	v.Visit(ctx.Switch_stmt())
-	// } else if ctx.While_stmt() != nil {
-	// 	v.Visit(ctx.While_stmt())
-	// } else if ctx.For_stmt() != nil {
-	// 	v.Visit(ctx.For_stmt())
-	// } else if ctx.Guard_stmt() != nil {
-	// 	v.Visit(ctx.Guard_stmt())
-	// } else if ctx.Transfer_stmt() != nil {
-	// 	v.Visit(ctx.Transfer_stmt())
-	// } else if ctx.Func_call() != nil {
-	// 	v.Visit(ctx.Func_call())
-	// } else if ctx.Func_dcl() != nil {
-	// 	v.Visit(ctx.Func_dcl())
-	// } else if ctx.Strct_dcl() != nil {
-	// 	v.Visit(ctx.Strct_dcl())
-	// } else if ctx.Vector_func() != nil {
-	// 	v.Visit(ctx.Vector_func())
-	// } else {
-	// 	log.Fatal("Statement not found " + ctx.GetText())
-	// }
+	// Aquí van todos los ifs como los que hicimos antes:
+	if printlnStmt, ok := node.(*parser.PrintlnStmtContext); ok {
+		fmt.Println("🔔 Visitando nodo println")
+		v.Visit(printlnStmt)
+	} else {
+		fmt.Printf("⚠️ Tipo no reconocido dentro de stmt: %T\n", node)
+	}
 
 	return nil
 }
@@ -212,6 +187,14 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 	return nil
 
 }
+
+func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface{} {
+	fmt.Println("🔍 Visitando PrintlnStmt:", ctx.GetText())
+	val := v.Visit(ctx.Expresion()).(value.IVOR)
+	fmt.Println(val)
+	return nil
+}
+
 func (v *ReplVisitor) VisitIfStmt(ctx *parser.IfStmtContext) interface{} {
 
 	runChain := true

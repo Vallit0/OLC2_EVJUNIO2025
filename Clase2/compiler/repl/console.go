@@ -8,8 +8,14 @@ type Console struct {
 	output string
 }
 
-func (c *Console) Print(s string) {
+// tiene el "\n"
+func (c *Console) Println(s string) {
 	c.output += s + "\n"
+}
+
+// no tiene el "\n"
+func (c *Console) Print(s string) {
+	c.output += s
 }
 
 func (c *Console) Show() {
