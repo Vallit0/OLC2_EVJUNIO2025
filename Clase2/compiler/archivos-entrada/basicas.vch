@@ -29,7 +29,7 @@ fn main() {
 	// Cambiar 
 	/*
 	
-	Declaracion explicita con Tipo vs Sin Tipo 
+	//Declaracion explicita con Tipo vs Sin Tipo 
 
 
 	varDcl: 'mut' ID_VARIABLE type assign expr # VarDclWithTypeAndValue
@@ -44,10 +44,11 @@ fn main() {
 	
 	
 	*/
-	mut entero_sin_valor = 0
-	mut decimal_sin_valor = 0.0
-	mut texto_sin_valor = ""
-	mut booleano_sin_valor = false
+	mut entero_sin_valor int = 0
+	mut decimal_sin_valor float = 0.0
+	mut texto_sin_valor string = ""
+	mut booleano_sin_valor bool = false
+
 
 	println("enteroSinValor:", entero_sin_valor)
 	println("decimalSinValor:", decimal_sin_valor)

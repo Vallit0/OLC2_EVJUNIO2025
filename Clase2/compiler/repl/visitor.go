@@ -445,10 +445,3 @@ func (v *ReplVisitor) VisitBinaryExp(ctx *parser.BinaryExpContext) interface{} {
 
 	return result
 }
-
-func (v *ReplVisitor) VisitCommunityExp(ctx *parser.CommunityExpContext) interface{} {
-	ctx.GetLeft()
-	ctx.GetRight()
-
-	return v.VisitChildren(ctx)
-}
