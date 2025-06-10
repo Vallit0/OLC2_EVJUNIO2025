@@ -115,10 +115,10 @@ func vlangParserInit() {
 		0, 122, 121, 1, 0, 0, 0, 122, 123, 1, 0, 0, 0, 123, 127, 1, 0, 0, 0, 124,
 		127, 5, 19, 0, 0, 125, 127, 5, 20, 0, 0, 126, 120, 1, 0, 0, 0, 126, 124,
 		1, 0, 0, 0, 126, 125, 1, 0, 0, 0, 127, 17, 1, 0, 0, 0, 128, 129, 3, 24,
-		12, 0, 129, 130, 5, 29, 0, 0, 130, 131, 3, 26, 13, 0, 131, 19, 1, 0, 0,
-		0, 132, 133, 3, 22, 11, 0, 133, 134, 5, 12, 0, 0, 134, 135, 5, 29, 0, 0,
+		12, 0, 129, 130, 5, 35, 0, 0, 130, 131, 3, 26, 13, 0, 131, 19, 1, 0, 0,
+		0, 132, 133, 3, 22, 11, 0, 133, 134, 5, 12, 0, 0, 134, 135, 5, 35, 0, 0,
 		135, 136, 3, 26, 13, 0, 136, 146, 1, 0, 0, 0, 137, 138, 3, 22, 11, 0, 138,
-		139, 3, 24, 12, 0, 139, 140, 5, 29, 0, 0, 140, 141, 3, 26, 13, 0, 141,
+		139, 3, 24, 12, 0, 139, 140, 5, 35, 0, 0, 140, 141, 3, 26, 13, 0, 141,
 		146, 1, 0, 0, 0, 142, 143, 3, 22, 11, 0, 143, 144, 3, 24, 12, 0, 144, 146,
 		1, 0, 0, 0, 145, 132, 1, 0, 0, 0, 145, 137, 1, 0, 0, 0, 145, 142, 1, 0,
 		0, 0, 146, 21, 1, 0, 0, 0, 147, 148, 5, 5, 0, 0, 148, 23, 1, 0, 0, 0, 149,
@@ -2489,8 +2489,8 @@ func (s *DirectAssignContext) Id_pattern() IId_patternContext {
 	return t.(IId_patternContext)
 }
 
-func (s *DirectAssignContext) EQ() antlr.TerminalNode {
-	return s.GetToken(VlangParserEQ, 0)
+func (s *DirectAssignContext) ASSIGN() antlr.TerminalNode {
+	return s.GetToken(VlangParserASSIGN, 0)
 }
 
 func (s *DirectAssignContext) Expresion() IExpresionContext {
@@ -2542,7 +2542,7 @@ func (p *VlangParser) Assign_stmt() (localctx IAssign_stmtContext) {
 	}
 	{
 		p.SetState(129)
-		p.Match(VlangParserEQ)
+		p.Match(VlangParserASSIGN)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
@@ -2658,8 +2658,8 @@ func (s *DeclAssignContext) ID() antlr.TerminalNode {
 	return s.GetToken(VlangParserID, 0)
 }
 
-func (s *DeclAssignContext) EQ() antlr.TerminalNode {
-	return s.GetToken(VlangParserEQ, 0)
+func (s *DeclAssignContext) ASSIGN() antlr.TerminalNode {
+	return s.GetToken(VlangParserASSIGN, 0)
 }
 
 func (s *DeclAssignContext) Expresion() IExpresionContext {
@@ -2822,8 +2822,8 @@ func (s *DeclAssignPatternContext) Id_pattern() IId_patternContext {
 	return t.(IId_patternContext)
 }
 
-func (s *DeclAssignPatternContext) EQ() antlr.TerminalNode {
-	return s.GetToken(VlangParserEQ, 0)
+func (s *DeclAssignPatternContext) ASSIGN() antlr.TerminalNode {
+	return s.GetToken(VlangParserASSIGN, 0)
 }
 
 func (s *DeclAssignPatternContext) Expresion() IExpresionContext {
@@ -2891,7 +2891,7 @@ func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 		}
 		{
 			p.SetState(134)
-			p.Match(VlangParserEQ)
+			p.Match(VlangParserASSIGN)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -2915,7 +2915,7 @@ func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 		}
 		{
 			p.SetState(139)
-			p.Match(VlangParserEQ)
+			p.Match(VlangParserASSIGN)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -3678,114 +3678,6 @@ func (s *AsignacionforContext) Accept(visitor antlr.ParseTreeVisitor) interface{
 	}
 }
 
-type CommunityExpContext struct {
-	ExpresionContext
-	left  IExpresionContext
-	op    antlr.Token
-	right IExpresionContext
-}
-
-func NewCommunityExpContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *CommunityExpContext {
-	var p = new(CommunityExpContext)
-
-	InitEmptyExpresionContext(&p.ExpresionContext)
-	p.parser = parser
-	p.CopyAll(ctx.(*ExpresionContext))
-
-	return p
-}
-
-func (s *CommunityExpContext) GetOp() antlr.Token { return s.op }
-
-func (s *CommunityExpContext) SetOp(v antlr.Token) { s.op = v }
-
-func (s *CommunityExpContext) GetLeft() IExpresionContext { return s.left }
-
-func (s *CommunityExpContext) GetRight() IExpresionContext { return s.right }
-
-func (s *CommunityExpContext) SetLeft(v IExpresionContext) { s.left = v }
-
-func (s *CommunityExpContext) SetRight(v IExpresionContext) { s.right = v }
-
-func (s *CommunityExpContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *CommunityExpContext) AllExpresion() []IExpresionContext {
-	children := s.GetChildren()
-	len := 0
-	for _, ctx := range children {
-		if _, ok := ctx.(IExpresionContext); ok {
-			len++
-		}
-	}
-
-	tst := make([]IExpresionContext, len)
-	i := 0
-	for _, ctx := range children {
-		if t, ok := ctx.(IExpresionContext); ok {
-			tst[i] = t.(IExpresionContext)
-			i++
-		}
-	}
-
-	return tst
-}
-
-func (s *CommunityExpContext) Expresion(i int) IExpresionContext {
-	var t antlr.RuleContext
-	j := 0
-	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExpresionContext); ok {
-			if j == i {
-				t = ctx.(antlr.RuleContext)
-				break
-			}
-			j++
-		}
-	}
-
-	if t == nil {
-		return nil
-	}
-
-	return t.(IExpresionContext)
-}
-
-func (s *CommunityExpContext) MUL() antlr.TerminalNode {
-	return s.GetToken(VlangParserMUL, 0)
-}
-
-func (s *CommunityExpContext) DIV() antlr.TerminalNode {
-	return s.GetToken(VlangParserDIV, 0)
-}
-
-func (s *CommunityExpContext) MOD() antlr.TerminalNode {
-	return s.GetToken(VlangParserMOD, 0)
-}
-
-func (s *CommunityExpContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.EnterCommunityExp(s)
-	}
-}
-
-func (s *CommunityExpContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.ExitCommunityExp(s)
-	}
-}
-
-func (s *CommunityExpContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case VlangVisitor:
-		return t.VisitCommunityExp(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
 type IdContext struct {
 	ExpresionContext
 }
@@ -4018,6 +3910,18 @@ func (s *BinaryExpContext) Expresion(i int) IExpresionContext {
 	}
 
 	return t.(IExpresionContext)
+}
+
+func (s *BinaryExpContext) MUL() antlr.TerminalNode {
+	return s.GetToken(VlangParserMUL, 0)
+}
+
+func (s *BinaryExpContext) DIV() antlr.TerminalNode {
+	return s.GetToken(VlangParserDIV, 0)
+}
+
+func (s *BinaryExpContext) MOD() antlr.TerminalNode {
+	return s.GetToken(VlangParserMOD, 0)
 }
 
 func (s *BinaryExpContext) PLUS() antlr.TerminalNode {
@@ -4322,8 +4226,8 @@ func (p *VlangParser) expresion(_p int) (localctx IExpresionContext) {
 
 			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 14, p.GetParserRuleContext()) {
 			case 1:
-				localctx = NewCommunityExpContext(p, NewExpresionContext(p, _parentctx, _parentState))
-				localctx.(*CommunityExpContext).left = _prevctx
+				localctx = NewBinaryExpContext(p, NewExpresionContext(p, _parentctx, _parentState))
+				localctx.(*BinaryExpContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, VlangParserRULE_expresion)
 				p.SetState(182)
@@ -4337,14 +4241,14 @@ func (p *VlangParser) expresion(_p int) (localctx IExpresionContext) {
 
 					var _lt = p.GetTokenStream().LT(1)
 
-					localctx.(*CommunityExpContext).op = _lt
+					localctx.(*BinaryExpContext).op = _lt
 
 					_la = p.GetTokenStream().LA(1)
 
 					if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&58720256) != 0) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
-						localctx.(*CommunityExpContext).op = _ri
+						localctx.(*BinaryExpContext).op = _ri
 					} else {
 						p.GetErrorHandler().ReportMatch(p)
 						p.Consume()
@@ -4355,7 +4259,7 @@ func (p *VlangParser) expresion(_p int) (localctx IExpresionContext) {
 
 					var _x = p.expresion(12)
 
-					localctx.(*CommunityExpContext).right = _x
+					localctx.(*BinaryExpContext).right = _x
 				}
 
 			case 2:

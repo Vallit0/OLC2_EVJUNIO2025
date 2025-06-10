@@ -817,7 +817,7 @@ public class VlangParser extends Parser {
 		public Id_patternContext id_pattern() {
 			return getRuleContext(Id_patternContext.class,0);
 		}
-		public TerminalNode EQ() { return getToken(VlangParser.EQ, 0); }
+		public TerminalNode ASSIGN() { return getToken(VlangParser.ASSIGN, 0); }
 		public ExpresionContext expresion() {
 			return getRuleContext(ExpresionContext.class,0);
 		}
@@ -834,7 +834,7 @@ public class VlangParser extends Parser {
 			setState(128);
 			id_pattern();
 			setState(129);
-			match(EQ);
+			match(ASSIGN);
 			setState(130);
 			expresion(0);
 			}
@@ -868,7 +868,7 @@ public class VlangParser extends Parser {
 			return getRuleContext(Var_typeContext.class,0);
 		}
 		public TerminalNode ID() { return getToken(VlangParser.ID, 0); }
-		public TerminalNode EQ() { return getToken(VlangParser.EQ, 0); }
+		public TerminalNode ASSIGN() { return getToken(VlangParser.ASSIGN, 0); }
 		public ExpresionContext expresion() {
 			return getRuleContext(ExpresionContext.class,0);
 		}
@@ -892,7 +892,7 @@ public class VlangParser extends Parser {
 		public Id_patternContext id_pattern() {
 			return getRuleContext(Id_patternContext.class,0);
 		}
-		public TerminalNode EQ() { return getToken(VlangParser.EQ, 0); }
+		public TerminalNode ASSIGN() { return getToken(VlangParser.ASSIGN, 0); }
 		public ExpresionContext expresion() {
 			return getRuleContext(ExpresionContext.class,0);
 		}
@@ -915,7 +915,7 @@ public class VlangParser extends Parser {
 				setState(133);
 				match(ID);
 				setState(134);
-				match(EQ);
+				match(ASSIGN);
 				setState(135);
 				expresion(0);
 				}
@@ -929,7 +929,7 @@ public class VlangParser extends Parser {
 				setState(138);
 				id_pattern();
 				setState(139);
-				match(EQ);
+				match(ASSIGN);
 				setState(140);
 				expresion(0);
 				}
@@ -1828,12 +1828,12 @@ public class VlangParser extends Parser {
 		"\u0001\u0000\u0000\u0000|\u007f\u0005\u0013\u0000\u0000}\u007f\u0005\u0014"+
 		"\u0000\u0000~x\u0001\u0000\u0000\u0000~|\u0001\u0000\u0000\u0000~}\u0001"+
 		"\u0000\u0000\u0000\u007f\u0011\u0001\u0000\u0000\u0000\u0080\u0081\u0003"+
-		"\u0018\f\u0000\u0081\u0082\u0005\u001d\u0000\u0000\u0082\u0083\u0003\u001a"+
+		"\u0018\f\u0000\u0081\u0082\u0005#\u0000\u0000\u0082\u0083\u0003\u001a"+
 		"\r\u0000\u0083\u0013\u0001\u0000\u0000\u0000\u0084\u0085\u0003\u0016\u000b"+
-		"\u0000\u0085\u0086\u0005\f\u0000\u0000\u0086\u0087\u0005\u001d\u0000\u0000"+
+		"\u0000\u0085\u0086\u0005\f\u0000\u0000\u0086\u0087\u0005#\u0000\u0000"+
 		"\u0087\u0088\u0003\u001a\r\u0000\u0088\u0092\u0001\u0000\u0000\u0000\u0089"+
 		"\u008a\u0003\u0016\u000b\u0000\u008a\u008b\u0003\u0018\f\u0000\u008b\u008c"+
-		"\u0005\u001d\u0000\u0000\u008c\u008d\u0003\u001a\r\u0000\u008d\u0092\u0001"+
+		"\u0005#\u0000\u0000\u008c\u008d\u0003\u001a\r\u0000\u008d\u0092\u0001"+
 		"\u0000\u0000\u0000\u008e\u008f\u0003\u0016\u000b\u0000\u008f\u0090\u0003"+
 		"\u0018\f\u0000\u0090\u0092\u0001\u0000\u0000\u0000\u0091\u0084\u0001\u0000"+
 		"\u0000\u0000\u0091\u0089\u0001\u0000\u0000\u0000\u0091\u008e\u0001\u0000"+

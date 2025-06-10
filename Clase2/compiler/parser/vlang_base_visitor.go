@@ -99,10 +99,6 @@ func (v *BaseVlangVisitor) VisitAsignacionfor(ctx *AsignacionforContext) interfa
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseVlangVisitor) VisitCommunityExp(ctx *CommunityExpContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseVlangVisitor) VisitId(ctx *IdContext) interface{} {
 	return v.VisitChildren(ctx)
 }

@@ -43,12 +43,12 @@ transfer_stmt:
 
 
 assign_stmt:
-	id_pattern EQ expresion  	# DirectAssign
+	id_pattern ASSIGN expresion  	# DirectAssign
     ; 
 
 decl_stmt: 
-    var_type ID EQ expresion # DeclAssign
-    | var_type id_pattern EQ expresion # DeclAssignPattern
+    var_type ID ASSIGN expresion # DeclAssign
+    | var_type id_pattern ASSIGN expresion # DeclAssignPattern
     | var_type id_pattern # DeclPattern
     ; 
 
