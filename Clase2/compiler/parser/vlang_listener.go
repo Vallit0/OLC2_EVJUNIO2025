@@ -37,6 +37,15 @@ type VlangListener interface {
 	// EnterNumericRange is called when entering the NumericRange production.
 	EnterNumericRange(c *NumericRangeContext)
 
+	// EnterFuncCall is called when entering the FuncCall production.
+	EnterFuncCall(c *FuncCallContext)
+
+	// EnterFuncDecl is called when entering the FuncDecl production.
+	EnterFuncDecl(c *FuncDeclContext)
+
+	// EnterStructDecl is called when entering the StructDecl production.
+	EnterStructDecl(c *StructDeclContext)
+
 	// EnterReturnStmt is called when entering the ReturnStmt production.
 	EnterReturnStmt(c *ReturnStmtContext)
 
@@ -63,6 +72,9 @@ type VlangListener interface {
 
 	// EnterCorchetesexpre is called when entering the corchetesexpre production.
 	EnterCorchetesexpre(c *CorchetesexpreContext)
+
+	// EnterFuncionexpre is called when entering the funcionexpre production.
+	EnterFuncionexpre(c *FuncionexpreContext)
 
 	// EnterUnario is called when entering the unario production.
 	EnterUnario(c *UnarioContext)
@@ -115,6 +127,33 @@ type VlangListener interface {
 	// EnterValorFloat is called when entering the valorFloat production.
 	EnterValorFloat(c *ValorFloatContext)
 
+	// EnterStructInstancia is called when entering the StructInstancia production.
+	EnterStructInstancia(c *StructInstanciaContext)
+
+	// EnterStructAttr is called when entering the StructAttr production.
+	EnterStructAttr(c *StructAttrContext)
+
+	// EnterIntType is called when entering the IntType production.
+	EnterIntType(c *IntTypeContext)
+
+	// EnterFloatType is called when entering the FloatType production.
+	EnterFloatType(c *FloatTypeContext)
+
+	// EnterStringType is called when entering the StringType production.
+	EnterStringType(c *StringTypeContext)
+
+	// EnterBoolType is called when entering the BoolType production.
+	EnterBoolType(c *BoolTypeContext)
+
+	// EnterCharType is called when entering the CharType production.
+	EnterCharType(c *CharTypeContext)
+
+	// EnterVoidType is called when entering the VoidType production.
+	EnterVoidType(c *VoidTypeContext)
+
+	// EnterStructVector is called when entering the StructVector production.
+	EnterStructVector(c *StructVectorContext)
+
 	// EnterIncremento is called when entering the incremento production.
 	EnterIncremento(c *IncrementoContext)
 
@@ -151,6 +190,15 @@ type VlangListener interface {
 	// ExitNumericRange is called when exiting the NumericRange production.
 	ExitNumericRange(c *NumericRangeContext)
 
+	// ExitFuncCall is called when exiting the FuncCall production.
+	ExitFuncCall(c *FuncCallContext)
+
+	// ExitFuncDecl is called when exiting the FuncDecl production.
+	ExitFuncDecl(c *FuncDeclContext)
+
+	// ExitStructDecl is called when exiting the StructDecl production.
+	ExitStructDecl(c *StructDeclContext)
+
 	// ExitReturnStmt is called when exiting the ReturnStmt production.
 	ExitReturnStmt(c *ReturnStmtContext)
 
@@ -177,6 +225,9 @@ type VlangListener interface {
 
 	// ExitCorchetesexpre is called when exiting the corchetesexpre production.
 	ExitCorchetesexpre(c *CorchetesexpreContext)
+
+	// ExitFuncionexpre is called when exiting the funcionexpre production.
+	ExitFuncionexpre(c *FuncionexpreContext)
 
 	// ExitUnario is called when exiting the unario production.
 	ExitUnario(c *UnarioContext)
@@ -228,6 +279,33 @@ type VlangListener interface {
 
 	// ExitValorFloat is called when exiting the valorFloat production.
 	ExitValorFloat(c *ValorFloatContext)
+
+	// ExitStructInstancia is called when exiting the StructInstancia production.
+	ExitStructInstancia(c *StructInstanciaContext)
+
+	// ExitStructAttr is called when exiting the StructAttr production.
+	ExitStructAttr(c *StructAttrContext)
+
+	// ExitIntType is called when exiting the IntType production.
+	ExitIntType(c *IntTypeContext)
+
+	// ExitFloatType is called when exiting the FloatType production.
+	ExitFloatType(c *FloatTypeContext)
+
+	// ExitStringType is called when exiting the StringType production.
+	ExitStringType(c *StringTypeContext)
+
+	// ExitBoolType is called when exiting the BoolType production.
+	ExitBoolType(c *BoolTypeContext)
+
+	// ExitCharType is called when exiting the CharType production.
+	ExitCharType(c *CharTypeContext)
+
+	// ExitVoidType is called when exiting the VoidType production.
+	ExitVoidType(c *VoidTypeContext)
+
+	// ExitStructVector is called when exiting the StructVector production.
+	ExitStructVector(c *StructVectorContext)
 
 	// ExitIncremento is called when exiting the incremento production.
 	ExitIncremento(c *IncrementoContext)

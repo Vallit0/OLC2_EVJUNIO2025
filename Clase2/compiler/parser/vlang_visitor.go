@@ -37,6 +37,15 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#NumericRange.
 	VisitNumericRange(ctx *NumericRangeContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#FuncCall.
+	VisitFuncCall(ctx *FuncCallContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#FuncDecl.
+	VisitFuncDecl(ctx *FuncDeclContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#StructDecl.
+	VisitStructDecl(ctx *StructDeclContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#ReturnStmt.
 	VisitReturnStmt(ctx *ReturnStmtContext) interface{}
 
@@ -63,6 +72,9 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#corchetesexpre.
 	VisitCorchetesexpre(ctx *CorchetesexpreContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#funcionexpre.
+	VisitFuncionexpre(ctx *FuncionexpreContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#unario.
 	VisitUnario(ctx *UnarioContext) interface{}
@@ -114,6 +126,33 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#valorFloat.
 	VisitValorFloat(ctx *ValorFloatContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#StructInstancia.
+	VisitStructInstancia(ctx *StructInstanciaContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#StructAttr.
+	VisitStructAttr(ctx *StructAttrContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#IntType.
+	VisitIntType(ctx *IntTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#FloatType.
+	VisitFloatType(ctx *FloatTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#StringType.
+	VisitStringType(ctx *StringTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#BoolType.
+	VisitBoolType(ctx *BoolTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#CharType.
+	VisitCharType(ctx *CharTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#VoidType.
+	VisitVoidType(ctx *VoidTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#StructVector.
+	VisitStructVector(ctx *StructVectorContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#incremento.
 	VisitIncremento(ctx *IncrementoContext) interface{}

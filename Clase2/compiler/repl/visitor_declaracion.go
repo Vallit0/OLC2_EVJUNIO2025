@@ -52,11 +52,13 @@ func (v *DclVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	// 	v.Visit(ctx.Strct_dcl())
 	// }
 
-	return nil
-}
+// 	return nil
+// }
 
 // func (v *DclVisitor) VisitFuncDecl(ctx *parser.FuncDeclContext) interface{} {
 
+// 	// Entorno -> Global
+// 	// Entorno -> Actual
 // 	if v.ScopeTrace.CurrentScope != v.ScopeTrace.GlobalScope {
 // 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Las funciones solo pueden ser declaradas en el scope global")
 // 	}
@@ -81,19 +83,20 @@ func (v *DclVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 // 		}
 // 	}
 
+// 	// void | int | float | string | bool | nil
 // 	returnType := value.IVOR_NIL
 // 	var returnTypeToken antlr.Token = nil
 
-// 	if ctx.Type_() != nil {
-// 		returnType = ctx.Type_().GetText()
-// 		returnTypeToken = ctx.Type_().GetStart()
-// 	}
+// 	// if ctx.Type_() != nil {
+// 	// 	returnType = ctx.Type_().GetText()
+// 	// 	returnTypeToken = ctx.Type_().GetStart()
+// 	// }
 
 // 	body := ctx.AllStmt()
 
 // 	function := &Function{ // pointer ?
-// 		Name:            funcName,
-// 		Param:           params,
+// 		Name: funcName,
+// 		//	Param:           params,
 // 		ReturnType:      returnType,
 // 		Body:            body,
 // 		DeclScope:       v.ScopeTrace.CurrentScope,

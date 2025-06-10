@@ -147,7 +147,7 @@ valor
 */
 
 // Instancia de Struct
-strct_instancia: 'struct' ID LCOR struct_prop* RCOR # StructDecl;
+strct_instancia: 'struct' ID LCOR struct_prop* RCOR # StructInstancia;
 
 /*
 miInstancia = Persona{
