@@ -52,9 +52,6 @@ type VlangListener interface {
 	// EnterDeclPattern is called when entering the DeclPattern production.
 	EnterDeclPattern(c *DeclPatternContext)
 
-	// EnterMutType is called when entering the mutType production.
-	EnterMutType(c *MutTypeContext)
-
 	// EnterIdPattern is called when entering the IdPattern production.
 	EnterIdPattern(c *IdPatternContext)
 
@@ -162,9 +159,6 @@ type VlangListener interface {
 
 	// ExitDeclPattern is called when exiting the DeclPattern production.
 	ExitDeclPattern(c *DeclPatternContext)
-
-	// ExitMutType is called when exiting the mutType production.
-	ExitMutType(c *MutTypeContext)
 
 	// ExitIdPattern is called when exiting the IdPattern production.
 	ExitIdPattern(c *IdPatternContext)

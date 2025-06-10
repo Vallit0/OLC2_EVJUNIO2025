@@ -52,9 +52,6 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#DeclPattern.
 	VisitDeclPattern(ctx *DeclPatternContext) interface{}
 
-	// Visit a parse tree produced by VlangParser#mutType.
-	VisitMutType(ctx *MutTypeContext) interface{}
-
 	// Visit a parse tree produced by VlangParser#IdPattern.
 	VisitIdPattern(ctx *IdPatternContext) interface{}
 

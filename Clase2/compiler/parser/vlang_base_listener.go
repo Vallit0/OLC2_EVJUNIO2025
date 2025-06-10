@@ -110,12 +110,6 @@ func (s *BaseVlangListener) EnterDeclPattern(ctx *DeclPatternContext) {}
 // ExitDeclPattern is called when production DeclPattern is exited.
 func (s *BaseVlangListener) ExitDeclPattern(ctx *DeclPatternContext) {}
 
-// EnterMutType is called when production mutType is entered.
-func (s *BaseVlangListener) EnterMutType(ctx *MutTypeContext) {}
-
-// ExitMutType is called when production mutType is exited.
-func (s *BaseVlangListener) ExitMutType(ctx *MutTypeContext) {}
-
 // EnterIdPattern is called when production IdPattern is entered.
 func (s *BaseVlangListener) EnterIdPattern(ctx *IdPatternContext) {}
 

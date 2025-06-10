@@ -67,10 +67,6 @@ func (v *BaseVlangVisitor) VisitDeclPattern(ctx *DeclPatternContext) interface{}
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseVlangVisitor) VisitMutType(ctx *MutTypeContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseVlangVisitor) VisitIdPattern(ctx *IdPatternContext) interface{} {
 	return v.VisitChildren(ctx)
 }

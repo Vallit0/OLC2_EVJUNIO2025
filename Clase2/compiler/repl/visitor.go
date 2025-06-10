@@ -12,19 +12,40 @@ import (
 )
 
 // Visitor personalizado para recorrer el árbol de sintaxis
+
+// Constructor del visitor
 type ReplVisitor struct {
 	parser.BaseVlangVisitor
-	ScopeTrace *ScopeTrace
-	// CallStack   *CallStack
+	ScopeTrace  *ScopeTrace
+	CallStack   *CallStack
 	Console     *Console
 	ErrorTable  *ErrorTable
 	StructNames []string
 }
 
-// Constructor del visitor
-func NewReplVisitor() *ReplVisitor {
-	return &ReplVisitor{}
+func NewVisitor(dclVisitor *DclVisitor) *ReplVisitor {
+	return &ReplVisitor{
+		ScopeTrace:  dclVisitor.ScopeTrace,
+		ErrorTable:  dclVisitor.ErrorTable,
+		StructNames: dclVisitor.StructNames,
+		CallStack:   NewCallStack(),
+		Console:     NewConsole(),
+	}
 }
+
+func (v *ReplVisitor) GetReplContext() *ReplContext {
+	return &ReplContext{
+		Console:    v.Console,
+		ScopeTrace: v.ScopeTrace,
+		CallStack:  v.CallStack,
+		ErrorTable: v.ErrorTable,
+	}
+}
+
+func (v *ReplVisitor) ValidType(_type string) bool {
+	return v.ScopeTrace.GlobalScope.ValidType(_type)
+}
+
 func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 	switch val := tree.(type) {
@@ -39,6 +60,7 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 func (v *ReplVisitor) VisitPrograma(ctx *parser.ProgramaContext) interface{} {
 
+	fmt.Println("🔍 Visitando el programa...")
 	// Vamos a recorrer todos los statements y los visitamos
 	for _, stmt := range ctx.AllStmt() {
 		fmt.Println("🔍 Visitando declaración:", stmt.GetText())
