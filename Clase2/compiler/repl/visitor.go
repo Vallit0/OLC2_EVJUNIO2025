@@ -1,6 +1,7 @@
 package repl
 
 import (
+	compiler "compiler/parser"
 	parser "compiler/parser"
 	"compiler/value"
 	"fmt"
@@ -95,9 +96,6 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 	case *parser.ProgramaContext:
 		return v.VisitPrograma(node)
 
-	case *parser.StmtContext:
-		return v.VisitStmt(node)
-
 	case *parser.PrintlnStmtContext:
 		return v.VisitPrintlnStmt(node)
 
@@ -107,6 +105,9 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 		// Visitamos el hijo de valorexpresion
 		return v.VisitValorexpresion(node)
 
+	case *compiler.DeclAssignContext:
+		fmt.Println("🔍 Visitando DeclAssign:", node.GetText())
+		return v.VisitValueDeclAssign(node)
 	// tiramos todos los case de los nodos literales
 	case *parser.ValorEnteroContext:
 		fmt.Println("🔍 Visitando ValorEntero:", node.GetText())
@@ -127,10 +128,9 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 	case *parser.BinaryExpContext:
 		return v.VisitBinaryExp(node)
 	/// Agregamos las declaraciones
-	case *parser.DeclAssignContext:
-		return v.VisitValueDeclAssign(node)
-	case *parser.DirectAssignContext:
-		return v.VisitDirectAssign(node)
+	// asignaciones posibles
+	case *parser.StmtContext:
+		return v.VisitStmt(node)
 
 	default:
 		fmt.Printf("⚠️ Tipo inesperado en Visit(): %T\n", tree)
@@ -148,7 +148,7 @@ func (v *ReplVisitor) VisitPrograma(ctx *parser.ProgramaContext) interface{} {
 	fmt.Println("🔍 Visitando el programa...")
 	// Vamos a recorrer todos los statements y los visitamos
 	for _, stmt := range ctx.AllStmt() {
-		fmt.Println("🔍 Visitando statement*:", stmt.GetText())
+		fmt.Println("🔍 Visitando statement*:(text)", stmt.GetText())
 		v.Visit(stmt)
 	}
 
@@ -176,8 +176,28 @@ func (v *ReplVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 		fmt.Println("🔔 Visitando nodo println")
 
 		v.VisitPrintlnStmt(printlnStmt)
+		// visitamos un print normal
+	} else if printStmt, ok := node.(*parser.PrintStmtContext); ok {
+		fmt.Println("🔔 Visitando nodo print")
+		v.VisitPrintStmt(printStmt)
+		// visitamos una declaracion
+	} else if declAssign, ok := node.(*parser.DeclAssignContext); ok {
+		fmt.Println("🔔 Visitando nodo declAssign")
+		v.VisitValueDeclAssign(declAssign)
+	} else if directAssign, ok := node.(*parser.DirectAssignContext); ok {
+		fmt.Println("🔔 Visitando nodo directAssign")
+		v.VisitDirectAssign(directAssign)
+	} else if ifStmt, ok := node.(*parser.IfStmtContext); ok {
+		fmt.Println("🔔 Visitando nodo ifStmt")
+		v.VisitIfStmt(ifStmt)
+	} else if whileStmt, ok := node.(*parser.WhileStmtContext); ok {
+		fmt.Println("🔔 Visitando nodo whileStmt")
+		v.VisitWhileStmt(whileStmt)
+	} else if forStmt, ok := node.(*parser.ForStmtContext); ok {
+		fmt.Println("🔔 Visitando nodo forStmt")
+		v.VisitForStmt(forStmt)
 	} else {
-		fmt.Printf("⚠️ Tipo no reconocido dentro de stmt: %T\n", node)
+		fmt.Printf("⚠️ Tipo no reconocido dentro de stmt->: %T\n", node)
 	}
 
 	return nil
@@ -379,6 +399,7 @@ func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interf
 	// verificamos si es una constante
 
 	// isConst := isDeclConst(ctx.Var_type().GetText())
+	fmt.Println("🔍 Visitando DeclAssign:", ctx.GetText())
 	varName := ctx.ID().GetText()
 	varValue := v.Visit(ctx.Expresion()).(value.IVOR)
 	varType := varValue.Type()
@@ -469,7 +490,16 @@ func (v *ReplVisitor) VisitId(ctx *parser.IdContext) interface{} {
 	id := ctx.ID().GetText()
 	// TODO: buscar variable en entorno
 	fmt.Println("Accediendo a variable:", id)
-	return nil
+	// debemos buscar la variable en el ScopeTrace
+	variable := v.ScopeTrace.GetVariable(id)
+	if variable == nil {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Variable '"+id+"' no encontrada")
+		return nil
+	} else {
+		// Si la variable existe, devolvemos su valor
+		fmt.Println("Variable encontrada:", id, "con valor:", variable.Value)
+		return variable
+	}
 }
 
 func (v *ReplVisitor) VisitIncredecr(ctx *parser.IncredecrContext) interface{} {
@@ -607,4 +637,60 @@ func (v *ReplVisitor) VisitBinaryExp(ctx *parser.BinaryExpContext) interface{} {
 	}
 
 	return result
+}
+
+//llamadas a funciones
+
+func (v *ReplVisitor) VisitFuncCall(ctx *compiler.FuncCallContext) interface{} {
+
+	// find if its a func or constructor of a struct
+
+	canditateName := v.Visit(ctx.Id_pattern()).(string)
+	funcObj, msg1 := v.ScopeTrace.GetFunction(canditateName)
+	structObj, msg2 := v.ScopeTrace.GlobalScope.GetStruct(canditateName)
+
+	if funcObj == nil && structObj == nil {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), msg1+msg2)
+		return value.DefaultNilValue
+	}
+
+	args := make([]*Argument, 0)
+	if ctx.Parametros() != nil {
+		args = v.Visit(ctx.Parametros()).([]*Argument)
+	}
+
+	// struct has priority over func
+	if structObj != nil {
+
+		switch funcObj := funcObj.(type) {
+		case *BuiltInFunction:
+			returnValue, ok, msg := funcObj.Exec(v.GetReplContext(), args)
+
+			if !ok {
+
+				if msg != "" {
+					v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
+				}
+
+				return value.DefaultNilValue
+
+			}
+
+			return returnValue
+
+		case *Function:
+			funcObj.Exec(v, args, ctx.GetStart())
+			return funcObj.ReturnValue
+
+		// case *ObjectBuiltInFunction:
+		// 	funcObj.Exec(v, args, ctx.GetStart())
+		// 	return funcObj.ReturnValue
+
+		default:
+			log.Fatal("Function type not found")
+		}
+
+		return value.DefaultNilValue
+	}
+	return nil
 }

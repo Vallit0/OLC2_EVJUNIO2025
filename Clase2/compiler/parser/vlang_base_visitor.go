@@ -79,11 +79,7 @@ func (v *BaseVlangVisitor) VisitDeclAssign(ctx *DeclAssignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseVlangVisitor) VisitDeclAssignPattern(ctx *DeclAssignPatternContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitDeclPattern(ctx *DeclPatternContext) interface{} {
+func (v *BaseVlangVisitor) VisitDeclAssignType(ctx *DeclAssignTypeContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

@@ -61,11 +61,8 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#DeclAssign.
 	VisitDeclAssign(ctx *DeclAssignContext) interface{}
 
-	// Visit a parse tree produced by VlangParser#DeclAssignPattern.
-	VisitDeclAssignPattern(ctx *DeclAssignPatternContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#DeclPattern.
-	VisitDeclPattern(ctx *DeclPatternContext) interface{}
+	// Visit a parse tree produced by VlangParser#DeclAssignType.
+	VisitDeclAssignType(ctx *DeclAssignTypeContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#IdPattern.
 	VisitIdPattern(ctx *IdPatternContext) interface{}

@@ -1,0 +1,9 @@
+// definimos suma
+mut suma = 10 
+mut puntosbreak = 0 
+if suma == 10 {
+		puntosBreak = puntosBreak + 2
+		fmt.Println("OK Break en for clásico: correcto")
+} else {
+		fmt.Println("X Break en for clásico: incorrecto")
+}

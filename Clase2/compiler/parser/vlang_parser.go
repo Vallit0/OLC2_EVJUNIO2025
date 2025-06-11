@@ -94,7 +94,7 @@ func vlangParserInit() {
 		25, 1, 25, 3, 25, 330, 8, 25, 1, 25, 0, 1, 34, 26, 0, 2, 4, 6, 8, 10, 12,
 		14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48,
 		50, 0, 5, 2, 0, 30, 30, 34, 34, 1, 0, 31, 33, 1, 0, 29, 30, 1, 0, 39, 42,
-		1, 0, 37, 38, 363, 0, 53, 1, 0, 0, 0, 2, 71, 1, 0, 0, 0, 4, 73, 1, 0, 0,
+		1, 0, 37, 38, 362, 0, 53, 1, 0, 0, 0, 2, 71, 1, 0, 0, 0, 4, 73, 1, 0, 0,
 		0, 6, 84, 1, 0, 0, 0, 8, 95, 1, 0, 0, 0, 10, 105, 1, 0, 0, 0, 12, 110,
 		1, 0, 0, 0, 14, 122, 1, 0, 0, 0, 16, 133, 1, 0, 0, 0, 18, 149, 1, 0, 0,
 		0, 20, 155, 1, 0, 0, 0, 22, 162, 1, 0, 0, 0, 24, 177, 1, 0, 0, 0, 26, 194,
@@ -137,10 +137,10 @@ func vlangParserInit() {
 		0, 0, 144, 142, 1, 0, 0, 0, 144, 145, 1, 0, 0, 0, 145, 147, 1, 0, 0, 0,
 		146, 144, 1, 0, 0, 0, 147, 148, 5, 52, 0, 0, 148, 17, 1, 0, 0, 0, 149,
 		150, 3, 34, 17, 0, 150, 151, 5, 53, 0, 0, 151, 152, 5, 53, 0, 0, 152, 153,
-		5, 53, 0, 0, 153, 154, 3, 34, 17, 0, 154, 19, 1, 0, 0, 0, 155, 156, 5,
-		20, 0, 0, 156, 158, 5, 47, 0, 0, 157, 159, 3, 36, 18, 0, 158, 157, 1, 0,
-		0, 0, 158, 159, 1, 0, 0, 0, 159, 160, 1, 0, 0, 0, 160, 161, 5, 48, 0, 0,
-		161, 21, 1, 0, 0, 0, 162, 163, 5, 20, 0, 0, 163, 165, 5, 47, 0, 0, 164,
+		5, 53, 0, 0, 153, 154, 3, 34, 17, 0, 154, 19, 1, 0, 0, 0, 155, 156, 3,
+		32, 16, 0, 156, 158, 5, 47, 0, 0, 157, 159, 3, 36, 18, 0, 158, 157, 1,
+		0, 0, 0, 158, 159, 1, 0, 0, 0, 159, 160, 1, 0, 0, 0, 160, 161, 5, 48, 0,
+		0, 161, 21, 1, 0, 0, 0, 162, 163, 5, 20, 0, 0, 163, 165, 5, 47, 0, 0, 164,
 		166, 3, 36, 18, 0, 165, 164, 1, 0, 0, 0, 165, 166, 1, 0, 0, 0, 166, 167,
 		1, 0, 0, 0, 167, 168, 5, 48, 0, 0, 168, 172, 5, 50, 0, 0, 169, 171, 3,
 		2, 1, 0, 170, 169, 1, 0, 0, 0, 171, 174, 1, 0, 0, 0, 172, 170, 1, 0, 0,
@@ -156,57 +156,56 @@ func vlangParserInit() {
 		198, 5, 43, 0, 0, 198, 199, 3, 34, 17, 0, 199, 29, 1, 0, 0, 0, 200, 201,
 		5, 13, 0, 0, 201, 202, 5, 20, 0, 0, 202, 203, 5, 43, 0, 0, 203, 212, 3,
 		34, 17, 0, 204, 205, 5, 13, 0, 0, 205, 206, 3, 32, 16, 0, 206, 207, 5,
-		43, 0, 0, 207, 208, 3, 34, 17, 0, 208, 212, 1, 0, 0, 0, 209, 210, 5, 13,
-		0, 0, 210, 212, 3, 32, 16, 0, 211, 200, 1, 0, 0, 0, 211, 204, 1, 0, 0,
-		0, 211, 209, 1, 0, 0, 0, 212, 31, 1, 0, 0, 0, 213, 218, 5, 20, 0, 0, 214,
-		215, 5, 53, 0, 0, 215, 217, 5, 20, 0, 0, 216, 214, 1, 0, 0, 0, 217, 220,
-		1, 0, 0, 0, 218, 216, 1, 0, 0, 0, 218, 219, 1, 0, 0, 0, 219, 33, 1, 0,
-		0, 0, 220, 218, 1, 0, 0, 0, 221, 222, 6, 17, -1, 0, 222, 246, 3, 40, 20,
-		0, 223, 246, 3, 20, 10, 0, 224, 225, 5, 47, 0, 0, 225, 226, 3, 34, 17,
-		0, 226, 227, 5, 48, 0, 0, 227, 246, 1, 0, 0, 0, 228, 229, 5, 49, 0, 0,
-		229, 230, 3, 34, 17, 0, 230, 231, 5, 51, 0, 0, 231, 246, 1, 0, 0, 0, 232,
-		233, 7, 0, 0, 0, 233, 246, 3, 34, 17, 12, 234, 246, 5, 20, 0, 0, 235, 246,
-		3, 50, 25, 0, 236, 237, 5, 20, 0, 0, 237, 238, 5, 53, 0, 0, 238, 246, 5,
-		20, 0, 0, 239, 240, 5, 20, 0, 0, 240, 241, 5, 53, 0, 0, 241, 246, 3, 34,
-		17, 2, 242, 243, 5, 20, 0, 0, 243, 244, 5, 43, 0, 0, 244, 246, 3, 34, 17,
-		1, 245, 221, 1, 0, 0, 0, 245, 223, 1, 0, 0, 0, 245, 224, 1, 0, 0, 0, 245,
-		228, 1, 0, 0, 0, 245, 232, 1, 0, 0, 0, 245, 234, 1, 0, 0, 0, 245, 235,
-		1, 0, 0, 0, 245, 236, 1, 0, 0, 0, 245, 239, 1, 0, 0, 0, 245, 242, 1, 0,
-		0, 0, 246, 267, 1, 0, 0, 0, 247, 248, 10, 11, 0, 0, 248, 249, 7, 1, 0,
-		0, 249, 266, 3, 34, 17, 12, 250, 251, 10, 10, 0, 0, 251, 252, 7, 2, 0,
-		0, 252, 266, 3, 34, 17, 11, 253, 254, 10, 9, 0, 0, 254, 255, 7, 3, 0, 0,
-		255, 266, 3, 34, 17, 10, 256, 257, 10, 8, 0, 0, 257, 258, 7, 4, 0, 0, 258,
-		266, 3, 34, 17, 9, 259, 260, 10, 7, 0, 0, 260, 261, 5, 36, 0, 0, 261, 266,
-		3, 34, 17, 8, 262, 263, 10, 6, 0, 0, 263, 264, 5, 35, 0, 0, 264, 266, 3,
-		34, 17, 7, 265, 247, 1, 0, 0, 0, 265, 250, 1, 0, 0, 0, 265, 253, 1, 0,
-		0, 0, 265, 256, 1, 0, 0, 0, 265, 259, 1, 0, 0, 0, 265, 262, 1, 0, 0, 0,
-		266, 269, 1, 0, 0, 0, 267, 265, 1, 0, 0, 0, 267, 268, 1, 0, 0, 0, 268,
-		35, 1, 0, 0, 0, 269, 267, 1, 0, 0, 0, 270, 275, 3, 34, 17, 0, 271, 272,
-		5, 54, 0, 0, 272, 274, 3, 34, 17, 0, 273, 271, 1, 0, 0, 0, 274, 277, 1,
-		0, 0, 0, 275, 273, 1, 0, 0, 0, 275, 276, 1, 0, 0, 0, 276, 37, 1, 0, 0,
-		0, 277, 275, 1, 0, 0, 0, 278, 279, 3, 40, 20, 0, 279, 39, 1, 0, 0, 0, 280,
-		287, 5, 15, 0, 0, 281, 287, 5, 17, 0, 0, 282, 287, 5, 18, 0, 0, 283, 287,
-		5, 14, 0, 0, 284, 287, 5, 19, 0, 0, 285, 287, 5, 16, 0, 0, 286, 280, 1,
-		0, 0, 0, 286, 281, 1, 0, 0, 0, 286, 282, 1, 0, 0, 0, 286, 283, 1, 0, 0,
-		0, 286, 284, 1, 0, 0, 0, 286, 285, 1, 0, 0, 0, 287, 41, 1, 0, 0, 0, 288,
-		289, 5, 3, 0, 0, 289, 290, 5, 20, 0, 0, 290, 294, 5, 50, 0, 0, 291, 293,
-		3, 44, 22, 0, 292, 291, 1, 0, 0, 0, 293, 296, 1, 0, 0, 0, 294, 292, 1,
-		0, 0, 0, 294, 295, 1, 0, 0, 0, 295, 297, 1, 0, 0, 0, 296, 294, 1, 0, 0,
-		0, 297, 298, 5, 52, 0, 0, 298, 43, 1, 0, 0, 0, 299, 300, 3, 46, 23, 0,
-		300, 301, 5, 20, 0, 0, 301, 302, 5, 43, 0, 0, 302, 303, 5, 20, 0, 0, 303,
-		304, 5, 50, 0, 0, 304, 305, 5, 20, 0, 0, 305, 306, 5, 46, 0, 0, 306, 307,
-		3, 34, 17, 0, 307, 308, 5, 54, 0, 0, 308, 309, 1, 0, 0, 0, 309, 310, 5,
-		52, 0, 0, 310, 45, 1, 0, 0, 0, 311, 318, 5, 4, 0, 0, 312, 318, 5, 5, 0,
-		0, 313, 318, 5, 6, 0, 0, 314, 318, 5, 7, 0, 0, 315, 318, 5, 8, 0, 0, 316,
-		318, 5, 9, 0, 0, 317, 311, 1, 0, 0, 0, 317, 312, 1, 0, 0, 0, 317, 313,
-		1, 0, 0, 0, 317, 314, 1, 0, 0, 0, 317, 315, 1, 0, 0, 0, 317, 316, 1, 0,
-		0, 0, 318, 47, 1, 0, 0, 0, 319, 320, 5, 49, 0, 0, 320, 321, 5, 20, 0, 0,
-		321, 322, 5, 51, 0, 0, 322, 323, 5, 47, 0, 0, 323, 324, 5, 48, 0, 0, 324,
-		49, 1, 0, 0, 0, 325, 326, 5, 20, 0, 0, 326, 330, 5, 44, 0, 0, 327, 328,
-		5, 20, 0, 0, 328, 330, 5, 45, 0, 0, 329, 325, 1, 0, 0, 0, 329, 327, 1,
-		0, 0, 0, 330, 51, 1, 0, 0, 0, 26, 55, 71, 78, 82, 90, 100, 117, 128, 138,
-		144, 158, 165, 172, 183, 190, 194, 211, 218, 245, 265, 267, 275, 286, 294,
-		317, 329,
+		46, 0, 0, 207, 208, 3, 46, 23, 0, 208, 209, 5, 43, 0, 0, 209, 210, 3, 34,
+		17, 0, 210, 212, 1, 0, 0, 0, 211, 200, 1, 0, 0, 0, 211, 204, 1, 0, 0, 0,
+		212, 31, 1, 0, 0, 0, 213, 218, 5, 20, 0, 0, 214, 215, 5, 53, 0, 0, 215,
+		217, 5, 20, 0, 0, 216, 214, 1, 0, 0, 0, 217, 220, 1, 0, 0, 0, 218, 216,
+		1, 0, 0, 0, 218, 219, 1, 0, 0, 0, 219, 33, 1, 0, 0, 0, 220, 218, 1, 0,
+		0, 0, 221, 222, 6, 17, -1, 0, 222, 246, 3, 40, 20, 0, 223, 246, 3, 20,
+		10, 0, 224, 225, 5, 47, 0, 0, 225, 226, 3, 34, 17, 0, 226, 227, 5, 48,
+		0, 0, 227, 246, 1, 0, 0, 0, 228, 229, 5, 49, 0, 0, 229, 230, 3, 34, 17,
+		0, 230, 231, 5, 51, 0, 0, 231, 246, 1, 0, 0, 0, 232, 233, 7, 0, 0, 0, 233,
+		246, 3, 34, 17, 12, 234, 246, 5, 20, 0, 0, 235, 246, 3, 50, 25, 0, 236,
+		237, 5, 20, 0, 0, 237, 238, 5, 53, 0, 0, 238, 246, 5, 20, 0, 0, 239, 240,
+		5, 20, 0, 0, 240, 241, 5, 53, 0, 0, 241, 246, 3, 34, 17, 2, 242, 243, 5,
+		20, 0, 0, 243, 244, 5, 43, 0, 0, 244, 246, 3, 34, 17, 1, 245, 221, 1, 0,
+		0, 0, 245, 223, 1, 0, 0, 0, 245, 224, 1, 0, 0, 0, 245, 228, 1, 0, 0, 0,
+		245, 232, 1, 0, 0, 0, 245, 234, 1, 0, 0, 0, 245, 235, 1, 0, 0, 0, 245,
+		236, 1, 0, 0, 0, 245, 239, 1, 0, 0, 0, 245, 242, 1, 0, 0, 0, 246, 267,
+		1, 0, 0, 0, 247, 248, 10, 11, 0, 0, 248, 249, 7, 1, 0, 0, 249, 266, 3,
+		34, 17, 12, 250, 251, 10, 10, 0, 0, 251, 252, 7, 2, 0, 0, 252, 266, 3,
+		34, 17, 11, 253, 254, 10, 9, 0, 0, 254, 255, 7, 3, 0, 0, 255, 266, 3, 34,
+		17, 10, 256, 257, 10, 8, 0, 0, 257, 258, 7, 4, 0, 0, 258, 266, 3, 34, 17,
+		9, 259, 260, 10, 7, 0, 0, 260, 261, 5, 36, 0, 0, 261, 266, 3, 34, 17, 8,
+		262, 263, 10, 6, 0, 0, 263, 264, 5, 35, 0, 0, 264, 266, 3, 34, 17, 7, 265,
+		247, 1, 0, 0, 0, 265, 250, 1, 0, 0, 0, 265, 253, 1, 0, 0, 0, 265, 256,
+		1, 0, 0, 0, 265, 259, 1, 0, 0, 0, 265, 262, 1, 0, 0, 0, 266, 269, 1, 0,
+		0, 0, 267, 265, 1, 0, 0, 0, 267, 268, 1, 0, 0, 0, 268, 35, 1, 0, 0, 0,
+		269, 267, 1, 0, 0, 0, 270, 275, 3, 34, 17, 0, 271, 272, 5, 54, 0, 0, 272,
+		274, 3, 34, 17, 0, 273, 271, 1, 0, 0, 0, 274, 277, 1, 0, 0, 0, 275, 273,
+		1, 0, 0, 0, 275, 276, 1, 0, 0, 0, 276, 37, 1, 0, 0, 0, 277, 275, 1, 0,
+		0, 0, 278, 279, 3, 40, 20, 0, 279, 39, 1, 0, 0, 0, 280, 287, 5, 15, 0,
+		0, 281, 287, 5, 17, 0, 0, 282, 287, 5, 18, 0, 0, 283, 287, 5, 14, 0, 0,
+		284, 287, 5, 19, 0, 0, 285, 287, 5, 16, 0, 0, 286, 280, 1, 0, 0, 0, 286,
+		281, 1, 0, 0, 0, 286, 282, 1, 0, 0, 0, 286, 283, 1, 0, 0, 0, 286, 284,
+		1, 0, 0, 0, 286, 285, 1, 0, 0, 0, 287, 41, 1, 0, 0, 0, 288, 289, 5, 3,
+		0, 0, 289, 290, 5, 20, 0, 0, 290, 294, 5, 50, 0, 0, 291, 293, 3, 44, 22,
+		0, 292, 291, 1, 0, 0, 0, 293, 296, 1, 0, 0, 0, 294, 292, 1, 0, 0, 0, 294,
+		295, 1, 0, 0, 0, 295, 297, 1, 0, 0, 0, 296, 294, 1, 0, 0, 0, 297, 298,
+		5, 52, 0, 0, 298, 43, 1, 0, 0, 0, 299, 300, 3, 46, 23, 0, 300, 301, 5,
+		20, 0, 0, 301, 302, 5, 43, 0, 0, 302, 303, 5, 20, 0, 0, 303, 304, 5, 50,
+		0, 0, 304, 305, 5, 20, 0, 0, 305, 306, 5, 46, 0, 0, 306, 307, 3, 34, 17,
+		0, 307, 308, 5, 54, 0, 0, 308, 309, 1, 0, 0, 0, 309, 310, 5, 52, 0, 0,
+		310, 45, 1, 0, 0, 0, 311, 318, 5, 4, 0, 0, 312, 318, 5, 5, 0, 0, 313, 318,
+		5, 6, 0, 0, 314, 318, 5, 7, 0, 0, 315, 318, 5, 8, 0, 0, 316, 318, 5, 9,
+		0, 0, 317, 311, 1, 0, 0, 0, 317, 312, 1, 0, 0, 0, 317, 313, 1, 0, 0, 0,
+		317, 314, 1, 0, 0, 0, 317, 315, 1, 0, 0, 0, 317, 316, 1, 0, 0, 0, 318,
+		47, 1, 0, 0, 0, 319, 320, 5, 49, 0, 0, 320, 321, 5, 20, 0, 0, 321, 322,
+		5, 51, 0, 0, 322, 323, 5, 47, 0, 0, 323, 324, 5, 48, 0, 0, 324, 49, 1,
+		0, 0, 0, 325, 326, 5, 20, 0, 0, 326, 330, 5, 44, 0, 0, 327, 328, 5, 20,
+		0, 0, 328, 330, 5, 45, 0, 0, 329, 325, 1, 0, 0, 0, 329, 327, 1, 0, 0, 0,
+		330, 51, 1, 0, 0, 0, 26, 55, 71, 78, 82, 90, 100, 117, 128, 138, 144, 158,
+		165, 172, 183, 190, 194, 211, 218, 245, 265, 267, 275, 286, 294, 317, 329,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -2755,8 +2754,20 @@ func (s *FuncCallContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *FuncCallContext) ID() antlr.TerminalNode {
-	return s.GetToken(VlangParserID, 0)
+func (s *FuncCallContext) Id_pattern() IId_patternContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IId_patternContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IId_patternContext)
 }
 
 func (s *FuncCallContext) LPAREN() antlr.TerminalNode {
@@ -2814,11 +2825,7 @@ func (p *VlangParser) Func_call() (localctx IFunc_callContext) {
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(155)
-		p.Match(VlangParserID)
-		if p.HasError() {
-			// Recognition error - abort rule
-			goto errorExit
-		}
+		p.Id_pattern()
 	}
 	{
 		p.SetState(156)
@@ -3915,12 +3922,12 @@ func (s *DeclAssignContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	}
 }
 
-type DeclPatternContext struct {
+type DeclAssignTypeContext struct {
 	Decl_stmtContext
 }
 
-func NewDeclPatternContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DeclPatternContext {
-	var p = new(DeclPatternContext)
+func NewDeclAssignTypeContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DeclAssignTypeContext {
+	var p = new(DeclAssignTypeContext)
 
 	InitEmptyDecl_stmtContext(&p.Decl_stmtContext)
 	p.parser = parser
@@ -3929,15 +3936,15 @@ func NewDeclPatternContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *De
 	return p
 }
 
-func (s *DeclPatternContext) GetRuleContext() antlr.RuleContext {
+func (s *DeclAssignTypeContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
 
-func (s *DeclPatternContext) MUT() antlr.TerminalNode {
+func (s *DeclAssignTypeContext) MUT() antlr.TerminalNode {
 	return s.GetToken(VlangParserMUT, 0)
 }
 
-func (s *DeclPatternContext) Id_pattern() IId_patternContext {
+func (s *DeclAssignTypeContext) Id_pattern() IId_patternContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IId_patternContext); ok {
@@ -3953,54 +3960,14 @@ func (s *DeclPatternContext) Id_pattern() IId_patternContext {
 	return t.(IId_patternContext)
 }
 
-func (s *DeclPatternContext) EnterRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.EnterDeclPattern(s)
-	}
+func (s *DeclAssignTypeContext) COLON() antlr.TerminalNode {
+	return s.GetToken(VlangParserCOLON, 0)
 }
 
-func (s *DeclPatternContext) ExitRule(listener antlr.ParseTreeListener) {
-	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.ExitDeclPattern(s)
-	}
-}
-
-func (s *DeclPatternContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
-	switch t := visitor.(type) {
-	case VlangVisitor:
-		return t.VisitDeclPattern(s)
-
-	default:
-		return t.VisitChildren(s)
-	}
-}
-
-type DeclAssignPatternContext struct {
-	Decl_stmtContext
-}
-
-func NewDeclAssignPatternContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *DeclAssignPatternContext {
-	var p = new(DeclAssignPatternContext)
-
-	InitEmptyDecl_stmtContext(&p.Decl_stmtContext)
-	p.parser = parser
-	p.CopyAll(ctx.(*Decl_stmtContext))
-
-	return p
-}
-
-func (s *DeclAssignPatternContext) GetRuleContext() antlr.RuleContext {
-	return s
-}
-
-func (s *DeclAssignPatternContext) MUT() antlr.TerminalNode {
-	return s.GetToken(VlangParserMUT, 0)
-}
-
-func (s *DeclAssignPatternContext) Id_pattern() IId_patternContext {
+func (s *DeclAssignTypeContext) Var_type() IVar_typeContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IId_patternContext); ok {
+		if _, ok := ctx.(IVar_typeContext); ok {
 			t = ctx.(antlr.RuleContext)
 			break
 		}
@@ -4010,14 +3977,14 @@ func (s *DeclAssignPatternContext) Id_pattern() IId_patternContext {
 		return nil
 	}
 
-	return t.(IId_patternContext)
+	return t.(IVar_typeContext)
 }
 
-func (s *DeclAssignPatternContext) ASSIGN() antlr.TerminalNode {
+func (s *DeclAssignTypeContext) ASSIGN() antlr.TerminalNode {
 	return s.GetToken(VlangParserASSIGN, 0)
 }
 
-func (s *DeclAssignPatternContext) Expresion() IExpresionContext {
+func (s *DeclAssignTypeContext) Expresion() IExpresionContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
 		if _, ok := ctx.(IExpresionContext); ok {
@@ -4033,22 +4000,22 @@ func (s *DeclAssignPatternContext) Expresion() IExpresionContext {
 	return t.(IExpresionContext)
 }
 
-func (s *DeclAssignPatternContext) EnterRule(listener antlr.ParseTreeListener) {
+func (s *DeclAssignTypeContext) EnterRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.EnterDeclAssignPattern(s)
+		listenerT.EnterDeclAssignType(s)
 	}
 }
 
-func (s *DeclAssignPatternContext) ExitRule(listener antlr.ParseTreeListener) {
+func (s *DeclAssignTypeContext) ExitRule(listener antlr.ParseTreeListener) {
 	if listenerT, ok := listener.(VlangListener); ok {
-		listenerT.ExitDeclAssignPattern(s)
+		listenerT.ExitDeclAssignType(s)
 	}
 }
 
-func (s *DeclAssignPatternContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+func (s *DeclAssignTypeContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
 	switch t := visitor.(type) {
 	case VlangVisitor:
-		return t.VisitDeclAssignPattern(s)
+		return t.VisitDeclAssignType(s)
 
 	default:
 		return t.VisitChildren(s)
@@ -4098,7 +4065,7 @@ func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 		}
 
 	case 2:
-		localctx = NewDeclAssignPatternContext(p, localctx)
+		localctx = NewDeclAssignTypeContext(p, localctx)
 		p.EnterOuterAlt(localctx, 2)
 		{
 			p.SetState(204)
@@ -4114,7 +4081,7 @@ func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 		}
 		{
 			p.SetState(206)
-			p.Match(VlangParserASSIGN)
+			p.Match(VlangParserCOLON)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -4122,23 +4089,19 @@ func (p *VlangParser) Decl_stmt() (localctx IDecl_stmtContext) {
 		}
 		{
 			p.SetState(207)
-			p.expresion(0)
+			p.Var_type()
 		}
-
-	case 3:
-		localctx = NewDeclPatternContext(p, localctx)
-		p.EnterOuterAlt(localctx, 3)
 		{
-			p.SetState(209)
-			p.Match(VlangParserMUT)
+			p.SetState(208)
+			p.Match(VlangParserASSIGN)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
 			}
 		}
 		{
-			p.SetState(210)
-			p.Id_pattern()
+			p.SetState(209)
+			p.expresion(0)
 		}
 
 	case antlr.ATNInvalidAltNumber:

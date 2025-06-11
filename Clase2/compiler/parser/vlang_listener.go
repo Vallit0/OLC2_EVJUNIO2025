@@ -61,11 +61,8 @@ type VlangListener interface {
 	// EnterDeclAssign is called when entering the DeclAssign production.
 	EnterDeclAssign(c *DeclAssignContext)
 
-	// EnterDeclAssignPattern is called when entering the DeclAssignPattern production.
-	EnterDeclAssignPattern(c *DeclAssignPatternContext)
-
-	// EnterDeclPattern is called when entering the DeclPattern production.
-	EnterDeclPattern(c *DeclPatternContext)
+	// EnterDeclAssignType is called when entering the DeclAssignType production.
+	EnterDeclAssignType(c *DeclAssignTypeContext)
 
 	// EnterIdPattern is called when entering the IdPattern production.
 	EnterIdPattern(c *IdPatternContext)
@@ -214,11 +211,8 @@ type VlangListener interface {
 	// ExitDeclAssign is called when exiting the DeclAssign production.
 	ExitDeclAssign(c *DeclAssignContext)
 
-	// ExitDeclAssignPattern is called when exiting the DeclAssignPattern production.
-	ExitDeclAssignPattern(c *DeclAssignPatternContext)
-
-	// ExitDeclPattern is called when exiting the DeclPattern production.
-	ExitDeclPattern(c *DeclPatternContext)
+	// ExitDeclAssignType is called when exiting the DeclAssignType production.
+	ExitDeclAssignType(c *DeclAssignTypeContext)
 
 	// ExitIdPattern is called when exiting the IdPattern production.
 	ExitIdPattern(c *IdPatternContext)

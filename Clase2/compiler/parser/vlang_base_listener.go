@@ -128,17 +128,11 @@ func (s *BaseVlangListener) EnterDeclAssign(ctx *DeclAssignContext) {}
 // ExitDeclAssign is called when production DeclAssign is exited.
 func (s *BaseVlangListener) ExitDeclAssign(ctx *DeclAssignContext) {}
 
-// EnterDeclAssignPattern is called when production DeclAssignPattern is entered.
-func (s *BaseVlangListener) EnterDeclAssignPattern(ctx *DeclAssignPatternContext) {}
+// EnterDeclAssignType is called when production DeclAssignType is entered.
+func (s *BaseVlangListener) EnterDeclAssignType(ctx *DeclAssignTypeContext) {}
 
-// ExitDeclAssignPattern is called when production DeclAssignPattern is exited.
-func (s *BaseVlangListener) ExitDeclAssignPattern(ctx *DeclAssignPatternContext) {}
-
-// EnterDeclPattern is called when production DeclPattern is entered.
-func (s *BaseVlangListener) EnterDeclPattern(ctx *DeclPatternContext) {}
-
-// ExitDeclPattern is called when production DeclPattern is exited.
-func (s *BaseVlangListener) ExitDeclPattern(ctx *DeclPatternContext) {}
+// ExitDeclAssignType is called when production DeclAssignType is exited.
+func (s *BaseVlangListener) ExitDeclAssignType(ctx *DeclAssignTypeContext) {}
 
 // EnterIdPattern is called when production IdPattern is entered.
 func (s *BaseVlangListener) EnterIdPattern(ctx *IdPatternContext) {}

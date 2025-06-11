@@ -44,7 +44,7 @@ range: expresion DOT DOT DOT expresion # NumericRange;
 
 
 /// Llamadas a funciones catch
-func_call: ID LPAREN (parametros)? RPAREN # FuncCall;
+func_call: id_pattern LPAREN (parametros)? RPAREN # FuncCall;
 
 
 func_dcl: 
@@ -82,8 +82,7 @@ assign_stmt:
 
 decl_stmt: 
     MUT ID ASSIGN expresion # DeclAssign
-    | MUT id_pattern ASSIGN expresion # DeclAssignPattern
-    | MUT id_pattern # DeclPattern
+    | MUT id_pattern COLON var_type ASSIGN expresion # DeclAssignType
     ; 
 
 
