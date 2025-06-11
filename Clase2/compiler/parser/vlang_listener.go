@@ -100,8 +100,17 @@ type VlangListener interface {
 	// EnterBinaryExp is called when entering the BinaryExp production.
 	EnterBinaryExp(c *BinaryExpContext)
 
-	// EnterParametros is called when entering the parametros production.
-	EnterParametros(c *ParametrosContext)
+	// EnterParamList is called when entering the ParamList production.
+	EnterParamList(c *ParamListContext)
+
+	// EnterFuncParam is called when entering the funcParam production.
+	EnterFuncParam(c *FuncParamContext)
+
+	// EnterArgList is called when entering the ArgList production.
+	EnterArgList(c *ArgListContext)
+
+	// EnterFuncArg is called when entering the FuncArg production.
+	EnterFuncArg(c *FuncArgContext)
 
 	// EnterValores is called when entering the valores production.
 	EnterValores(c *ValoresContext)
@@ -250,8 +259,17 @@ type VlangListener interface {
 	// ExitBinaryExp is called when exiting the BinaryExp production.
 	ExitBinaryExp(c *BinaryExpContext)
 
-	// ExitParametros is called when exiting the parametros production.
-	ExitParametros(c *ParametrosContext)
+	// ExitParamList is called when exiting the ParamList production.
+	ExitParamList(c *ParamListContext)
+
+	// ExitFuncParam is called when exiting the funcParam production.
+	ExitFuncParam(c *FuncParamContext)
+
+	// ExitArgList is called when exiting the ArgList production.
+	ExitArgList(c *ArgListContext)
+
+	// ExitFuncArg is called when exiting the FuncArg production.
+	ExitFuncArg(c *FuncArgContext)
 
 	// ExitValores is called when exiting the valores production.
 	ExitValores(c *ValoresContext)

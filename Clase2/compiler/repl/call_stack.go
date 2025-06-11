@@ -86,6 +86,7 @@ func (cs *CallStack) IsContinueEnv() (bool, *CallStackItem) {
 	start := len(cs.Items) - 1
 
 	for i := start; i >= 0; i-- {
+
 		if cs.Items[i].IsType(ContinueItem) {
 			return true, cs.Items[i]
 		}
@@ -102,6 +103,7 @@ func (cs *CallStack) IsContinueEnv() (bool, *CallStackItem) {
 func (cs *CallStack) IsBreakEnv() (bool, *CallStackItem) {
 	// break item must be the peek of the stack, cannot interrupt a function call or a loop
 
+	// Error semantico de break en un entorno que no es de bucle
 	if len(cs.Items) == 0 {
 		return false, nil
 	}
@@ -113,6 +115,8 @@ func (cs *CallStack) IsBreakEnv() (bool, *CallStackItem) {
 	return false, nil
 }
 
+// if isbreakenv -> clear()
+
 func (cs *CallStack) IsReturnEnv() (bool, *CallStackItem) {
 
 	// return item can interfer with any other item
@@ -123,7 +127,7 @@ func (cs *CallStack) IsReturnEnv() (bool, *CallStackItem) {
 		}
 	}
 
-	return false, nil
+	return false, nil // error semantico de return en algo vacio
 }
 
 func (cs *CallStack) Len() int {

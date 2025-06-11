@@ -12,9 +12,6 @@ struct Empleado {
 	salario          f64
 }
 
-fn (p Persona) saludar() string {
-	return p.nombre
-}
 
 fn main() {
 	mut puntos = 0

@@ -74,6 +74,16 @@ func runVlang(code string) string {
 	p.AddErrorListener(syntaxErrs)
 
 	tree := p.Programa()
+	/*
+	   Voy a hacer un visitor que me ayude a la declaracion
+
+	*/
+	visitor_declaratorio := repl.NewDclVisitor(syntaxErrs.ErrorTable)
+	visitor_declaratorio.Visit(tree)
+	// En esta primera pasada se hace la declaracion de funciones y variables
+	// visitor_interprete := repl.NewVisitor(visitor_declaratorio)
+	// fmt.Println(visitor_interprete)
+
 	visitor := repl.NewReplVisitor(lexicalErrs.ErrorTable)
 	result := visitor.Visit(tree)
 	visitor.Console.Show()
