@@ -37,6 +37,10 @@ fn parse_float(s string) f64 {
 	return 0.0
 }
 
+fn sumar(a int, b int) int {
+	// Esta funcion retorna la suma de dos numeros 
+	return a + b 
+}
 /*
 Que las funciones no sean nativas 
 
@@ -67,7 +71,8 @@ fn main() {
 	// 2. Funciones con parámetros
 	mut puntos_param = 0
 	println("\n==== Funciones no recursivas con parámetros ====")
-	saludar_persona("Juan")
+
+	// saludar_persona("Juan") ERROR ---> No esta declarada
 	resultado = sumar(10, 20)
 	println("La suma de 10 y 20 es:")
 	println(resultado)
@@ -131,23 +136,19 @@ fn main() {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	// 6. reflect.TypeOf
 	mut puntos_type = 0
 
 	// Nativa no es de esta forma 
 	println("\n==== reflect.TypeOf ====")
+	/*
+	
+	NOTA: Cambiar si es necesario, si el enunciado tiene otros nombres
+	o utilizaron otros nombres para las funciones nativas
+
+	*/
+
+
 	t1 = TypeOf(42)
 	t2 = TypeOf(3.14)
 	t3 = TypeOf("Hola")
@@ -175,12 +176,16 @@ fn main() {
 	puntos = puntos_simples + puntos_param + puntos_recur + puntos_atoi + puntos_parse + puntos_type
 
 	println("\n=== Tabla de Resultados ===")
-	println("| Funciones sin parámetros         | 1")
-	println()
-	println("| Funciones con parámetros         | $puntos_param / 2")
-	println("| Funciones recursivas             | $puntos_recur / 6")
-	println("| Atoi                     | $puntos_atoi / 1")
-	println("| ParseFloat               | $puntos_parse / 1")
-	println("| TypeOf                   | $puntos_type / 1")
-	println("| TOTAL                            | $puntos / 12")
+	println("| Funciones con parámetros         | / 2")
+	println(puntos_param)
+	println("| Funciones recursivas             |  / 6")
+	println(puntos_recur)
+	println("| Atoi                     |  / 1")
+	println(puntos_atoi)
+	println("| ParseFloat               |  / 1")
+	println(puntos_parse)
+	println("| TypeOf                   |  / 1")
+	println(puntos_type)
+	println("| TOTAL                            |  / 12")
+	println(puntos)
 }

@@ -29,19 +29,8 @@ fn main() {
 	// Cambiar 
 	/*
 	
-	//Declaracion explicita con Tipo vs Sin Tipo 
-
-
-	varDcl: 'mut' ID_VARIABLE type assign expr # VarDclWithTypeAndValue
-      | 'mut' ID_VARIABLE type          # VarDclWithTypeOnly
-      | 'mut'? ID_VARIABLE assign expr           # VarDclWithInference
 	
-	
-	mut entero_sin_valor = 0
-	mut decimal_sin_valor = 0.0
-	mut texto_sin_valor = ""
-	mut booleano_sin_valor = false
-	
+	Corregido
 	
 	*/
 	mut entero_sin_valor int = 0
