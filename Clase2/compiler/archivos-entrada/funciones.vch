@@ -73,7 +73,8 @@ fn main() {
 	mut puntos_recur = 0
 	println("\n==== Funciones recursivas ====")
 	fact = factorial(5)
-	println("Factorial de 5: $fact")
+	println("Factorial de 5:")
+	println(fact)
 	if fact == 120 {
 		puntos_recur += 2
 		println("OK factorial: correcto")
@@ -82,7 +83,8 @@ fn main() {
 	}
 
 	fibo = fibonacci(10)
-	println("Fibonacci de 10: $fibo")
+	println("Fibonacci de 10:")
+	println(fibo)
 	if fibo == 55 {
 		puntos_recur += 2
 		println("OK fibonacci: correcto")
@@ -106,13 +108,19 @@ fn main() {
 		println("X strconv.Atoi: incorrecto")
 	}
 
-	// 5. strconv.ParseFloat (simulado)
+	// 5. ParseFloat 
+	/*
+	
+	NOTA: Si es necesario cambiar los nombres de las nativas 
+	porque asi se trabajo, adelante. 
+	
+	*/
 	mut puntos_parse = 0
 	println("\n==== strconv.ParseFloat ====")
 	val1 = parse_float("123.45")
 	val2 = parse_float("123")
-	println('"123.45" convertido a float64:', val1)
-	println('"123" convertido a float64:', val2)
+	println("123.45 convertido a float64:", val1)
+	println("123 convertido a float64:", val2)
 	if val1 == 123.45 && val2 == 123.0 {
 		puntos_parse += 1
 		println("OK strconv.ParseFloat: correcto")
@@ -120,15 +128,15 @@ fn main() {
 		println("X strconv.ParseFloat: incorrecto")
 	}
 
-	// 6. reflect.TypeOf
+	// 6. TypeOf 
 	mut puntos_type = 0
 	println("\n==== reflect.TypeOf ====")
 	// => Correccion del TypeOf 
-	t1 = reflect_typeof(42)
-	t2 = reflect_typeof(3.14)
-	t3 = reflect_typeof("Hola")
-	t4 = reflect_typeof(true)
-	t5 = reflect_typeof([1, 2, 3])
+	t1 = TypeOf(42)
+	t2 = TypeOf(3.14)
+	t3 = TypeOf("Hola")
+	t4 = TypeOf(true)
+	t5 = TypeOf([1, 2, 3])
 	println("Tipo de 42:", t1)
 	println("Tipo de 3.14:", t2)
 	println("Tipo de 'Hola':", t3)
