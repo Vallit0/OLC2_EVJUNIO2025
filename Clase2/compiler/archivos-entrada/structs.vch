@@ -1,0 +1,90 @@
+struct Persona {
+	nombre   string
+	edad     int
+	estatura f64
+	activo   bool
+}
+
+struct Empleado {
+	datos_personales Persona
+	id               string
+	departamento     string
+	salario          f64
+}
+
+fn (p Persona) saludar() string {
+	return p.nombre
+}
+
+fn main() {
+	mut puntos = 0
+	println("=== Archivo de prueba de structs ===")
+
+	// 1. Declaración
+	println("==== Declaración ====")
+	puntos += 1
+
+	// 2. Instanciación
+	println("\n==== Instanciación ====")
+	mut persona1 = Persona{
+		nombre: "Juan"
+		edad: 30
+		estatura: 1.75
+		activo: true
+	}
+	println("###Validación Manual")
+	println(persona1)
+	puntos += 2
+
+	// 3. Asignación a propiedades primitivas
+	println("\n==== Asignación a propiedades primitivas ====")
+	persona1.nombre = "María"
+	persona1.edad = 25
+	persona1.estatura = 1.65
+	persona1.activo = true
+	if persona1.nombre == "María" && persona1.edad == 25 {
+		puntos += 2
+		println("OK Asignación directa: correcto")
+	} else {
+		println("X Asignación directa: incorrecto")
+	}
+
+	// 4. Acceso a propiedades primitivas
+	println("\n==== Acceso a propiedades primitivas ====")
+	nombre_persona1 = persona1.nombre
+	edad_persona1 = persona1.edad
+	println("Nombre de persona1: ")
+    println(nombre_persona1)
+	println("Edad de persona1: ")
+    println(edad_persona1)
+	if nombre_persona1 == "María" && edad_persona1 == 25 {
+		puntos += 2
+		println("OK Acceso directo: correcto")
+	} else {
+		println("X Acceso directo: incorrecto")
+	}
+
+	
+	println(nombre_saludo)
+	if nombre_saludo == "Hola, mi nombre es María" {
+		puntos_funciones += 2
+		println("OK Método saludar: correcto")
+	} else {
+		println("X Método saludar: incorrecto")
+	}
+
+	puntos += puntos_funciones
+
+	// Tabla resumen
+	println("\n=== Tabla de Resultados ===")
+	println("| Característica                           | Puntos |")
+	println("|------------------------------------------|--------|")
+	println("| Declaración                              | 1      |")
+	println("| Instanciación                            | 2      |")
+	println("| Asignación propiedades primitivas        | 2      |")
+	println("| Acceso propiedades primitivas            | 2      |")
+	println("| Funciones asociadas                      | $puntos_funciones      |")
+	println("|------------------------------------------|--------|")
+	println("| TOTAL                                    | $puntos     |")
+}
+
