@@ -52,114 +52,116 @@ func (v *DclVisitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	// 	v.Visit(ctx.Strct_dcl())
 	// }
 
-// 	return nil
-// }
+	// 	return nil
+	// }
 
-// func (v *DclVisitor) VisitFuncDecl(ctx *parser.FuncDeclContext) interface{} {
+	// func (v *DclVisitor) VisitFuncDecl(ctx *parser.FuncDeclContext) interface{} {
 
-// 	// Entorno -> Global
-// 	// Entorno -> Actual
-// 	if v.ScopeTrace.CurrentScope != v.ScopeTrace.GlobalScope {
-// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Las funciones solo pueden ser declaradas en el scope global")
-// 	}
+	// 	// Entorno -> Global
+	// 	// Entorno -> Actual
+	// 	if v.ScopeTrace.CurrentScope != v.ScopeTrace.GlobalScope {
+	// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Las funciones solo pueden ser declaradas en el scope global")
+	// 	}
 
-// 	funcName := ctx.ID().GetText()
+	// 	funcName := ctx.ID().GetText()
 
-// 	params := make([]*Param, 0)
+	// 	params := make([]*Param, 0)
 
-// 	if ctx.Param_list() != nil {
-// 		params = v.Visit(ctx.Param_list()).([]*Param)
-// 	}
+	// 	if ctx.Param_list() != nil {
+	// 		params = v.Visit(ctx.Param_list()).([]*Param)
+	// 	}
 
-// 	if len(params) > 0 {
+	// 	if len(params) > 0 {
 
-// 		baseParamType := params[0].ParamType()
+	// 		baseParamType := params[0].ParamType()
 
-// 		for _, param := range params {
-// 			if param.ParamType() != baseParamType {
-// 				v.ErrorTable.NewSemanticError(param.Token, "Todos los parametros de la funcion deben ser del mismo tipo")
-// 				return nil
-// 			}
-// 		}
-// 	}
+	// 		for _, param := range params {
+	// 			if param.ParamType() != baseParamType {
+	// 				v.ErrorTable.NewSemanticError(param.Token, "Todos los parametros de la funcion deben ser del mismo tipo")
+	// 				return nil
+	// 			}
+	// 		}
+	// 	}
 
-// 	// void | int | float | string | bool | nil
-// 	returnType := value.IVOR_NIL
-// 	var returnTypeToken antlr.Token = nil
+	// 	// void | int | float | string | bool | nil
+	// 	returnType := value.IVOR_NIL
+	// 	var returnTypeToken antlr.Token = nil
 
-// 	// if ctx.Type_() != nil {
-// 	// 	returnType = ctx.Type_().GetText()
-// 	// 	returnTypeToken = ctx.Type_().GetStart()
-// 	// }
+	// 	// if ctx.Type_() != nil {
+	// 	// 	returnType = ctx.Type_().GetText()
+	// 	// 	returnTypeToken = ctx.Type_().GetStart()
+	// 	// }
 
-// 	body := ctx.AllStmt()
+	// 	body := ctx.AllStmt()
 
-// 	function := &Function{ // pointer ?
-// 		Name: funcName,
-// 		//	Param:           params,
-// 		ReturnType:      returnType,
-// 		Body:            body,
-// 		DeclScope:       v.ScopeTrace.CurrentScope,
-// 		ReturnTypeToken: returnTypeToken,
-// 		Token:           ctx.GetStart(),
-// 	}
+	// 	function := &Function{ // pointer ?
+	// 		Name: funcName,
+	// 		//	Param:           params,
+	// 		ReturnType:      returnType,
+	// 		Body:            body,
+	// 		DeclScope:       v.ScopeTrace.CurrentScope,
+	// 		ReturnTypeToken: returnTypeToken,
+	// 		Token:           ctx.GetStart(),
+	// 	}
 
-// 	ok, msg := v.ScopeTrace.AddFunction(funcName, function)
+	// 	ok, msg := v.ScopeTrace.AddFunction(funcName, function)
 
-// 	if !ok {
-// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
-// 	}
+	// 	if !ok {
+	// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), msg)
+	// 	}
 
-// 	return nil
-// }
+	// 	return nil
+	// }
 
-// func (v *DclVisitor) VisitParamList(ctx *parser.ParamListContext) interface{} {
+	// func (v *DclVisitor) VisitParamList(ctx *parser.ParamListContext) interface{} {
 
-// 	params := make([]*Param, 0)
+	// 	params := make([]*Param, 0)
 
-// 	for _, param := range ctx.AllFunc_param() {
-// 		params = append(params, v.Visit(param).(*Param))
-// 	}
+	// 	for _, param := range ctx.AllFunc_param() {
+	// 		params = append(params, v.Visit(param).(*Param))
+	// 	}
 
-// 	return params
-// }
+	// 	return params
+	// }
 
-// func (v *DclVisitor) VisitFuncParam(ctx *parser.FuncParamContext) interface{} {
+	// func (v *DclVisitor) VisitFuncParam(ctx *parser.FuncParamContext) interface{} {
 
-// 	externName := ""
-// 	innerName := ""
+	// 	externName := ""
+	// 	innerName := ""
 
-// 	// at least ID(0) is defined
-// 	// only 1 ID defined
-// 	if ctx.ID(1) == nil {
-// 		// innerName : type
-// 		// _ : type
-// 		innerName = ctx.ID(0).GetText()
-// 	} else {
-// 		// externName innerName : type
-// 		externName = ctx.ID(0).GetText()
-// 		innerName = ctx.ID(1).GetText()
-// 	}
+	// 	// at least ID(0) is defined
+	// 	// only 1 ID defined
+	// 	if ctx.ID(1) == nil {
+	// 		// innerName : type
+	// 		// _ : type
+	// 		innerName = ctx.ID(0).GetText()
+	// 	} else {
+	// 		// externName innerName : type
+	// 		externName = ctx.ID(0).GetText()
+	// 		innerName = ctx.ID(1).GetText()
+	// 	}
 
-// 	passByReference := false
+	// 	passByReference := false
 
-// 	if ctx.INOUT_KW() != nil {
-// 		passByReference = true
-// 	}
+	// 	if ctx.INOUT_KW() != nil {
+	// 		passByReference = true
+	// 	}
 
-// 	paramType := ctx.Type_().GetText()
+	// 	paramType := ctx.Type_().GetText()
 
-// 	return &Param{
-// 		ExternName:      externName,
-// 		InnerName:       innerName,
-// 		PassByReference: passByReference,
-// 		Type:            paramType,
-// 		Token:           ctx.GetStart(),
-// 	}
+	// 	return &Param{
+	// 		ExternName:      externName,
+	// 		InnerName:       innerName,
+	// 		PassByReference: passByReference,
+	// 		Type:            paramType,
+	// 		Token:           ctx.GetStart(),
+	// 	}
 
-// }
+	// }
 
-// func (v *DclVisitor) VisitStructDecl(ctx *parser.StructDeclContext) interface{} {
-// 	v.StructNames = append(v.StructNames, ctx.ID().GetText())
-// 	return nil
-// }
+	//	func (v *DclVisitor) VisitStructDecl(ctx *parser.StructDeclContext) interface{} {
+	//		v.StructNames = append(v.StructNames, ctx.ID().GetText())
+	//		return nil
+	//	}
+	return nil
+}

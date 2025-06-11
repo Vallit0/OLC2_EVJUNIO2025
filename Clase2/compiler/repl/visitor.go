@@ -87,7 +87,7 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 		fmt.Println("⚠️ Árbol nulo recibido.")
 		return nil
 	}
-
+	fmt.Println("Enrutado------------------")
 	switch node := tree.(type) {
 	case *antlr.ErrorNodeImpl:
 		log.Fatal(node.GetText())
@@ -103,6 +103,9 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 
 	case *parser.PrintStmtContext:
 		return v.VisitPrintStmt(node)
+	case *parser.ValorexpresionContext:
+		// Visitamos el hijo de valorexpresion
+		return v.VisitValorexpresion(node)
 
 	// tiramos todos los case de los nodos literales
 	case *parser.ValorEnteroContext:
@@ -214,17 +217,89 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 
 }
 
+/*
+
+Con este metodo subimos el valor de la expresion
+
+*/
+
+func (v *ReplVisitor) VisitValorexpresion(ctx *parser.ValorexpresionContext) interface{} {
+	// solo vamos a subir al hijo
+	fmt.Println("🔍 Visitando Valorexpresion:", ctx.GetText())
+
+	/*
+		Todo esta bien, pero, tenemos que verificar el tipo de objeto que
+		es el ctx y mandarlo al visit de nuevo para que suba pero
+		con una forma de expresion con valores atomicos
+
+		volvemos a subir el valor a la expresion
+
+	*/
+	valor := ctx.Valor()
+
+	return v.Visit(valor)
+}
+
+// print normal
+func (v *ReplVisitor) VisitPrintStmt(ctx *parser.PrintStmtContext) interface{} {
+	fmt.Println("🔍 Visitando PrintStmt:", ctx.GetText())
+
+	// Total de expresiones
+	exprs := ctx.AllExpresion()
+
+	// Lista de resultados para imprimir
+	resultados := []string{}
+
+	for _, expr := range exprs {
+		result := v.Visit(expr)
+		if result == nil {
+			v.ErrorTable.NewSemanticError(expr.GetStart(), "Expresión vacía dentro de print")
+			continue
+		}
+
+		val, ok := result.(value.IVOR)
+		if !ok {
+			v.ErrorTable.NewSemanticError(expr.GetStart(), "La expresión no devuelve un valor válido")
+			continue
+		}
+
+		// Convertir el valor a string y agregar a resultados
+		text := fmt.Sprintf("%v", val.Value())
+		resultados = append(resultados, text)
+	}
+
+	// Unir con espacios y enviar a la consola
+	finalOutput := strings.Join(resultados, " ")
+	v.Console.Println(finalOutput)
+
+	return nil
+}
+
 func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface{} {
 	fmt.Println("🔍 Visitando PrintlnStmt:", ctx.GetText())
 
-	val := v.Visit(ctx.Expresion()).(value.IVOR)
-	fmt.Println("🔔 Imprimiendo valor:", val)
-	if val == nil {
+	// Evaluar expresión
+	result := v.Visit(ctx.Expresion())
+	if result == nil {
 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Expresión vacía dentro de Println")
 		return nil
 	}
 
-	fmt.Println(val)
+	// Verificar que el resultado sea IVOR
+	val, ok := result.(value.IVOR)
+	if !ok {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "La expresión no devuelve un valor válido")
+		return nil
+	}
+
+	// Obtener valor interno e imprimirlo como texto
+	valInterno := val.Value()
+	valTipo := val.Type()
+
+	fmt.Printf("🔔 Imprimiendo valor: %v (tipo: %s)\n", valInterno, valTipo)
+
+	// Agregar a consola como string
+	v.Console.Println(fmt.Sprintf("%v", valInterno))
 	return nil
 }
 
@@ -353,11 +428,6 @@ es un entero asi que solamente tomaremos lo que nos da el usuario
 y lo convertiremos a un entero
 
 */
-
-// Funcion para subir el valorExpresion
-func (v *ReplVisitor) VisitValorexpresion(ctx *parser.ValorexpresionContext) interface{} {
-	return v.VisitChildren(ctx)
-}
 
 // el hijo de valorexpresioncontext -> valorEnter | valorBooleano |
 
