@@ -300,6 +300,7 @@ func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface
 
 	// Evaluar expresión
 	result := v.Visit(ctx.Expresion())
+	fmt.Println("🔍 Resultado de la expresión:", result)
 	if result == nil {
 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Expresión vacía dentro de Println")
 		return nil
@@ -308,6 +309,7 @@ func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface
 	// Verificar que el resultado sea IVOR
 	val, ok := result.(value.IVOR)
 	if !ok {
+		fmt.Println("🔍 Resultado no es IVOR:", result)
 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "La expresión no devuelve un valor válido")
 		return nil
 	}
