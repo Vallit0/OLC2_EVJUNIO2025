@@ -75,6 +75,12 @@ fn main() {
 	// 2. Asignación
 	println("\n==== Asignación de variables ====")
 	mut puntos_asignacion = 0
+	/*
+	NOTA: Si trabajaste con mut puntos_asignacion = 0 
+	o trabajste con puntos_asignacion = 0; 
+	Ambos estan bien, solo indicame en la calificacion cual usaste.
+	
+	*/
 
 	println("Asignación con tipo correcto")
 	entero = 99
