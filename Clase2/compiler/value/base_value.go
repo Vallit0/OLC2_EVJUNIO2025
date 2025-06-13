@@ -9,7 +9,7 @@ const (
 	IVOR_NIL              = "nil"
 	IVOR_BUILTIN_FUNCTION = "builtin_function"
 	IVOR_FUNCTION         = "function"
-	IVOR_VECTOR           = "vector"
+	IVOR_VECTOR           = "vector" // equivalente a slices
 	IVOR_OBJECT           = "object"
 	IVOR_ANY              = "any"
 	IVOR_POINTER          = "pointer"

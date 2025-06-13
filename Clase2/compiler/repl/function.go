@@ -34,6 +34,8 @@ func (f *Function) Copy() value.IVOR {
 }
 
 // Exex ejecuta la funcion -> // Built-in Functions
+// hacemos un recorrido de los stmt*
+// al momento de la llamada de la funcion
 func (f *Function) Exec(visitor *ReplVisitor, args []*Argument, token antlr.Token) {
 
 	context := visitor.GetReplContext()
@@ -56,6 +58,8 @@ func (f *Function) Exec(visitor *ReplVisitor, args []*Argument, token antlr.Toke
 		context.ScopeTrace.PushScope("func: " + token.GetText()) // push a new function scope
 	}
 
+	/// En nuestro lenguaje no consideramos el concepto de mutabilidad
+	// por lo que siempre se considera mutating
 	wasMutating := context.ScopeTrace.CurrentScope.IsMutating
 	context.ScopeTrace.CurrentScope.IsMutating = f.IsMutating
 

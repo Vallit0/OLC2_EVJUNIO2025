@@ -164,9 +164,25 @@ func (v *DclVisitor) VisitArgList(ctx *parser.ArgListContext) interface{} {
 
 // }
 
-//	func (v *DclVisitor) VisitStructDecl(ctx *parser.StructDeclContext) interface{} {
-//		v.StructNames = append(v.StructNames, ctx.ID().GetText())
-//		return nil
-//	}
+// func (v *DclVisitor) VisitStructDecl(ctx *parser.StructDeclContext) interface{} {
+
+// 	v.StructNames = append(v.StructNames, ctx.ID().GetText())
+// 	// Agregar los nombres de las variables
+// 	// Recorrer los hijos del struct y agregar las variables al scope actual
+// 	if v.ScopeTrace.CurrentScope != v.ScopeTrace.GlobalScope {
+// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Las estructuras solo pueden ser declaradas en el scope global")
+// 		return nil
+// 	}
+
+// 	structName := ctx.ID().GetText()
+
+// 	fields := make([]*Variable, 0)
+// 	for _, field := range ctx.AllStructField() {
+
+// 		variable := v.Visit(field).(*Variable)
+
 // 	return nil
 // }
+
+//return nil
+//}

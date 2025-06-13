@@ -55,6 +55,9 @@ type VlangListener interface {
 	// EnterContinueStmt is called when entering the ContinueStmt production.
 	EnterContinueStmt(c *ContinueStmtContext)
 
+	// EnterStructAttr is called when entering the StructAttr production.
+	EnterStructAttr(c *StructAttrContext)
+
 	// EnterDirectAssign is called when entering the DirectAssign production.
 	EnterDirectAssign(c *DirectAssignContext)
 
@@ -63,6 +66,12 @@ type VlangListener interface {
 
 	// EnterDeclAssignType is called when entering the DeclAssignType production.
 	EnterDeclAssignType(c *DeclAssignTypeContext)
+
+	// EnterSliceDeclInit is called when entering the SliceDeclInit production.
+	EnterSliceDeclInit(c *SliceDeclInitContext)
+
+	// EnterListExpressions is called when entering the ListExpressions production.
+	EnterListExpressions(c *ListExpressionsContext)
 
 	// EnterIdPattern is called when entering the IdPattern production.
 	EnterIdPattern(c *IdPatternContext)
@@ -87,6 +96,9 @@ type VlangListener interface {
 
 	// EnterAsignacionfor is called when entering the asignacionfor production.
 	EnterAsignacionfor(c *AsignacionforContext)
+
+	// EnterSliceExpr is called when entering the SliceExpr production.
+	EnterSliceExpr(c *SliceExprContext)
 
 	// EnterId is called when entering the id production.
 	EnterId(c *IdContext)
@@ -135,9 +147,6 @@ type VlangListener interface {
 
 	// EnterStructInstancia is called when entering the StructInstancia production.
 	EnterStructInstancia(c *StructInstanciaContext)
-
-	// EnterStructAttr is called when entering the StructAttr production.
-	EnterStructAttr(c *StructAttrContext)
 
 	// EnterIntType is called when entering the IntType production.
 	EnterIntType(c *IntTypeContext)
@@ -214,6 +223,9 @@ type VlangListener interface {
 	// ExitContinueStmt is called when exiting the ContinueStmt production.
 	ExitContinueStmt(c *ContinueStmtContext)
 
+	// ExitStructAttr is called when exiting the StructAttr production.
+	ExitStructAttr(c *StructAttrContext)
+
 	// ExitDirectAssign is called when exiting the DirectAssign production.
 	ExitDirectAssign(c *DirectAssignContext)
 
@@ -222,6 +234,12 @@ type VlangListener interface {
 
 	// ExitDeclAssignType is called when exiting the DeclAssignType production.
 	ExitDeclAssignType(c *DeclAssignTypeContext)
+
+	// ExitSliceDeclInit is called when exiting the SliceDeclInit production.
+	ExitSliceDeclInit(c *SliceDeclInitContext)
+
+	// ExitListExpressions is called when exiting the ListExpressions production.
+	ExitListExpressions(c *ListExpressionsContext)
 
 	// ExitIdPattern is called when exiting the IdPattern production.
 	ExitIdPattern(c *IdPatternContext)
@@ -246,6 +264,9 @@ type VlangListener interface {
 
 	// ExitAsignacionfor is called when exiting the asignacionfor production.
 	ExitAsignacionfor(c *AsignacionforContext)
+
+	// ExitSliceExpr is called when exiting the SliceExpr production.
+	ExitSliceExpr(c *SliceExprContext)
 
 	// ExitId is called when exiting the id production.
 	ExitId(c *IdContext)
@@ -294,9 +315,6 @@ type VlangListener interface {
 
 	// ExitStructInstancia is called when exiting the StructInstancia production.
 	ExitStructInstancia(c *StructInstanciaContext)
-
-	// ExitStructAttr is called when exiting the StructAttr production.
-	ExitStructAttr(c *StructAttrContext)
 
 	// ExitIntType is called when exiting the IntType production.
 	ExitIntType(c *IntTypeContext)

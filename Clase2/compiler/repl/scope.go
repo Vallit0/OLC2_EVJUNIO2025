@@ -17,6 +17,7 @@ type BaseScope struct {
 	structs    map[string]*Struct
 	isStruct   bool
 	IsMutating bool
+	reportito  string // aqui vamos a guardar el reporte de simbolos
 }
 
 // Anadir hijos en Clase
@@ -248,3 +249,5 @@ func (s *BaseScope) PrintScopeVariables(indent int) {
 	}
 	fmt.Printf("%s-----------------------\n", prefix)
 }
+
+// buscar struct

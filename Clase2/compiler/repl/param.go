@@ -7,7 +7,7 @@ const (
 	ExternEqualInnerParam
 	PositionalParam
 )
-
+// fn sumar (a int(TYPE))
 type Param struct {
 	ExternName      string
 	InnerName       string

@@ -69,7 +69,7 @@ struct_dcl:
     los atributos sin asignacion
     
      */
-    'struct' ID LCOR (assign_stmt)* RCOR # StructDecl
+    'struct' ID LCOR (struct_prop)* RCOR # StructDecl
     ;
 
 
@@ -79,6 +79,38 @@ transfer_stmt:
 	| CONTINUE_KW	# ContinueStmt;
 
 
+/**
+
+// Definición del struct
+struct Persona {
+ string Nombre
+ int Edad
+ bool EsEstudiante
+}
+// Creación de una instancia
+miInstancia := Persona{
+ Nombre: "Alice",
+ Edad: 25,
+ EsEstudiante: false,
+}
+// Acceso a atributos
+nombre := miInstancia.Nombre // "Alice"
+// Modificación de atributos
+miInstancia.Nombre = "Bob" // Cambia el nombre a "Bob"
+miInstancia.Edad = 30 // Cambia la edad a 30
+
+
+
+ */
+// instancias del struct 
+
+
+
+struct_prop:
+// int id : expresion 
+	var_type ID (COLON)? (expresion)? (COMMA)?	# StructAttr
+; 
+
 assign_stmt:
 	id_pattern ASSIGN expresion  	# DirectAssign
     ; 
@@ -86,11 +118,14 @@ assign_stmt:
 decl_stmt: 
     MUT ID ASSIGN expresion # DeclAssign
     | MUT id_pattern COLON var_type ASSIGN expresion # DeclAssignType
+    | ID '=' '['']' var_type '{' list_expresiones '}' ';'?    # SliceDeclInit 
     ; 
 
+list_expresiones: expresion (COMMA expresion)* # ListExpressions;
 
 id_pattern: ID (DOT ID)* # IdPattern;
 // === Reglas de expresiones ===
+// println(expresion )
 expresion
     : valor                                                #valorexpresion        
     | func_call                                            #funcionexpre
@@ -121,7 +156,22 @@ porque lo definiremos en el visit de BinaryExpr
     | ID DOT ID                                            #expdotexp1             
     | ID DOT expresion                                     #expdotexp      
     | ID ASSIGN expresion                                  #asignacionfor
+    | ('['']'var_type)? '{' expresion '}'';'?           # SliceExpr
+    // agregar funciones nativas
+
+    
     ;
+
+/*
+
+    | 'indexOf' '(' ID ',' expr ')'                 # SliceIndexExpr
+    | 'join' '(' expr ',' expr ')'                  # JoinExpr
+    | 'len' '(' expr ')'                            # LenExpr
+    | 'append' '(' expr ',' expr ')'                # AppendExp
+
+ */
+
+
 
 /*
 param_list: func_param (COMMA func_param)* # ParamList;
@@ -173,20 +223,10 @@ valor
 */
 
 // Instancia de Struct
-strct_instancia: 'struct' ID LCOR struct_prop* RCOR # StructInstancia;
+// struct id { } 
+strct_instancia: 'struct' ID ASSIGN LCOR struct_prop* RCOR # StructInstancia;
 
-/*
-miInstancia = Persona{
- Nombre: "Alice",
- Edad: 25,
- EsEstudiante: false,
-}
- */
 
-struct_prop:
-
-	var_type ID ASSIGN ID LCOR (ID COLON expresion COMMA) RCOR 	# StructAttr
-;
 // tipos de primitivos que puede ser un struct catch
 var_type
     : 'int'     # IntType
@@ -264,3 +304,12 @@ COMMA   : ',' ;
 WS : [ \t\r\n]+ -> skip ;
 LINE_COMMENT  : '//' ~[\r\n]* -> skip ;
 BLOCK_COMMENT : '/*' .*? '*/' -> skip ;
+
+
+/*
+
+Gramatica -> Expresiones -> Declaraciones -> Asignaciones -> Println ->
+-> Sentencias de Control -> Funciones -> Sentencias de Transferencia -> 
+-> Structs -> Slices
+
+ */

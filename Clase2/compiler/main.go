@@ -87,7 +87,12 @@ func runVlang(code string) string {
 	visitor := repl.NewReplVisitor(lexicalErrs.ErrorTable)
 	result := visitor.Visit(tree)
 	visitor.Console.Show()
-	fmt.Print(result)
+	// reporte Global Scope
+	visitor.ScopeTrace.GlobalScope.Report()
+	// retorna un objeto con todos los reportes de todos los scopes
+	visitor.ScopeTrace.CurrentScope.Report()
+	// Recorrer los Scopes y Generar un Reporte de HTML por cada uno
+	// html := visitor.ScopeTrace.reporte_html()
 
 	// if lexicalErrs.ErrorTable.HasErrors() {
 	// 	builder.WriteString("Errores léxicos:\n")

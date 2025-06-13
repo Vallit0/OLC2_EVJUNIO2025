@@ -132,6 +132,7 @@ func (v *ReplVisitor) Visit(tree antlr.ParseTree) interface{} {
 	case *parser.StmtContext:
 		return v.VisitStmt(node)
 
+	//
 	default:
 		fmt.Printf("⚠️ Tipo inesperado en Visit(): %T\n", tree)
 		return tree.Accept(v) // fallback por si acaso
@@ -210,10 +211,14 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 	// es ver si tenemos el ID
 	varName := v.Visit(ctx.Id_pattern()).(string)
 	varValue := v.Visit(ctx.Expresion()).(value.IVOR)
-	// le pedimos la variable al ScopeTrace
+	// inicializo la variable
 	variable := v.ScopeTrace.GetVariable(varName)
+	// vamos a buscar el id a la lista de los nombres del scope
 
-	if variable == nil {
+	// le pedimos la variable al ScopeTrace
+	//variable := v.ScopeTrace.GlobalScope.GetStruct(varName)
+
+	if varValue == nil {
 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Variable "+varName+" no encontrada")
 	} else {
 
@@ -222,9 +227,8 @@ func (v *ReplVisitor) VisitDirectAssign(ctx *parser.DirectAssignContext) interfa
 		// Aqui se deberia agregar la validacion del vector
 
 		// // verificamos si es un struct
-		// if v.ScopeTrace.CurrentScope.isStruct {
-		// 	canMutate = v.ScopeTrace.IsMutatingEnvironment()
-		// }
+
+		// verificamos si es un objetos de tipo struct.
 
 		ok, msg := variable.Assign(varValue, true)
 
@@ -327,6 +331,7 @@ func (v *ReplVisitor) VisitPrintlnStmt(ctx *parser.PrintlnStmtContext) interface
 
 func (v *ReplVisitor) VisitIfStmt(ctx *parser.IfStmtContext) interface{} {
 
+	fmt.Println("🔍 Visitando IfStmt:", ctx.GetText())
 	runChain := true
 
 	for _, ifStmt := range ctx.AllIf_chain() {
@@ -387,6 +392,45 @@ func (v *ReplVisitor) VisitElseStmt(ctx *parser.ElseStmtContext) interface{} {
 
 	return nil
 }
+
+// func (v *ReplVisitor) VisitSliceDeclInit(ctx *parser.SliceDeclInitContext) interface{} {
+// 	// listado de expresiones
+// 	var s []value.IVOR // declaramos un slice de expresiones
+
+// 	// Tomar todos los valores
+// 	id := ctx.ID().GetText()
+// 	rawTipo := ctx.Var_type().GetText()  // p.ej. "[]int" o "[][]int"
+// 	dims := strings.Count(rawTipo, "[]") // p.ej. 1 o 2
+// 	baseType := strings.TrimPrefix(rawTipo, strings.Repeat("[]", dims))
+// 	exprList := ctx.List_expresiones()
+
+// 	child_count := exprList.GetChildCount()
+// 	// ahora que ya tenemos los slices podemos
+// 	if exprList == nil {
+// 		v.ErrorTable.NewSemanticError(ctx.GetStart(), "No se puede inferir el tipo de un slice vacio '"+id+"'")
+// 		return nil
+// 	}
+// 	// recorrer la lista de las expresiones
+// 	for i := 0; i < child_count; i++ {
+// 		child := exprList.GetChild(i)
+// 		// resolvemos a cada uno de los hijos
+// 		if child == nil {
+// 			v.ErrorTable.NewSemanticError(ctx.GetStart(), "Expresión vacía dentro de slice")
+// 			return nil
+// 		}
+// 		// visitamos el hijo y lo convertimos a IVOR
+// 		val := v.Visit(child).(value.IVOR)
+// 		// agregamos el valor al slice
+// 		if val == nil {
+// 			v.ErrorTable.NewSemanticError(ctx.GetStart(), "Expresión vacía dentro de slice")
+// 			return nil
+// 		}
+// 		// agregar el valor al slice
+
+// 		return nil
+// 	}
+// 	return nil
+// }
 
 func (v *ReplVisitor) VisitValueDeclAssign(ctx *parser.DeclAssignContext) interface{} {
 
@@ -478,6 +522,36 @@ func (v *ReplVisitor) VisitValorFloat(ctx *parser.ValorFloatContext) interface{}
 }
 func (v *ReplVisitor) VisitIdPattern(ctx *parser.IdContext) interface{} {
 	// hay que ir a buscar el Id a el entorno
+	// aqui hay que ir a buscar el id al ScopeTrace
+	id := ctx.ID().GetText()
+	//primero := ctx.GetChild(0)
+	v.ScopeTrace.GetVariable(id)
+
+	// asignacion de las propiedades del struct
+	if ctx.GetChildCount() > 1 {
+
+		// significa que vienen divididos entre puntos
+		// por ejemplo: id.propiedad
+		// entonces tenemos que devolver el id completo
+		fmt.Println("Accediendo a propiedad de struct:", id)
+		for i := 1; i < ctx.GetChildCount(); i++ {
+			if dot, ok := ctx.GetChild(i).(*antlr.TerminalNodeImpl); ok && dot.GetSymbol().GetTokenType() == parser.VlangParserDOT {
+				// es un punto, entonces seguimos
+				continue
+			} else if idNode, ok := ctx.GetChild(i).(*parser.IdContext); ok {
+				id += "." + idNode.ID().GetText()
+			} else {
+				v.ErrorTable.NewSemanticError(ctx.GetStart(), "Error al acceder a propiedad de struct")
+				return nil
+			}
+
+		}
+
+	}
+	// ir a ver al ScopeTrace si existe el struct
+	//v.ScopeTrace.GetStruct(id)
+
+	fmt.Println("ID completo:", id)
 	return ctx.GetText()
 }
 
@@ -696,3 +770,25 @@ func (v *ReplVisitor) VisitFuncCall(ctx *compiler.FuncCallContext) interface{} {
 	}
 	return nil
 }
+
+// Struct Declaration (de nuevo)
+func (v *ReplVisitor) VisitStructDecl(ctx *compiler.StructDeclContext) interface{} {
+	if v.ScopeTrace.CurrentScope != v.ScopeTrace.GlobalScope {
+		v.ErrorTable.NewSemanticError(ctx.GetStart(), "Los structs solo pueden ser declaradas en el scope global")
+		return nil
+	}
+
+	structAdded, msg := v.ScopeTrace.GlobalScope.AddStruct(ctx.ID().GetText(), &Struct{
+		Name:   ctx.ID().GetText(),
+		Fields: ctx.AllStruct_prop(),
+		Token:  ctx.GetStart(),
+	})
+
+	if !structAdded {
+		v.ErrorTable.NewSemanticError(ctx.ID().GetSymbol(), msg)
+	}
+
+	return nil
+}
+
+// Asignacion de una variable adentro de un struct

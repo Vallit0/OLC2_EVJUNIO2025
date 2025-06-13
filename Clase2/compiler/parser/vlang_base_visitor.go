@@ -71,6 +71,10 @@ func (v *BaseVlangVisitor) VisitContinueStmt(ctx *ContinueStmtContext) interface
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseVlangVisitor) VisitStructAttr(ctx *StructAttrContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseVlangVisitor) VisitDirectAssign(ctx *DirectAssignContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -80,6 +84,14 @@ func (v *BaseVlangVisitor) VisitDeclAssign(ctx *DeclAssignContext) interface{} {
 }
 
 func (v *BaseVlangVisitor) VisitDeclAssignType(ctx *DeclAssignTypeContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitSliceDeclInit(ctx *SliceDeclInitContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitListExpressions(ctx *ListExpressionsContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -112,6 +124,10 @@ func (v *BaseVlangVisitor) VisitValorexpresion(ctx *ValorexpresionContext) inter
 }
 
 func (v *BaseVlangVisitor) VisitAsignacionfor(ctx *AsignacionforContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseVlangVisitor) VisitSliceExpr(ctx *SliceExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -176,10 +192,6 @@ func (v *BaseVlangVisitor) VisitValorFloat(ctx *ValorFloatContext) interface{} {
 }
 
 func (v *BaseVlangVisitor) VisitStructInstancia(ctx *StructInstanciaContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseVlangVisitor) VisitStructAttr(ctx *StructAttrContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

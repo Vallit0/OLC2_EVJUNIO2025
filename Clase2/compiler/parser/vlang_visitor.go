@@ -55,6 +55,9 @@ type VlangVisitor interface {
 	// Visit a parse tree produced by VlangParser#ContinueStmt.
 	VisitContinueStmt(ctx *ContinueStmtContext) interface{}
 
+	// Visit a parse tree produced by VlangParser#StructAttr.
+	VisitStructAttr(ctx *StructAttrContext) interface{}
+
 	// Visit a parse tree produced by VlangParser#DirectAssign.
 	VisitDirectAssign(ctx *DirectAssignContext) interface{}
 
@@ -63,6 +66,12 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#DeclAssignType.
 	VisitDeclAssignType(ctx *DeclAssignTypeContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#SliceDeclInit.
+	VisitSliceDeclInit(ctx *SliceDeclInitContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#ListExpressions.
+	VisitListExpressions(ctx *ListExpressionsContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#IdPattern.
 	VisitIdPattern(ctx *IdPatternContext) interface{}
@@ -87,6 +96,9 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#asignacionfor.
 	VisitAsignacionfor(ctx *AsignacionforContext) interface{}
+
+	// Visit a parse tree produced by VlangParser#SliceExpr.
+	VisitSliceExpr(ctx *SliceExprContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#id.
 	VisitId(ctx *IdContext) interface{}
@@ -135,9 +147,6 @@ type VlangVisitor interface {
 
 	// Visit a parse tree produced by VlangParser#StructInstancia.
 	VisitStructInstancia(ctx *StructInstanciaContext) interface{}
-
-	// Visit a parse tree produced by VlangParser#StructAttr.
-	VisitStructAttr(ctx *StructAttrContext) interface{}
 
 	// Visit a parse tree produced by VlangParser#IntType.
 	VisitIntType(ctx *IntTypeContext) interface{}
