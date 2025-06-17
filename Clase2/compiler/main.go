@@ -87,6 +87,9 @@ func runVlang(code string) string {
 	visitor := repl.NewReplVisitor(lexicalErrs.ErrorTable)
 	result := visitor.Visit(tree)
 	visitor.Console.Show()
+
+	// imprimir result
+	fmt.Println("Resultado de la ejecución:", result)
 	// reporte Global Scope
 	visitor.ScopeTrace.GlobalScope.Report()
 	// retorna un objeto con todos los reportes de todos los scopes
@@ -106,6 +109,9 @@ func runVlang(code string) string {
 	// 		builder.WriteString(fmt.Sprintf("  - %s\n", e.String()))
 	// 	}
 	// }
+
+	// Visitor Traductor a ARM64
+
 	if builder.Len() == 0 {
 		builder.WriteString(fmt.Sprintf("✅ Resultado: %v\n", visitor.Console.GetOutput()))
 	}
