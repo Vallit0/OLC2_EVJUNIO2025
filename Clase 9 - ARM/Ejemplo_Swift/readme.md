@@ -1,7 +1,3 @@
-# OLC2 - Proyecto 1 - 2S2023
-
-- Damián Ignacio Peña Afre 202110568
-
 
 ## antlr command
 ```bash
