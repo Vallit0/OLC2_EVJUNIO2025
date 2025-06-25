@@ -4,9 +4,14 @@
 ```bash 
 sudo apt-get install gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
 ```
+### Ahora Instalamos el qemu-user static
+```bash
+sudo apt-get update
+sudo apt-get install gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu qemu-user-static gdb-multiarch
+```
 
+Ejecutamos
 ```bash 
-sudo apt install qemu-user-static
 aarch64-linux-gnu-as -mcpu=cortex-a57 hello-world.s -o hello-world.o
 aarch64-linux-gnu-ld hello-world.o -o hello-world
 
