@@ -1,113 +1,161 @@
+// Archivo de pruebas funcionales simplificadas
 fn main() {
 	mut puntos = 0
-	println("=== Prueba simplificada con for ===")
 
-	// 1. Variables simples
+	// 1. Entornos
 	mut puntos_entornos = 0
 	mut a = 10
+	println("a =", a)
 	if a == 10 {
 		puntos_entornos += 1
+		println("OK a = 10")
 	}
-	mut b = 20
+
+	mut b = 10
+	b = 20
+	println("b =", b)
 	if b == 20 {
 		puntos_entornos += 1
+		println("OK b = 20")
 	}
-	mut c = 30
+
+	mut c = 10
+	mut d = 10
+	c = 30
+	println("c =", c)
+	println("d =", d)
 	if c == 30 {
 		puntos_entornos += 1
+		println("OK c = 30")
 	}
 
 	// 2. If simples
 	mut puntos_if = 0
 	if true {
 		puntos_if += 1
+		println("OK true")
 	}
 	if 1 == 1 {
 		puntos_if += 1
+		println("OK 1 == 1")
 	}
 	if 2 > 1 {
 		puntos_if += 1
+		println("OK 2 > 1")
 	}
 
 	// 3. For tipo while
 	mut puntos_while = 0
-
-	// --- ejemplo 1 ---
 	mut i = 0
 	mut suma1 = 0
 	for i < 5 {
-		println("i (while): $i")
+		println(i)
 		suma1 += i
 		i += 1
 	}
 	if suma1 == 10 {
 		puntos_while += 1
+		println("OK suma1 == 10")
 	}
 	if i == 5 {
 		puntos_while += 1
+		println("OK i == 5")
 	}
 
-	// --- ejemplo 2: cuenta regresiva ---
 	mut j = 3
 	for j > 0 {
-		println("Cuenta regresiva: $j")
+		println(j)
 		j -= 1
 	}
 
-	// --- ejemplo 3: contar de 2 en 2 hasta 10 ---
 	mut k = 0
 	for k <= 10 {
-		println("k (2 en 2): $k")
+		println(k)
 		k += 2
 	}
 
 	// 4. For clásico
 	mut puntos_for = 0
 	mut suma2 = 0
-	for j := 0; j < 5; j++ {
-		println("j (clásico): $j")
-		suma2 += j
+	for x := 0; x < 5; x++ {
+		println(x)
+		suma2 += x
 	}
 	if suma2 == 10 {
 		puntos_for += 1
+		println("OK suma2 == 10")
 	}
-	for j := 0; j < 3; j++ {
-		println("For1 ejecución: $j")
+	for y := 0; y < 3; y++ {
+		println(y)
 	}
-	for k := 0; k < 2; k++ {
-		println("For2 ejecución: $k")
+	for z := 0; z < 2; z++ {
+		println(z)
 	}
 	puntos_for += 2
 
-	// 5. Break simulado
+	// 5. Switch real
+	mut puntos_case = 0
+	mut dia = 3
+	switch dia {
+		case 1 {
+			println("Lunes")
+			puntos_case += 1
+		}
+		case 2 {
+			println("Martes")
+		}
+		case 3 {
+			println("Miércoles")
+			puntos_case += 1
+		}
+		case 4 {
+			println("Jueves")
+		}
+		case 5 {
+			println("Viernes")
+		}
+		case 6 {
+			println("Sábado")
+		}
+		case 7 {
+			println("Domingo")
+		}
+		default {
+			println("Día inválido")
+		}
+	}
+
+	// 6. Break
 	mut puntos_break = 0
 	mut suma3 = 0
-	for z := 0; z < 10; z++ {
-		if z == 5 {
+	for n := 0; n < 10; n++ {
+		if n == 5 {
 			break
 		}
-		println("z: $z")
-		suma3 += z
+		println(n)
+		suma3 += n
 	}
 	if suma3 == 10 {
 		puntos_break += 3
+		println("OK suma3 == 10")
 	}
 
-	// 6. Continue simulado
+	// 7. Continue
 	mut puntos_continue = 0
 	mut suma_pares = 0
-	for x := 0; x < 10; x++ {
-		if x % 2 != 0 {
+	for m := 0; m < 10; m++ {
+		if m % 2 != 0 {
 			continue
 		}
-		println("x par: $x")
-		suma_pares += x
+		println(m)
+		suma_pares += m
 	}
 	if suma_pares == 20 {
 		puntos_continue += 3
+		println("OK suma_pares == 20")
 	}
 
 	// Total
-	puntos = puntos_entornos + puntos_if + puntos_while + puntos_for + puntos_break + puntos_continue
-	println("Puntos obtenidos:", puntos, "/ 23")
+	puntos = puntos_entornos + puntos_if + puntos_while + puntos_for + puntos_case + puntos_break + puntos_continue
+	println("Puntos totales:", puntos, "/ 26")
 }
